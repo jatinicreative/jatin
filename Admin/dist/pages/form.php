@@ -46,6 +46,7 @@
         max-width: 600px;
       }
     </style>
+
   </head>
 
   <?php include ("header.php"); ?>
@@ -76,6 +77,10 @@
                         <label>Password</label>
                         <input type="password" name="pass" class="form-control" />
                       </div>
+                      <div class="mb-3">
+                        <label>Confirm Password</label>
+                        <input type="password" name="cpass" class="form-control" />
+                      </div>
 
                       <div class="mb-3">
                       <label>Profile Image</label>
@@ -89,7 +94,7 @@
                       
                       <div class="mb-3">
                         <label>Phone No</label>
-                        <input type="text" name="phone" class="form-control" />
+                        <input type="text" name="phone" class="form-control"/>
                       </div>
 
                       <div class="mb-3">

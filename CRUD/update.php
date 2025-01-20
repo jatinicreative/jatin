@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $hobby = implode(", ", $_POST['hobby']);
     $country = $_POST['country'];
 
-    // Check if a new file is uploaded
+
     if (isset($_FILES['file']) && $_FILES['file']['size'] > 0) {
         $file = $_FILES['file']['name'];
         $tempname = $_FILES['file']['tmp_name'];
@@ -43,10 +43,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die("Failed to move the uploaded file.");
         }
 
-        // If a new file was uploaded, update the database with the new file
+   
         $sql = "UPDATE user SET first_name='$first_name', last_name='$last_name', email='$email', file='$file', address='$address', phone='$phone', gender='$gender', hobby='$hobby', country='$country' WHERE id='$id'";
     } else {
-        // If no new file uploaded, don't update the 'file' field
+      
         $sql = "UPDATE user SET first_name='$first_name', last_name='$last_name', email='$email', address='$address', phone='$phone', gender='$gender', hobby='$hobby', country='$country' WHERE id='$id'";
     }
 

@@ -112,7 +112,7 @@
                             <td><?= $row['first_name'] ?></td>
                             <td><?= $row['last_name'] ?></td>
                             <td><?= $row['email'] ?></td>
-                            <td><img src="./images/<?= htmlspecialchars($row['file']) ?>" width="100" height="100" alt="Profile Image"></td>
+                            <td><img src="images/<?= htmlspecialchars($row['file']) ?>" width="100" height="100" alt="Profile Image"></td>
                             <td><?= $row['address'] ?></td>
                             <td><?= $row['phone'] ?></td>
                             <td><?= $row['gender'] ?></td>

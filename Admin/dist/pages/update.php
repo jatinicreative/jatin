@@ -1,3 +1,4 @@
+
 <html>
   <head>
     <link
@@ -52,59 +53,65 @@
   <?php
     include 'db.php';
 
+  
     if (isset($_GET['id'])) {
-        $id = $_GET['id'];
-        $result = $conn->query("SELECT * FROM user WHERE id = $id");
-        $user = $result->fetch_assoc();
+      $id = $_GET['id'];
+      $result = $conn->query("SELECT * FROM user WHERE id = $id");
+      if ($result && $result->num_rows > 0) {
+          $user = $result->fetch_assoc();
+      } else {
+          die("User not found.");
+      }
     }
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $id = $_POST['id'];
-        $first_name = $_POST['first_name'];
-        $last_name = $_POST['last_name'];
-        $email = $_POST['email'];
-        $pass = $_POST['pass'];
-        $address = $_POST['address'];
-        $phone = $_POST['phone'];
-        $gender = $_POST['gender'];
-        $hobby = implode(", ", $_POST['hobby']);
-        $country = $_POST['country'];
+      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $id = $_POST['id'] ?? '';
+      $first_name = $_POST['first_name'] ?? '';
+      $last_name = $_POST['last_name'] ?? '';
+      $email = $_POST['email'] ?? '';
+      $address = $_POST['address'] ?? '';
+      $phone = $_POST['phone'] ?? '';
+      $gender = $_POST['gender'] ?? '';
+      $hobby = isset($_POST['hobby']) ? implode(", ", $_POST['hobby']) : '';
+      $country = $_POST['country'] ?? '';
 
-        if (isset($_FILES['file']) && $_FILES['file']['size'] > 0) {
-            $file = $_FILES['file']['name'];
-            $tempname = $_FILES['file']['tmp_name'];
-            $folder = "./image/" . $file;
+        $target_file = '';
+      if (isset($_FILES['file']) && $_FILES['file']['size'] > 0) {
+          $target_file = basename($_FILES["file"]["name"]);
+          $upload_path = "images/" . $target_file;
 
-            if ($_FILES["file"]["error"] > 0) {
-                die("Error uploading file: " . $_FILES["file"]["error"]);
-            }
+          if (!move_uploaded_file($_FILES["file"]["tmp_name"], $upload_path)) {
+              die('File upload failed.');
+          }
+      }
 
-            if ($_FILES['file']['size'] == 0) {
-                die("File is empty.");
-            }
+  
+      $sql = "UPDATE user SET 
+              first_name='$first_name', 
+              last_name='$last_name', 
+              email='$email', 
+              address='$address', 
+              phone='$phone', 
+              gender='$gender', 
+              hobby='$hobby', 
+              country='$country'";
 
-            $allowed_extensions = ['jpg', 'jpeg', 'png'];
-            $file_ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-            if (!in_array($file_ext, $allowed_extensions)) {
-                die("Only JPG, JPEG, and PNG files are allowed.");
-            }
+      if (!empty($target_file)) {
+          $sql .= ", file='$target_file'";
+      }
 
-            if (!move_uploaded_file($tempname, $folder)) {
-                die("Failed to move the uploaded file.");
-            }
+      $sql .= " WHERE id='$id'";
 
-            $sql = "UPDATE user SET first_name='$first_name', last_name='$last_name', email='$email', file='$file', address='$address', phone='$phone', gender='$gender', hobby='$hobby', country='$country' WHERE id='$id'";
-        } else {
-            $sql = "UPDATE user SET first_name='$first_name', last_name='$last_name', email='$email', address='$address', phone='$phone', gender='$gender', hobby='$hobby', country='$country' WHERE id='$id'";
-        }
-
-        if (!mysqli_query($conn, $sql)) {
-            die('Error: ' . mysqli_error($conn));
-        } else {
-            echo '<script language="javascript">';
-            echo 'alert("Successfully Data Updated"); location.href="display.php"';
-            echo '</script>';
-        }
+  
+      if (!mysqli_query($conn, $sql)) {
+          die('Error updating record: ' . mysqli_error($conn));
+      } else {
+          echo '<script>
+                  alert("Successfully Updated!");
+                  window.location.href="display.php";
+                </script>';
+          exit;
+      }
     }
     ?>
                 
@@ -162,7 +169,7 @@
                       <select name="country">
                           <option value="India" <?php echo ($user['country'] == 'India') ? 'selected' : ''; ?>>India</option>
                           <option value="Pakistan" <?php echo ($user['country'] == 'Pakistan') ? 'selected' : ''; ?>>Pakistan</option>
-                          <option value="Sri Lanka" <?php echo ($user['country'] == 'Sri Lanka') ? 'selected' : ''; ?>></option>>Sri Lanka</option>
+                          <option value="Sri Lanka" <?php echo ($user['country'] == 'Sri Lanka') ? 'selected' : ''; ?>>Sri Lanka</option>
                       </select><br>
                       </div>
                     </div>
