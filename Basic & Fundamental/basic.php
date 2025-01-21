@@ -3,8 +3,8 @@
         <title>Functions in PHP...</title>
     </head>
 <body>
-    <h1>String Functions....</h1>
     <?php
+    echo "<h1>String Functions....</h1>";
         $string = "Hello World!";
         echo "String is Hello World". "<br>";
         echo "String Length is  ".strlen($string). "<br>";
@@ -41,10 +41,10 @@
         echo "First Occurence of PHP ".stripos("I want to learn PHP, but php takes time too!","PHP")."<br>";
         echo "Upper First Char ".ucfirst("hello world")."<br>";
         echo "Words First Char ".ucwords("hello world")."<br>";
-        echo "Word Wraps ".wordwrap($string,5,"<br>\n")
-    ?> 
-    <h1>Math Functions....</h1>
-    <?php
+        echo "Word Wraps ".wordwrap($string,5,"<br>\n")."<br>";
+     
+    echo "<h1>Math Functions....</h1>";
+   
         echo "Pi value ".pi()."<br>";
         echo "Min value ".min(0,1,10,12,5,4)."<br>";
         echo "Max value ".max(0,1,10,12,5,4)."<br>";
@@ -52,9 +52,9 @@
         echo "Sqrt ".sqrt(64)."<br>";
         echo "Round ".round(5.6)."<br>";
         echo "Random ".rand()."<br>";
-    ?>
-    <h1>Array and its Types....</h1>
-    <?php
+   
+    echo "<h1>Array and its Types....</h1>";
+
         echo "Index Array:-<br><br>";
         $subjects = array("English","Maths","Science","SST","Hindi","Guj");
             foreach ($subjects as $x)   
@@ -75,9 +75,9 @@
             echo "Name: ".$students[0][0].": Enroll: ".$students[0][1].", Phone: ".$students[0][2].".<br>";
             echo "Name: ".$students[1][0].": Enroll: ".$students[1][1].", Phone: ".$students[1][2].".<br>";
             echo "Name: ".$students[2][0].": Enroll: ".$students[2][1].", Phone: ".$students[2][2].".<br>";   
-    ?>
-    <h1>Array Functions....</h1>
-    <?php
+    
+    echo "<h1>Array Functions....</h1>";
+    
         echo "Print array key into upper case:- <br>";
         print_r(array_change_key_case($student,CASE_UPPER));
 
