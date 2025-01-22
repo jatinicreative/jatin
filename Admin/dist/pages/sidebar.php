@@ -1,7 +1,7 @@
 <html>
   <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
       <div class="sidebar-brand">
-          <a href="./index.html" class="brand-link">
+          <a href="./index.php" class="brand-link">
             <img
               src="../../dist/assets/img/AdminLTELogo.png"
               alt="AdminLTE Logo"
@@ -11,7 +11,7 @@
           </a>
       </div>
       <div class="sidebar-wrapper">
-          <nav class="mt-2">
+          <div class="mt-2">
             <ul
               class="nav sidebar-menu flex-column"
               data-lte-toggle="treeview"
@@ -26,6 +26,17 @@
               </li>
               <li class="nav-item">
                 <a href="./display.php" class="nav-link">
+                  <p>Display Details </p>
+                </a>
+              </li>
+              <li class="nav-header">CRUD Operation(OOPS Concepts)</li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <p>User Form </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
                   <p>Display Details </p>
                 </a>
               </li>

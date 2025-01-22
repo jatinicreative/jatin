@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <html>
   <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <div class="app-wrapper">
@@ -140,7 +141,7 @@
                   class="user-image rounded-circle shadow"
                   alt="User Image"
                 />
-                <span class="d-none d-md-inline">Alexander Pierce</span>
+                <span class="d-none d-md-inline"><?php echo $_SESSION['first']; echo ' '; echo $_SESSION['last']; ?></span>
               </a>
               <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                 <li class="user-header text-bg-primary">
@@ -150,20 +151,20 @@
                     alt="User Image"
                   />
                   <p>
-                    Alexander Pierce - Web Developer
+                    <?php
+ 
+                    if (isset($_SESSION['first']) && $_SESSION['last']){
+                        echo $_SESSION['first'];
+                        echo ' ';
+                        echo $_SESSION['last'];
+                    }?>
                     <small>Member since Nov. 2023</small>
                   </p>
                 </li>
-                <li class="user-body">
-                  <div class="row">
-                    <div class="col-4 text-center"><a href="#">Followers</a></div>
-                    <div class="col-4 text-center"><a href="#">Sales</a></div>
-                    <div class="col-4 text-center"><a href="#">Friends</a></div>
-                  </div>
-                </li>
+             
                 <li class="user-footer">
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
-                  <a href="#" class="btn btn-default btn-flat float-end">Sign out</a>
+                  <a href="logout.php" class="btn btn-default btn-flat float-end">Sign out</a>
                 </li>
               </ul>
             </li>
