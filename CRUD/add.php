@@ -6,7 +6,7 @@ if(isset($_POST['add']))
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $email = $_POST['email'];
-    $pass = $_POST['pass'];
+    $password = $_POST['password'];
     $address = $_POST['address'];
     $phone = $_POST['phone'];
     $gender = $_POST['gender'];
@@ -36,8 +36,8 @@ if(isset($_POST['add']))
         die("Failed to move the uploaded file.");
     }
 
-    $sql = "INSERT INTO user (first_name, last_name, email, pass, file, address, phone, 
-    gender, hobby, country) VALUES ('$first_name','$last_name','$email','$pass','$file','$address','$phone',
+    $sql = "INSERT INTO user (first_name, last_name, email, password, file, address, phone, 
+    gender, hobby, country) VALUES ('$first_name','$last_name','$email','$password','$file','$address','$phone',
     '$gender','$hobby','$country')";
   
     if(!mysqli_query($conn,$sql)) 
