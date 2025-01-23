@@ -15,7 +15,7 @@ if(isset($_POST['add']))
 
     $file = $_FILES['file']['name'];
     $tempname = $_FILES['file']['tmp_name'];
-    $folder = "./image/" . $file;
+    $folder = "./image/" . $file;	
 
     if ($_FILES["file"]["error"] > 0) {
         die("Error uploading file: " . $_FILES["file"]["error"]);

@@ -36,11 +36,12 @@
     />
   </head>
   
-  <?php include ("header.php"); ?>
+  <?php 
+    include ("header.php"); 
+    include ("sidebar.php");
 
-  <?php include ("sidebar.php"); ?>
-
-  <?php include ("footer.php"); ?>
+    include ("footer.php"); 
+  ?>
 
     <script
       src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/browser/overlayscrollbars.browser.es6.min.js"

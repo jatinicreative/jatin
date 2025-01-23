@@ -32,27 +32,13 @@
       integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4="
       crossorigin="anonymous"
     />
-    <style>
-      .center-form {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        margin: 0;
-      }
-      .form-container {
-        width: 100%;
-        max-width: 600px;
-      }
-    </style>
+
   </head>
 
-  <?php include ("header.php"); ?>
-
-  <?php include ("sidebar.php"); ?>
-  <?php
+  <?php 
+    include ("header.php"); 
+    include ("sidebar.php");   
     include 'db.php';
-
   
     if (isset($_GET['id'])) {
       $id = $_GET['id'];
@@ -75,7 +61,7 @@
       $hobby = isset($_POST['hobby']) ? implode(", ", $_POST['hobby']) : '';
       $country = $_POST['country'] ?? '';
 
-        $target_file = '';
+      $target_file = '';
       if (isset($_FILES['file']) && $_FILES['file']['size'] > 0) {
           $target_file = basename($_FILES["file"]["name"]);
           $upload_path = "images/" . $target_file;
@@ -114,12 +100,12 @@
       }
     }
     ?>
-                
-                <div class="card card-primary card-outline mb-4">
-                  <div class="card-header"><div class="card-title">Input User Details..</div></div>
-                  <form action="update.php" method="POST" enctype="multipart/form-data">
-                    <div class="card-body">
-                    <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
+    <body>                
+      <div class="card card-primary card-outline mb-4">
+        <div class="card-header"><div class="card-title">Input User Details..</div></div>
+          <form action="update.php" method="POST" enctype="multipart/form-data">
+            <div class="card-body">
+              <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
                     <div class="mb-3">
                         <label>First Name</label>
                         <input type="text" name="first_name" value="<?php echo $user['first_name']; ?>" class="form-control" />
@@ -137,6 +123,7 @@
                       
 
                       <div class="mb-3">
+                      <?php echo "Profile Image Uploaded:- ".$user['file']; ?><br>
                       <label>Update Profile Image</label>
                         <input type="file" name="file" accept="image/*" class="form-control"  />
                       </div>
@@ -164,7 +151,7 @@
                       <input type="checkbox" name="hobby[]" value="coding" <?php echo strpos($user['hobby'], 'coding') !== false ? 'checked' : ''; ?>>Coding<br>
                       </div>
 
-                      <div class="mb-3">
+                      <div class="mb-3">  
                       <label>Country :-</label>
                       <select name="country">
                           <option value="India" <?php echo ($user['country'] == 'India') ? 'selected' : ''; ?>>India</option>
