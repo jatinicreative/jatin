@@ -1,23 +1,24 @@
-  <?php 
+<?php
     include ("header.php"); 
-    include ("sidebar.php");   
-    include ("db.php");
-  
-    if (isset($_GET['id'])) {
-      $id = $_GET['id'];
-      $result = $conn->query("SELECT * FROM user WHERE id = $id");
-      if ($result && $result->num_rows > 0) {
-          $user = $result->fetch_assoc();
-      } else {
-          die("User not found.");
-      }
-    }
-  ?>
-  <html>
+    include ("sidebar.php"); 
+require_once'ofunction.php';
+if(isset($_GET['id']))
+{
+$rid=$_GET['id'];
+$fetchdata=new CRUD();
+$sql=$fetchdata->singlefetchdata($rid);
+if ($sql) {
+    $user = $sql->fetch_assoc();
+} else {
+    die("User not found.");
+}
+}
+?>
+<html>
     <body>                
       <div class="card card-primary card-outline mb-4">
         <div class="card-header"><div class="card-title">Input User Details..</div></div>
-          <form action="update.php" method="POST" enctype="multipart/form-data">
+          <form action="oupdate.php" method="POST" enctype="multipart/form-data">
             <div class="card-body">
               <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
                     <div class="mb-3">
@@ -80,6 +81,6 @@
                   </form>
                 </div>
 
-        <?php include ("footer.php"); ?>
-  </body>
+  <?php include ("footer.php"); ?>
+</body>
 </html>

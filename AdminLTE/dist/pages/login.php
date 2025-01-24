@@ -1,6 +1,6 @@
 <?php
-        session_start();
-        include('db.php');
+    session_start();
+    include('db.php');
 ?>
 <html>
 <head>
@@ -31,7 +31,7 @@
         <div class="card p-4">
             <h2 class="text-center">Login</h2>
             <form method="POST" action="loginn.php">
-                
+            <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                 <div class="mb-3">
                     <label for="email" class="form-label">Username</label>
                     <input type="email" name="email" id="email" class="form-control" value="<?php if (isset($_COOKIE["user"])){echo $_COOKIE["user"];}?>">
@@ -52,7 +52,6 @@
                 ?>
                 </span>
             <p class="text-center mt-3">Don't have an account? <a href="register.php">Register here</a></p>
-       
         </div>
     </div>
 </body>

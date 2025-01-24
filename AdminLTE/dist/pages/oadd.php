@@ -21,7 +21,7 @@ if (move_uploaded_file($_FILES["file"]["tmp_name"], $upload_path)) {
     if($sql)
     {
     echo "<script>alert('Record inserted successfully');</script>";
-    echo "<script>window.location.href='oform.php'</script>";
+    echo "<script>window.location.href='odisplay.php'</script>";
     }
     else
     {
@@ -31,5 +31,3 @@ if (move_uploaded_file($_FILES["file"]["tmp_name"], $upload_path)) {
     }            
 } 
 
-
-?>

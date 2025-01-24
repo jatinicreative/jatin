@@ -1,5 +1,4 @@
 <?php
-
 include("db.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -22,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               die('File upload failed.');
           }
       }
-
   
       $sql = "UPDATE user SET 
               first_name='$first_name', 

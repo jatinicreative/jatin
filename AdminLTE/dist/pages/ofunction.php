@@ -26,15 +26,20 @@ class CRUD
 	$result=mysqli_query($this->con,"SELECT * from user");
 	return $result;
 	}
-	public function update($first_name,$last_name,$email,$address,$phone,$gender,$hobby,$country)
+	public function singlefetchdata($rid)
 	{
-	$updaterecord=mysqli_query($this->con,"UPDATE user SET first_name='$first_name', last_name='$last_name', email='$email', 
-              address='$address', phone='$phone', gender='$gender', hobby='$hobby', country='$country'" );
+	$result=mysqli_query($this->con,"SELECT * from user where id=$rid");
+	return $result;
+	}
+	public function update($first_name,$last_name,$email,$filename,$address,$phone,$gender,$hobby,$country,$id)
+	{
+	$updaterecord=mysqli_query($this->con,"UPDATE user SET first_name='$first_name', last_name='$last_name', email='$email',file='$filename', 
+              address='$address', phone='$phone', gender='$gender', hobby='$hobby', country='$country' where id='$id'" );
 	return $updaterecord;
 	}
 	public function delete($rid)
 	{
-	$deleterecord=mysqli_query($this->con,"delete from tblusers where id=$rid");
+	$deleterecord=mysqli_query($this->con,"delete from user where id=$rid");
 	return $deleterecord;
 	}
 }

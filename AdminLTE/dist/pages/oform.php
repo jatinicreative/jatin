@@ -1,10 +1,10 @@
-  <?php
- 
+<?php
   include ("header.php"); 
   include ("sidebar.php"); 
-  
-  ?>
-  <div class="container mt-5">
+?>
+<html>
+<body>
+  <di class="container mt-5">
       <div class="card">
           <div class="card-header">Input User Details</div>
           <form action="oadd.php" method="POST" enctype="multipart/form-data">
@@ -80,11 +80,7 @@
                   <button type="submit" class="btn btn-primary" name="oadd">Submit</button>
               </div>
           </form>
-      </div>
-  </div>
-  
-
+    </div>
     <?php include ("footer.php"); ?>
-    
   </body>
 </html>

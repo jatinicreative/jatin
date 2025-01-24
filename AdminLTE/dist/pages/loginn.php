@@ -1,6 +1,6 @@
 <?php
- include('db.php');
- session_start();
+        session_start();
+        include('db.php');
 if(isset($_POST['login'])){
                
     $email=$_POST['email'];
@@ -13,14 +13,14 @@ if(isset($_POST['login'])){
             header('location:login.php');
     }
     else{
-        
+               
             $row=mysqli_fetch_array($query);
             if (isset($_POST['remember'])){
                     
                     setcookie("user", $row['email'], time() + (86400 * 30));
                     setcookie("pass", $row['pass'], time() + (86400 * 30));
             }
-           
+            $_SESSION['login_in']=true;     
             $_SESSION['userid']=$row['id'];
             $_SESSION['first']=$row['first_name'];
             $_SESSION['last']=$row['last_name'];

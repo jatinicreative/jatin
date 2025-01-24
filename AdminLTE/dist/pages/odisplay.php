@@ -1,9 +1,8 @@
 <?php 
-    
     include ("header.php");
     include ("sidebar.php"); 
     include ("ofunction.php");
-  ?>
+?>
 <html>
   <body>
     <div class="container-fluid">
@@ -42,8 +41,8 @@
                   <td><?= $row['hobby'] ?></td>
                   <td><?= $row['country'] ?></td>
                   <td>
-                    <a href="updateform.php?id= <?= $row['id'] ?>">EDIT</a>
-                    <a href="delete.php?id= <?= $row['id'] ?>">DELETE</a>
+                    <a href="oupdateform.php?id= <?= $row['id'] ?>">EDIT</a>
+                    <a href="odelete.php?id= <?= $row['id'] ?>" onclick="return confirm('Are You Sure?')">DELETE</a>
                   </td>    
                 </tr>
                 <?php } ?>  
@@ -51,8 +50,6 @@
             </table>
           </div>      
     </div>
-
     <?php include ("footer.php"); ?>
-  
   </body>
 </html>
