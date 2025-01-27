@@ -1,24 +1,12 @@
-<?php include 'db.php'; ?>
+
 <html>
     <head>
         <title>CRUD OPERATIONS</title>
-        <style></style>
-        <script>
-            function validation(){
-                if(document.getElementById("pass").value == document.getElementById("cpass").value)
-                {
-                    document.getElementById('message').style.color = 'green';
-                    document.getElementById('message').innerHTML = 'matching';
-                } else {
-                    document.getElementById('message').style.color = 'red';
-                    document.getElementById('message').innerHTML = 'not matching';
-              }
-
-            }
-        </script>
     </head>
     <body>
-        <?php include 'nav.html'; ?>
+        <?php 
+        include 'db.php';
+        include 'nav.html'; ?>
         <h1> User Form..</h1>
 
         <form action="add.php" method="POST" enctype="multipart/form-data">
@@ -32,10 +20,10 @@
             <input type="email" name="email" required><br><br>
 
             <label>Password :-</label>
-            <input type="password" name="pass" id="pass" onkeyup="validation()" required><br><br>
+            <input type="password" name="password" id="password" onkeyup="validation()" required><br><br>
 
             <label>Confirm Password :-</label>
-            <input type="password" name="cpass" id="cpass" onkeyup="validation()" required>
+            <input type="password" name="confirmpassword" id="confirmpassword" onkeyup="validation()" required>
             <span id='message'></span><br><br>
 
             <label>Profile Image :-</label>
@@ -66,9 +54,20 @@
             <input type="submit" name="add" value="SUBMIT">
 
         </form>
+    <footer>
+    <script>
+            function validation(){
+                if(document.getElementById("password").value == document.getElementById("confirmpassword").value)
+                {
+                    document.getElementById('message').style.color = 'green';
+                    document.getElementById('message').innerHTML = 'matching';
+                } else {
+                    document.getElementById('message').style.color = 'red';
+                    document.getElementById('message').innerHTML = 'not matching';
+              }
 
-
-        
- 
+            }
+        </script>
+    </footer>
     </body>
 </html>

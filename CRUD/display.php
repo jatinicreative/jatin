@@ -3,11 +3,13 @@
         <title>User Details</title>
     </head>
 <body>
-<?php include 'db.php'; ?>
-<?php include 'nav.html'; ?>
-<h3>User Details...</h3>
+<?php 
+    include 'db.php'; 
+    include 'nav.html'; 
+    
+    echo "<h3>User Details...</h3>";
 
-<?php $result = $conn->query("SELECT * FROM user"); 
+    $result = $conn->query("SELECT * FROM user"); 
 ?>
 
 <table border="1">
@@ -23,9 +25,9 @@
         <th>Country</th>
         <th>Actions</th>
     </tr>
-<?php    while ($row = $result->fetch_assoc())  {    
 
-?>
+<?php    while ($row = $result->fetch_assoc())  {    ?>
+    
     <tr>
         <td><?= $row['first_name'] ?></td>
         <td><?= $row['last_name'] ?></td>
@@ -37,7 +39,7 @@
         <td><?= $row['hobby'] ?></td>
         <td><?= $row['country'] ?></td>
         <td>
-            <a href="update.php?id= <?= $row['id'] ?>">EDIT</a>
+            <a href="updateform.php?id= <?= $row['id'] ?>">EDIT</a>
             <a href="delete.php?id= <?= $row['id'] ?>" onclick=" return confirm('Are You Sure?')">DELETE</a>
         </td>    
     </tr>

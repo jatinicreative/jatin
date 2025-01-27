@@ -2,12 +2,14 @@
 
 $server = "localhost";
 $user = "root";
-$pass = "admin123";
-$db = "crud";
+$password = "admin123";
+$db = "users";
 
-$conn = mysqli_connect($server,$user,$pass,$db);
+$conn = mysqli_connect($server,$user,$password,$db);
 
 if(mysqli_connect_error())
 {
     die("Connection Failed". mysqli_connect_errno());
 }
+
+    
