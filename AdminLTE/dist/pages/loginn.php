@@ -6,15 +6,16 @@ if(isset($_POST['login'])){
     $email=$_POST['email'];
     $pass=$_POST['pass'];
 
-    $query=mysqli_query($conn,"select * from `user` where email='$email' && pass='$pass'");
+    $query=mysqli_query($conn,"select * from `user` where email='$email'");
 
     if (mysqli_num_rows($query) == 0){
             $_SESSION['message']="Login Failed. User not Found!";
             header('location:login.php');
     }
     else{
-               
             $row=mysqli_fetch_array($query);
+            if(password_verify($pass,$row['pass']))   
+            {        
             if (isset($_POST['remember'])){
                     
                     setcookie("user", $row['email'], time() + (86400 * 30));
@@ -25,6 +26,11 @@ if(isset($_POST['login'])){
             $_SESSION['first']=$row['first_name'];
             $_SESSION['last']=$row['last_name'];
             header('location:index.php');
+            }
+            else{
+                $_SESSION['message']="Login Failed. Incorrect Password!";
+            header('location:login.php');
+            }
     }
 }
 else{

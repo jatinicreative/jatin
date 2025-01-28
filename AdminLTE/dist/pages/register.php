@@ -45,11 +45,12 @@ if (isset($_POST['register'])) {
         if (strlen($pass) < 5) {
             $passwordErr = "Password Minimun length should be 5 character";
         }
+        $hash = password_hash($pass, PASSWORD_DEFAULT); 
     }
 
     if (empty($firstnameErr) && empty($lastnameErr) && empty($usernameErr) && empty($passwordErr)) {
         $sql = "INSERT INTO user (first_name, last_name, email, pass, file, address, phone, gender, hobby, country) 
-                VALUES ('$first_name', '$last_name', '$email', '$pass','','','','','','')";
+                VALUES ('$first_name', '$last_name', '$email', '$hash','','','','','','')";
         if (mysqli_query($conn, $sql)) {
             $message = "Registration successful! <a href='login.php'>Login here</a>";
         } else {
