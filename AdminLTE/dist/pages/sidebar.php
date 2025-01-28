@@ -1,4 +1,14 @@
-
+<?php     
+    session_start();
+    if (isset($_SESSION['login_in']) ) {
+     
+    }
+    else {
+      header('Location: login.php');
+      exit();
+  
+    }
+?>
 <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
       <div class="sidebar-brand">
           <a href="./index.php" class="brand-link">

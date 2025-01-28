@@ -1,7 +1,16 @@
 <?php
+    session_start();
+    if (isset($_SESSION['login_in']) ) {
+     
+    }
+    else {
+      header('Location: login.php');
+      exit();
+  
+    }
     include ("header.php"); 
     include ("sidebar.php"); 
-require_once'ofunction.php';
+    include ('ofunction.php');
 if(isset($_GET['id']))
 {
 $rid=$_GET['id'];

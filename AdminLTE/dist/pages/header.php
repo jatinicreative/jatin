@@ -1,4 +1,25 @@
-<?php session_start(); ?>
+<?php  
+      session_start();
+      if (isset($_SESSION['login_in']) ) {
+         
+      }
+      else {
+          header('Location: login.php');
+          exit();
+      
+      }
+      require_once 'db.php';  
+      if (isset($_SESSION['userid'])) {
+        $id = $_SESSION['userid'];
+
+        $query = "SELECT file FROM user WHERE id = '$id'";
+        $result = mysqli_query($conn, $query);
+        if ($result && mysqli_num_rows($result) > 0) {
+          $row = mysqli_fetch_assoc($result);
+      }
+
+    }
+?>
   <head>
     <title></title>
     <link
@@ -57,7 +78,7 @@
             <li class="nav-item dropdown user-menu">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                 <img
-                  src="../../dist/assets/img/user2-160x160.jpg"
+                  src="images/<?= htmlspecialchars($row['file']) ?>"
                   class="user-image rounded-circle shadow"
                   alt="User Image"
                 />
@@ -71,7 +92,7 @@
               <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                 <li class="user-header text-bg-primary">
                   <img
-                    src="../../dist/assets/img/user2-160x160.jpg"
+                    src="images/<?= htmlspecialchars($row['file']) ?>"
                     class="rounded-circle shadow"
                     alt="User Image"
                   />
@@ -96,4 +117,3 @@
           </ul>
         </div>
       </nav>
-    
