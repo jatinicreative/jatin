@@ -1,5 +1,5 @@
 <?php
-require_once'ofunction.php';
+include 'ofunction.php';
 $updatedata=new CRUD();
 if(($_SERVER['REQUEST_METHOD'] === 'POST'))
 {

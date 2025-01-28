@@ -1,8 +1,18 @@
 <?php 
+    session_start();
+    if (isset($_SESSION['login_in']) ) {
+     
+    }
+    else {
+      header('Location: login.php');
+      exit();
+  
+    }
   include ("header.php");
   include ("sidebar.php"); 
   include 'db.php'; 
   $result = $conn->query("SELECT * FROM user");  
+
 ?>
 <html>
   <body>

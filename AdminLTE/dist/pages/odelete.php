@@ -1,5 +1,6 @@
 <?php 
-require_once'ofunction.php';
+
+include 'ofunction.php';
 if(isset($_GET['id']))
 {
 $rid=$_GET['id'];

@@ -28,6 +28,7 @@ if(isset($_POST['login'])){
     }
 }
 else{
+        $_SESSION['login_in']=false;
     header('location:login.php');
     $_SESSION['message']="Please Login!";
 }

@@ -1,7 +1,16 @@
 <?php
+    session_start();
+    if (isset($_SESSION['login_in']) ) {
+     
+    }
+    else {
+      header('Location: login.php');
+      exit();
+  
+    }
     include ("header.php"); 
     include ("sidebar.php"); 
-require_once'ofunction.php';
+    include ('ofunction.php');
 if(isset($_GET['id']))
 {
 $rid=$_GET['id'];
@@ -38,7 +47,7 @@ if ($sql) {
                       
 
                       <div class="mb-3">
-                      <?php echo "Profile Image Uploaded:- ".$user['file']; ?><br>
+                      <img src="image/<?= htmlspecialchars($user['file']) ?>" width="100" height="100" alt="Profile Image"><br>
                       <label>Update Profile Image</label>
                         <input type="file" name="file" accept="image/*" class="form-control"  />
                       </div>
