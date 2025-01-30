@@ -38,6 +38,7 @@ if (isset($_POST['add'])) {
         if (strlen($pass) < 5) {
             $passwordErr = "Password Minimun length should be 5 character";
         }
+        
     }
 
     if (empty($_POST["cpass"])) {
