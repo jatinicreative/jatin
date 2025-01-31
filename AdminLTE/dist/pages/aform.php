@@ -100,6 +100,7 @@
               if (response.status === "success") {
                 alert(response.message);
                 $("#userForm")[0].reset();
+
               } else {
                 alert(response.message);
               }

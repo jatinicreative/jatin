@@ -56,26 +56,53 @@
           dataType: "json",
           type: "GET",
           success: function (response){
+              $('.userdata').empty();
               $.each(response,function(key,value){
                 $('.userdata').append('<tr>'+
                                 '<td>'+value['first_name']+'</td>\
                                 <td>'+value['last_name']+'</td>\
                                 <td>'+value['email']+'</td>\
-                                <td>'+value['file']+'</td>\
+                                <td><img src="uploads/'+value['file']+'" width="100" height="100" alt="Profile Image"></td>\
                                 <td>'+value['address']+'</td>\
                                 <td>'+value['phone']+'</td>\
                                 <td>'+value['gender']+'</td>\
                                 <td>'+value['hobby']+'</td>\
                                 <td>'+value['country']+'</td>\
                                 <td>\
-                                    <a href="#" >EDIT</a>\
-                                    <a href="#" >DELETE</a>\
+                                    <a href="aupdateform.php?id='+value['id']+'" >EDIT</a>\
+                                    <a href="#" class="delete-btn" data-id="'+value['id']+'" >DELETE</a>\
                                 </td>\
                             </tr>');
                     });
+              $('.delete-btn').on('click',function(e){
+                    e.preventDefault();
+                    var id = $(this).data('id');
+                    if(confirm('Are you sure you want to delete')){
+                    $.ajax({
+                      url: "adelete.php",
+                      dataType: "json",
+                      type: "POST",
+                      data: { id: id },
+                      success: function(response)
+                      {
+                        if(response.status==='success')
+                        {
+                          alert(response.message);
+                          getdata();
+                        }
+                        else
+                        {
+                          alert(response.message);
+                        }
+                      },
+                      error: function(xhr, status, error) {
+                        alert("Error: " + xhr.responseText); }
+                    })
+                  }
+                });  
               }
           });                
-      }        
+        }  
     </script>
   </footer>
   </body>

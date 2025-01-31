@@ -40,10 +40,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $response = ["status" => "error", "message" => "Phone number must be 10 digits."];
     } else {
         $sql = "INSERT INTO user (first_name, last_name, email, pass, file, address, phone, gender, hobby, country) 
-                VALUES ('$first_name', '$last_name', '$email', '$password', '$file_path', '$address', '$phone', '$gender', '$hobby', '$country')";
+                VALUES ('$first_name', '$last_name', '$email', '$password', '$target_file', '$address', '$phone', '$gender', '$hobby', '$country')";
 
         if (mysqli_query($conn,$sql) === TRUE) {
-            $response = ["status" => "success", "message" => "User added successfully."];
+            $response = ["status" => "success", "message" => "User data successfully inserted."];
+         
         } else {
             $response = ["status" => "error", "message" => "Database error: ". mysqli_error($conn)];
         }
