@@ -48,7 +48,7 @@ if(isset($_POST['add']))
     {
 
         echo '<script language="javascript">';
-        echo 'alert("Successfully Data Inserted "); location.href="index.php"';
+        echo 'alert("Successfully Data Inserted "); location.href="display.php"';
         echo '</script>';
     }  
 }

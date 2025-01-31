@@ -21,7 +21,8 @@ if (isset($_GET['id'])) {
         <label>Email :-</label>
         <input type="email" name="email" value="<?php echo $user['email']; ?>"><br><br>
 
-        <label>Profile Image :-</label>
+        <img src="./image/<?= htmlspecialchars($user['file']) ?>" width="100" height="100" alt="Profile Image"><br>
+        <label>Update Profile Image :-</label>
         <input type="file" name="file" accept="image/*"/><br><br>
 
         <label>Address :-</label>

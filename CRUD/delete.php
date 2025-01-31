@@ -5,5 +5,5 @@ if (isset($_GET['id'])) {
     $sql ="DELETE from user WHERE id = $id";
     $conn->query($sql);
 
-    header("Location: index.php");
+    header("Location: display.php");
 }
