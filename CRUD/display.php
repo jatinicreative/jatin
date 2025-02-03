@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>User Details</title>
+        
     </head>
 <body>
 <?php 
