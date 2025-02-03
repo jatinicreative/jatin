@@ -42,8 +42,9 @@ if (isset($_POST['register'])) {
     }    
     else {
         $pass = $_POST["pass"];
-        if (strlen($pass) < 5) {
-            $passwordErr = "Password Minimun length should be 5 character";
+        if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/',$pass))
+         {
+            $passwordErr = "Password Minimum length of 8 character one upper case,lowercase & digit with special character...";
         }
         $hash = password_hash($pass, PASSWORD_DEFAULT); 
     }
@@ -90,6 +91,7 @@ if (isset($_POST['register'])) {
             <h2 class="text-center">Register </h2>
             <form method="POST" action="">
                 <div class="mb-3">
+                <p class="text-success text-center"><?php echo $message; ?></p>
                     <label for="first_name" class="form-label">First Name</label>
                     <input type="text" name="first_name" id="first_name" class="form-control" value="<?= htmlspecialchars($first_name ?? '') ?>">
                     <small class="text-danger"><?php echo $firstnameErr; ?></small>
@@ -101,18 +103,18 @@ if (isset($_POST['register'])) {
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Username</label>
-                    <input type="email" name="email" id="email" class="form-control" value="<?= htmlspecialchars($username ?? '') ?>">
+                    <input type="email" name="email" id="email" class="form-control" value="<?= htmlspecialchars($email ?? '') ?>">
                     <small class="text-danger"><?php echo $usernameErr; ?></small>
                 </div>
                 <div class="mb-3">
                     <label for="pass" class="form-label">Password</label>
-                    <input type="password" name="pass" id="pass" class="form-control" value="<?= htmlspecialchars($username ?? '') ?>" >
+                    <input type="password" name="pass" id="pass" class="form-control" value="<?= htmlspecialchars($pass ?? '') ?>" >
                     <small class="text-danger"><?php echo $passwordErr; ?></small>
                 </div>
                 <button type="submit" class="btn btn-primary w-100" name="register">Register</button>
             </form>
             <p class="text-center mt-3">Already have an account? <a href="login.php">Login here</a></p>
-            <p class="text-success text-center"><?php echo $message; ?></p>
+            
         </div>
     </div>
 </body>

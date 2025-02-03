@@ -27,8 +27,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['oadd'])) {
     $cpass = trim($_POST['cpass']);
     if (empty($pass)) {
         $errors['pass'] = "Password is required.";
-    } elseif ($pass !== $cpass) {
-        $errors['cpass'] = "Passwords do not match.";
+    } elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/',$pass)) {
+        $errors['ppass'] = "Passwords should be one uppercase, lowercase, digit & one special character.";
+    } elseif ($pass !== $cpass)
+    {
+        $errors["cpass"] = "Password does not match.";
     }
 
     $address = trim($_POST['address']);
@@ -38,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['oadd'])) {
 
     $phone = trim($_POST['phone']);
     if (empty($phone) || !preg_match('/^\d{10}$/', $phone)) {
-        $errors['phone'] = "Valid 10-digit Phone Number is required.";
+        $errors['phone'] = "10 digit Number required";
     }
 
     $gender = $_POST['gender'] ?? "";

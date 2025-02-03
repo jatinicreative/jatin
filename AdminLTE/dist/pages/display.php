@@ -11,10 +11,13 @@
   include ("header.php");
   include ("sidebar.php"); 
   include 'db.php'; 
-  $result = $conn->query("SELECT * FROM user");  
+  $result = $conn->query("SELECT * FROM user ORDER BY updated_at DESC");  
 
 ?>
 <html>
+  <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </head>
   <body>
     <div class="container-fluid">
       <div class="card mb-4">
@@ -48,8 +51,13 @@
                   <td><?= $row['hobby'] ?></td>
                   <td><?= $row['country'] ?></td>
                   <td>
-                    <a href="updateform.php?id= <?= $row['id'] ?>">EDIT</a>
-                    <a href="delete.php?id= <?= $row['id'] ?>" onclick=" return confirm('Are You Sure?')">DELETE</a>
+                  <a href="updateform.php?id=<?= $row['id'] ?>" title="Edit">
+                    <i class="fas fa-edit" style="color:ligthblue; font-size: 20px;"></i>
+                  </a>
+                  
+                  <a href="delete.php?id=<?= $row['id'] ?>" onclick="return confirm('Are You Sure?')" title="Delete">
+                    <i class="fas fa-trash" style="color:red; font-size: 20px;"></i>
+                  </a>
                   </td>    
                 </tr>
                 <?php } ?>  

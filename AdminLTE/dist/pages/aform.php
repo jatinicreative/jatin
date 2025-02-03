@@ -1,20 +1,17 @@
 <?php 
-    session_start();
-    if (isset($_SESSION['login_in']) ) {
-
-    }
-    else {
-      header('Location: login.php');
-      exit();
-    }
-    include("header.php"); 
-    include("sidebar.php"); 
+session_start();
+if (!isset($_SESSION['login_in'])) {
+  header('Location: login.php');
+  exit();
+}
+include("header.php"); 
+include("sidebar.php"); 
 ?>
 <html> 
   <head>
     <title>User Form</title>
-    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   
   </head>
   <body>
     <div class="container mt-5">
@@ -60,6 +57,7 @@
                 <input type="radio" name="gender" value="male"> Male
                 <input type="radio" name="gender" value="female"> Female
               </div>
+              <input type="hidden" name="gen">
             </div>
             <div class="mb-3">
               <label>Hobbies</label>
@@ -68,10 +66,12 @@
                 <input type="checkbox" name="hobby[]" value="dance"> Dance
                 <input type="checkbox" name="hobby[]" value="coding"> Coding
               </div>
+              <input type="hidden" name="hob">
             </div>
             <div class="mb-3">
               <label>Country</label>
               <select name="country" class="form-control">
+                <option value="">Select Country</option>
                 <option value="India">India</option>
                 <option value="Pakistan">Pakistan</option>
                 <option value="Sri Lanka">Sri Lanka</option>
@@ -90,29 +90,36 @@
       $("#userForm").on("submit", function (e) {
         e.preventDefault();
         var formData = new FormData(this);
-        $.ajax({
-            url: "aadd.php",
-            type: "POST",
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function (response) {
-              if (response.status === "success") {
-                alert(response.message);
-                $("#userForm")[0].reset();
 
-              } else {
-                alert(response.message);
-              }
-            },
-            error: function (xhr, status, error) {
-              alert("Error: " + xhr.responseText);
+        $(".error-message").remove();
+
+        $.ajax({
+          url: "aadd.php",
+          type: "POST",
+          data: formData,
+          contentType: false,
+          processData: false,
+          success: function (response) {
+            if (response.status === "success") {
+              alert(response.message);
+              $("#userForm")[0].reset();
+            } else if (response.errors) {
+
+              $.each(response.errors, function (key, message) {
+                $(`[name="${key}"]`).after(`<span class="error-message text-danger">${message}</span>`);
+              });
+            } else {
+              alert(response.message);
             }
-          });
+          },
+          error: function (xhr) {
+            alert("Error: " + xhr.responseText);
+          }
+        });
       });
-  });
+    });
   </script>
   </footer>
-    <?php include("footer.php"); ?>
+    <?php include("../footer.php"); ?>
   </body>
 </html>

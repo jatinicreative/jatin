@@ -20,9 +20,7 @@
       echo ' ';
       echo $_SESSION['last'];
       echo '.......';
-      echo $_SESSION['login_in'];
-      echo '.......';
-      echo $_SESSION['userid'];
+
     }  
     include ("footer.php"); 
   ?>

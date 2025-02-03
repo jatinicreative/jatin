@@ -2,7 +2,7 @@
  include "adb.php";
  header('Content-type: application/json');
 
- $query = "SELECT * FROM user";
+ $query = "SELECT * FROM user Order by updated_at DESC";
  $result= mysqli_query($conn, $query);
  $result_array = [];
 

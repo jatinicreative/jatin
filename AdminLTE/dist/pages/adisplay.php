@@ -16,6 +16,7 @@
   <head>
     <title>User Form</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   </head>  
   <body>
     <div class="container-fluid">
@@ -69,8 +70,12 @@
                                 <td>'+value['hobby']+'</td>\
                                 <td>'+value['country']+'</td>\
                                 <td>\
-                                    <a href="aupdateform.php?id='+value['id']+'" >EDIT</a>\
-                                    <a href="#" class="delete-btn" data-id="'+value['id']+'" >DELETE</a>\
+                                    <a href="aupdateform.php?id='+value['id']+'" title="Edit">\
+                                    <i class="fas fa-edit" style="color:ligthblue; font-size: 20px;"></i>\
+                                    </a>\
+                                    <a href="#" class="delete-btn" data-id="'+value['id']+'"title="Delete">\
+                                    <i class="fas fa-trash" style="color:red; font-size: 20px;"></i>\
+                                    </a>\
                                 </td>\
                             </tr>');
                     });
