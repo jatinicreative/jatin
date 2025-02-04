@@ -40,7 +40,7 @@
       integrity="sha256-9kPW/n5nn53j4WMRYAxe9c1rCY96Oogo/MKSVdKzPmI="
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="../../dist/css/adminlte.css" />
+    <link rel="stylesheet" href="../../css/adminlte.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css"
@@ -79,7 +79,7 @@
             <li class="nav-item dropdown user-menu">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                 <img
-                  src="images/<?= htmlspecialchars($row['file']) ?>"
+                  src="./../crud/images/<?= htmlspecialchars($row['file']) ?>"
                   class="user-image rounded-circle shadow"
                   alt="User Image"
                 />
@@ -93,7 +93,7 @@
               <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                 <li class="user-header text-bg-primary">
                   <img
-                    src="images/<?= htmlspecialchars($row['file']) ?>"
+                    src="./../crud/images/<?= htmlspecialchars($row['file']) ?>"
                     class="rounded-circle shadow"
                     alt="User Image"
                   />

@@ -1,27 +1,25 @@
 <?php  
-session_start();
-if (!isset($_SESSION['login_in'])) {
-    header('Location: login.php');
-    exit();
-}
+    session_start();
+    if (!isset($_SESSION['login_in'])) {
+        header('Location: ./../login.php');
+        exit();
+    }
+    include("../header.php"); 
+    include("../sidebar.php");   
+    include("db.php");
 
-include("header.php"); 
-include("sidebar.php");   
-include("adb.php");
+    $id = intval($_GET["id"]);
 
-$id = intval($_GET["id"]);
-
-$result = $conn->query("SELECT * FROM user WHERE id = $id");
-if ($result && $result->num_rows > 0) {
-    $user = $result->fetch_assoc();
-} else {
-    die("User not found.");
-}
+    $result = $conn->query("SELECT * FROM user WHERE id = $id");
+        if ($result && $result->num_rows > 0) {
+            $user = $result->fetch_assoc();
+        } else {
+            die("User not found.");
+        }
 ?>
-<!DOCTYPE html>
 <html>
     <head>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>                
       <div class="card card-primary card-outline mb-4">
@@ -65,13 +63,15 @@ if ($result && $result->num_rows > 0) {
                     <input type="radio" name="gender" value="male" <?php echo ($user['gender'] == 'male') ? 'checked' : ''; ?> >Male
                     <input type="radio" name="gender" value="female" <?php echo ($user['gender'] == 'female') ? 'checked' : ''; ?>>Female<br>
                     </div>
-
+                    <input type="hidden" name="gen">
+ 
                     <div class="mb-3">
                     <label>Hobby :-</label>
                     <input type="checkbox" name="hobby[]" value="music" <?php echo strpos($user['hobby'], 'music') !== false ? 'checked' : ''; ?> >Music
                     <input type="checkbox" name="hobby[]" value="dance" <?php echo strpos($user['hobby'], 'dance') !== false ? 'checked' : ''; ?>>Dance
                     <input type="checkbox" name="hobby[]" value="coding" <?php echo strpos($user['hobby'], 'coding') !== false ? 'checked' : ''; ?>>Coding<br>
                     </div>
+                    <input type="hidden" name="hob">
 
                     <div class="mb-3">  
                     <label>Country :-</label>
@@ -87,7 +87,6 @@ if ($result && $result->num_rows > 0) {
             </div>
           </form>
         </div>
-
         <?php include("footer.php"); ?>
         <footer>
             <script>
@@ -95,8 +94,9 @@ if ($result && $result->num_rows > 0) {
                     $('#update').on('submit', function (e) {
                         e.preventDefault();
                         var formData = new FormData(this);
+                        $(".error-message").remove();
                         $.ajax({
-                            url: "aupdate.php",
+                            url: "update.php",
                             type: "POST",
                             contentType: false,
                             processData: false,
@@ -105,9 +105,14 @@ if ($result && $result->num_rows > 0) {
                             success: function (response) {
                                 if (response.status === 'success') {
                                     alert(response.message);
-                                    window.location.href = "adisplay.php";
+                                    window.location.href = "display.php";
   
-                                } else {
+                                } else if (response.errors) {
+                                    $.each(response.errors, function (key, message) {
+                                    $(`[name="${key}"]`).after(`<span class="error-message text-danger">${message}</span>`);
+                                    });
+                                    }
+                                 else {
                                     alert(response.message);
                                 }
                             },
@@ -119,5 +124,6 @@ if ($result && $result->num_rows > 0) {
                 });
             </script>
         </footer>
+        <?php include("../footer.php"); ?>
     </body>
 </html>

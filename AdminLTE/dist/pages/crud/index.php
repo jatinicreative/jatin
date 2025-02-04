@@ -3,16 +3,14 @@
   <?php 
     session_start();  
     
-    if (isset($_SESSION['login_in']) ) {
-          
+    if (isset($_SESSION['login_in']) ) {        
     }
     else {
-      header('Location: login.php');
+      header('Location: ./../login.php');
       exit();
-
     }
-    include ("header.php"); 
-    include ("sidebar.php");
+    include ("../header.php"); 
+    include ("../sidebar.php");
     echo "Welcome ";
     if(isset($_SESSION['first']) && $_SESSION['last'] && $_SESSION['login_in'] && $_SESSION['userid'])
     {
@@ -22,7 +20,7 @@
       echo '.......';
 
     }  
-    include ("footer.php"); 
+    include ("../footer.php"); 
   ?>
   </body>
 </html>

@@ -1,16 +1,12 @@
 <?php 
-    session_start();
-    if (isset($_SESSION['login_in']) ) {
-     
-    }
-    else {
-      header('Location: login.php');
-      exit();
-  
-    }
-  include ("header.php");
-  include ("sidebar.php"); 
-
+  session_start();
+  if (isset($_SESSION['login_in']) ) {    }
+  else {
+    header('Location: ./../login.php');
+    exit();
+  }
+  include ("../header.php");
+  include ("../sidebar.php"); 
 ?>
 <html>
   <head>
@@ -39,7 +35,6 @@
                 </tr>
               </thead>
               <tbody class="userdata">
-              
               </tbody>
             </table>
           </div>      
@@ -53,7 +48,7 @@
       function getdata()
       {
         $.ajax({
-          url: "aget_user.php",
+          url: "get_user.php",
           dataType: "json",
           type: "GET",
           success: function (response){
@@ -70,7 +65,7 @@
                                 <td>'+value['hobby']+'</td>\
                                 <td>'+value['country']+'</td>\
                                 <td>\
-                                    <a href="aupdateform.php?id='+value['id']+'" title="Edit">\
+                                    <a href="updateform.php?id='+value['id']+'" title="Edit">\
                                     <i class="fas fa-edit" style="color:ligthblue; font-size: 20px;"></i>\
                                     </a>\
                                     <a href="#" class="delete-btn" data-id="'+value['id']+'"title="Delete">\
@@ -84,7 +79,7 @@
                     var id = $(this).data('id');
                     if(confirm('Are you sure you want to delete')){
                     $.ajax({
-                      url: "adelete.php",
+                      url: "delete.php",
                       dataType: "json",
                       type: "POST",
                       data: { id: id },
@@ -110,5 +105,6 @@
         }  
     </script>
   </footer>
+  <?php include("../footer.php"); ?>
   </body>
 </html>

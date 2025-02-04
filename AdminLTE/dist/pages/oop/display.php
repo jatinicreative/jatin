@@ -4,15 +4,13 @@
      
     }
     else {
-      header('Location: login.php');
+      header('Location: ./../login.php');
       exit();
   
     }
-  include ("header.php");
-  include ("sidebar.php"); 
-  include 'db.php'; 
-  $result = $conn->query("SELECT * FROM user ORDER BY updated_at DESC");  
-
+    include ("../header.php");
+    include ("../sidebar.php"); 
+    include ("function.php");
 ?>
 <html>
   <head>
@@ -39,12 +37,16 @@
                 </tr>
               </thead>
               <tbody>
-              <?php    while ($row = $result->fetch_assoc())  {    ?>
+              <?php   
+                    $fetchdata=new CRUD();
+                    $sql=$fetchdata->fetchdata();
+                    while($row=mysqli_fetch_array($sql))  {
+                ?>
                 <tr>
                   <td><?= $row['first_name'] ?></td>
                   <td><?= $row['last_name'] ?></td>
                   <td><?= $row['email'] ?></td>
-                  <td><img src="images/<?= htmlspecialchars($row['file']) ?>" width="100" height="100" alt="Profile Image"></td>
+                  <td><img src="image/<?= htmlspecialchars($row['file']) ?>" width="100" height="100" alt="Profile Image"></td>
                   <td><?= $row['address'] ?></td>
                   <td><?= $row['phone'] ?></td>
                   <td><?= $row['gender'] ?></td>
@@ -65,6 +67,6 @@
             </table>
           </div>      
     </div>
-    <?php include ("footer.php"); ?>  
+    <?php include ("../footer.php"); ?>
   </body>
 </html>

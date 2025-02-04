@@ -8,12 +8,15 @@
       exit();
   
     }
+    $current_page = ($_SERVER['PHP_SELF']);
+   
+
 ?>
 <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
       <div class="sidebar-brand">
           <a href="./index.php" class="brand-link">
             <img
-              src="../../dist/assets/img/AdminLTELogo.png"
+              src="../../assets/img/AdminLTELogo.png"
               alt="AdminLTE Logo"
               class="brand-image opacity-75 shadow"
             />
@@ -28,7 +31,7 @@
               role="menu"
               data-accordion="false"
             >
-              <li class="nav-item menu-open">
+              <li class="nav-item <?= str_contains($current_page,'crud') ? 'menu-open' :''?>">
                 <a href="#" class="nav-link">
                   <i class="nav-icon bi bi-speedometer"></i>
                   <p>
@@ -38,20 +41,20 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="./form.php" class="nav-link">
+                    <a href="./../crud/form.php" class="nav-link <?= $current_page == '/jatin/AdminLTE/dist/pages/crud/form.php' ? 'active' :''?>">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>User Form</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="./display.php" class="nav-link">
+                    <a href="./../crud/display.php" class="nav-link <?= $current_page == '/jatin/AdminLTE/dist/pages/crud/display.php' ? 'active' :''?>">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>Display User Details</p>
                     </a>
                   </li>
                 </ul>
               </li>
-              <li class="nav-item menu-open">
+              <li class="nav-item <?= str_contains($current_page,'oop') ? 'menu-open' :''?>">
                 <a href="#" class="nav-link">
                   <i class="nav-icon bi bi-speedometer"></i>
                   <p>
@@ -61,20 +64,20 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="./oform.php" class="nav-link ">
+                    <a href="./../oop/form.php" class="nav-link <?= $current_page == '/jatin/AdminLTE/dist/pages/oop/form.php' ? 'active' :''?>">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>User Form</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="./odisplay.php" class="nav-link">
+                    <a href="./../oop/display.php" class="nav-link <?= $current_page == '/jatin/AdminLTE/dist/pages/oop/display.php' ? 'active' :''?> ">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>Display User Details</p>
                     </a>
                   </li>
                 </ul>
               </li>
-              <li class="nav-item menu-open">
+              <li class="nav-item <?= str_contains($current_page,'ajax') ? 'menu-open' :''?>">
                 <a href="#" class="nav-link">
                   <i class="nav-icon bi bi-speedometer"></i>
                   <p>
@@ -84,13 +87,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="./aform.php" class="nav-link">
+                    <a href="./../ajax/form.php" class="nav-link <?= $current_page == '/jatin/AdminLTE/dist/pages/ajax/form.php' ? 'active' :''?>">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>User Form</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="./adisplay.php" class="nav-link">
+                    <a href="./../ajax/display.php" class="nav-link <?= $current_page == '/jatin/AdminLTE/dist/pages/ajax/display.php' ? 'active' :''?>">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>Display User Details</p>
                     </a>

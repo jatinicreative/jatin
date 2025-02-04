@@ -1,19 +1,17 @@
-  <?php 
-      session_start();
-      if (isset($_SESSION['login_in']) ) {
-       
-      }
-      else {
-        header('Location: login.php');
-        exit();
-    
-      }
-    include ("header.php"); 
-    include ("sidebar.php");   
-    include ("db.php");
-    include ("update.php");
+<?php 
+  session_start();
+  if (isset($_SESSION['login_in']) ) {       
+  }
+  else {
+    header('Location: ./../login.php');
+    exit();
+  }
+  include ("../header.php"); 
+  include ("../sidebar.php");   
+  include ("../db.php");
+  include ("update.php");
   
-    if (isset($_GET['id'])) {
+  if (isset($_GET['id'])) {
       $id = $_GET['id'];
       $result = $conn->query("SELECT * FROM user WHERE id = $id");
       if ($result && $result->num_rows > 0) {
@@ -21,10 +19,10 @@
       } else {
           die("User not found.");
       }
-    }
-  ?>
-  <html>
-    <body>                
+  }
+?>
+<html>
+  <body>                
       <div class="card card-primary card-outline mb-4">
         <div class="card-header"><div class="card-title">Input User Details..</div></div>
           <form action="" method="POST" enctype="multipart/form-data">
@@ -100,6 +98,6 @@
                   </form>
                 </div>
 
-        <?php include ("footer.php"); ?>
+        <?php include ("../footer.php"); ?>
   </body>
 </html>

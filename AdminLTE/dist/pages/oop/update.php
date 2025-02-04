@@ -1,5 +1,5 @@
 <?php
-include 'ofunction.php';
+include 'function.php';
 $updatedata=new CRUD();
 
 $errors = [];
@@ -74,7 +74,7 @@ if(($_SERVER['REQUEST_METHOD'] === 'POST'))
     $sql=$updatedata->update($first_name,$last_name,$email,$filename,$address,$phone,$gender,$hobby,$country,$id);
     if($sql){
     echo "<script>alert('Record Updated successfully');</script>";
-    echo "<script>window.location.href='odisplay.php'</script>";
+    echo "<script>window.location.href='display.php'</script>";
     }
 }
 }

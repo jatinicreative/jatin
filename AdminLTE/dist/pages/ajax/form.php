@@ -1,17 +1,16 @@
 <?php 
 session_start();
 if (!isset($_SESSION['login_in'])) {
-  header('Location: login.php');
+  header('Location: ./../login.php');
   exit();
 }
-include("header.php"); 
-include("sidebar.php"); 
+include("../header.php"); 
+include("../sidebar.php"); 
 ?>
 <html> 
   <head>
     <title>User Form</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-   
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>   
   </head>
   <body>
     <div class="container mt-5">
@@ -90,18 +89,19 @@ include("sidebar.php");
       $("#userForm").on("submit", function (e) {
         e.preventDefault();
         var formData = new FormData(this);
-
         $(".error-message").remove();
 
         $.ajax({
-          url: "aadd.php",
+          url: "add.php",
           type: "POST",
           data: formData,
           contentType: false,
           processData: false,
+          dataType : "json",
           success: function (response) {
             if (response.status === "success") {
               alert(response.message);
+              window.location.href = "display.php";
               $("#userForm")[0].reset();
             } else if (response.errors) {
 
@@ -119,7 +119,7 @@ include("sidebar.php");
       });
     });
   </script>
-  </footer>
-    <?php include("../footer.php"); ?>
+  <?php include("../footer.php"); ?>
+  </footer>  
   </body>
 </html>
