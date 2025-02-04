@@ -1,5 +1,6 @@
 <?php
 include 'db.php';
+include 'update.php';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -8,28 +9,42 @@ if (isset($_GET['id'])) {
 }
 ?>
 <html>
+    <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    </head>
 <body>
-    <form action="update.php" method="POST" enctype="multipart/form-data">
+    <h4>Update Details..</h4>
+    <form action="" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
-
+        
         <label>First Name :-</label>
-        <input type="text" name="first_name" value="<?php echo $user['first_name']; ?>"><br><br>
+        <?php $first_name = isset($_POST['first_name']) ? $_POST['first_name'] :$user['first_name']; ?>
+        <input type="text" name="first_name" value="<?php echo $first_name; ?>"><br><br>
+        <span class="text-danger"><?= $firstnameErr ?? '' ?></span> <br>
 
         <label>Last Name :-</label>
-        <input type="text" name="last_name" value="<?php echo $user['last_name']; ?>"><br><br>
+        <?php $last_name = isset($_POST['last_name']) ? $_POST['last_name'] :$user['last_name']; ?>
+        <input type="text" name="last_name" value="<?php echo $last_name; ?>"><br><br>
+        <span class="text-danger"><?= $lastnameErr ?? '' ?></span> <br>
 
         <label>Email :-</label>
-        <input type="email" name="email" value="<?php echo $user['email']; ?>"><br><br>
+        <?php $email = isset($_POST['email']) ? $_POST['email'] : $user['email']; ?>
+        <input type="email" name="email" value="<?php echo $email; ?>"><br><br>
+        <span class="text-danger"><?= $emailErr ?? '' ?></span> <br>
 
         <img src="./image/<?= htmlspecialchars($user['file']) ?>" width="100" height="100" alt="Profile Image"><br>
         <label>Update Profile Image :-</label>
         <input type="file" name="file" accept="image/*"/><br><br>
 
         <label>Address :-</label>
-        <input type="textarea" name="address" value="<?php echo $user['address']; ?>"><br><br>
+        <?php $address = isset($_POST['address']) ? $_POST['address'] : $user['address']; ?>
+        <input type="textarea" name="address" value="<?php echo $address ?>"><br><br>
+        <span class="text-danger"><?= $messageErr ?? '' ?></span> <br>
 
         <label>Phone No :-</label>
-        <input type="tel" name="phone" value="<?php echo $user['phone']; ?>"><br><br>
+        <?php $phone = isset($_POST['phone']) ? $_POST['phone'] : $user['phone']; ?>
+        <input type="tel" name="phone" value="<?php echo $phone; ?>"><br><br>
+        <span class="text-danger"><?= $numberErr ?? '' ?></span> <br>
 
         <label>Gender :-</label>
         <input type="radio" name="gender" value="male" <?php echo ($user['gender'] == 'male') ? 'checked' : ''; ?>>Male

@@ -1,7 +1,6 @@
 <html>
     <head>
-        <title>User Details</title>
-        
+        <title>User Details</title>    
     </head>
 <body>
 <?php 
@@ -12,7 +11,6 @@
 
     $result = $conn->query("SELECT * FROM user"); 
 ?>
-
 <table border="1">
     <tr>
         <th>First Name</th>
@@ -26,9 +24,7 @@
         <th>Country</th>
         <th>Actions</th>
     </tr>
-
 <?php    while ($row = $result->fetch_assoc())  {    ?>
-    
     <tr>
         <td><?= $row['first_name'] ?></td>
         <td><?= $row['last_name'] ?></td>
