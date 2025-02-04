@@ -6,7 +6,6 @@
   else {
     header('Location: login.php');
     exit();
-
   }
   include ("header.php"); 
   include ("sidebar.php"); 
@@ -36,12 +35,12 @@
                   </div>
                   <div class="mb-3">
                       <label>Password</label>
-                      <input type="password" name="pass" class="form-control" />
+                      <input type="password" name="pass" class="form-control" value="<?= htmlspecialchars($pass ?? '') ?>"/>
                       <span class="text-danger"><?= $passwordErr ?? '' ?></span>
                   </div>
                   <div class="mb-3">
                       <label>Confirm Password</label>
-                      <input type="password" name="cpass" class="form-control" />
+                      <input type="password" name="cpass" class="form-control" value="<?= htmlspecialchars($cpass ?? '') ?>" />
                       <span class="text-danger"><?= $cpasswordErr ?? '' ?></span>
                   </div>
                   <div class="mb-3">
@@ -79,6 +78,7 @@
                   <div class="mb-3">
                       <label>Country</label>
                       <select name="country" class="form-control">
+                          <option value="">Select Country</option>
                           <option value="India" <?= isset($country) && $country == 'India' ? 'selected' : '' ?>>India</option>
                           <option value="Pakistan" <?= isset($country) && $country == 'Pakistan' ? 'selected' : '' ?>>Pakistan</option>
                           <option value="Sri Lanka" <?= isset($country) && $country == 'Sri Lanka' ? 'selected' : '' ?>>Sri Lanka</option>

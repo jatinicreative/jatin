@@ -23,12 +23,12 @@ class CRUD
 	}
 	public function fetchdata()
 	{
-	$result=mysqli_query($this->con,"SELECT * from user");
+	$result=mysqli_query($this->con,"SELECT * from user order by updated_at DESC");
 	return $result;
 	}
-	public function singlefetchdata($rid)
+	public function singlefetchdata($id)
 	{
-	$result=mysqli_query($this->con,"SELECT * from user where id=$rid");
+	$result=mysqli_query($this->con,"SELECT * from user where id=$id");
 	return $result;
 	}
 	public function update($first_name,$last_name,$email,$filename,$address,$phone,$gender,$hobby,$country,$id)

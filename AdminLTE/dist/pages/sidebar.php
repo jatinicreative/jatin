@@ -29,16 +29,16 @@
               data-accordion="false"
             >
               <li class="nav-item menu-open">
-                <a href="#" class="nav-link active">
+                <a href="#" class="nav-link">
                   <i class="nav-icon bi bi-speedometer"></i>
                   <p>
-                  Crud Operation
+                  Simple Crud
                     <i class="nav-arrow bi bi-chevron-right"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="./form.php" class="nav-link active">
+                    <a href="./form.php" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>User Form</p>
                     </a>
@@ -52,16 +52,16 @@
                 </ul>
               </li>
               <li class="nav-item menu-open">
-                <a href="#" class="nav-link active">
+                <a href="#" class="nav-link">
                   <i class="nav-icon bi bi-speedometer"></i>
                   <p>
-                  Crud Operation (OOPS)
+                  OOPS Crud
                     <i class="nav-arrow bi bi-chevron-right"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="./oform.php" class="nav-link active">
+                    <a href="./oform.php" class="nav-link ">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>User Form</p>
                     </a>
@@ -75,16 +75,16 @@
                 </ul>
               </li>
               <li class="nav-item menu-open">
-                <a href="#" class="nav-link active">
+                <a href="#" class="nav-link">
                   <i class="nav-icon bi bi-speedometer"></i>
                   <p>
-                  Crud Operation (AJAX)
+                  AJAX Crud
                     <i class="nav-arrow bi bi-chevron-right"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="./aform.php" class="nav-link active">
+                    <a href="./aform.php" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>User Form</p>
                     </a>

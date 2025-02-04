@@ -10,12 +10,12 @@
     }
     include ("header.php"); 
     include ("sidebar.php"); 
-    include ('ofunction.php');
+    require_once ('oupdate.php');
 if(isset($_GET['id']))
 {
-$rid=$_GET['id'];
+$id=$_GET['id'];
 $fetchdata=new CRUD();
-$sql=$fetchdata->singlefetchdata($rid);
+$sql=$fetchdata->singlefetchdata($id);
 if ($sql) {
     $user = $sql->fetch_assoc();
 } else {
@@ -27,22 +27,28 @@ if ($sql) {
     <body>                
       <div class="card card-primary card-outline mb-4">
         <div class="card-header"><div class="card-title">Input User Details..</div></div>
-          <form action="oupdate.php" method="POST" enctype="multipart/form-data">
+          <form action="" method="POST" enctype="multipart/form-data">
             <div class="card-body">
               <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
                     <div class="mb-3">
                         <label>First Name</label>
-                        <input type="text" name="first_name" value="<?php echo $user['first_name']; ?>" class="form-control" />
+                        <?php $first_name = isset($_POST ['first_name'])?$_POST['first_name']:$user['first_name']; ?>
+                        <input type="text" name="first_name" value="<?php echo $first_name; ?>" class="form-control" />
+                        <span class="text-danger"><?= $errors['first_name'] ?? '' ?></span>
                       </div>
                       
                       <div class="mb-3">
                         <label>Last Name</label>
-                        <input type="text" name="last_name" value="<?php echo $user['last_name']; ?>" class="form-control" />
+                        <?php $last_name = isset($_POST ['last_name'])?$_POST['last_name']:$user['last_name']; ?>
+                        <input type="text" name="last_name" value="<?php echo $last_name; ?>" class="form-control" />
+                        <span class="text-danger"><?= $errors['last_name'] ?? '' ?></span>
                       </div>
                       
                       <div class="mb-3">
                         <label>Email</label>
-                        <input type="email" name="email" value="<?php echo $user['email']; ?>" class="form-control" />
+                        <?php $email = isset($_POST ['email'])?$_POST['email']:$user['email']; ?>
+                        <input type="email" name="email" value="<?php echo $email; ?>" class="form-control" />
+                        <span class="text-danger"><?= $errors['email'] ?? '' ?></span>
                       </div>
                       
 
@@ -54,12 +60,16 @@ if ($sql) {
                       
                       <div class="mb-3">
                         <label>Address</label>
-                        <input type="text" name="address" value="<?php echo $user['address']; ?>" class="form-control" />
+                        <?php $address = isset($_POST ['address'])?$_POST['address']:$user['address']; ?>
+                        <input type="text" name="address" value="<?php echo $address; ?>" class="form-control" />
+                        <span class="text-danger"><?= $errors['address'] ?? '' ?></span>
                       </div>
                       
                       <div class="mb-3">
                         <label>Phone No</label>
-                        <input type="text" name="phone" value="<?php echo $user['phone']; ?>" class="form-control" />
+                        <?php $phone = isset($_POST ['phone'])?$_POST['phone']:$user['phone']; ?>
+                        <input type="text" name="phone" value="<?php echo $phone; ?>" class="form-control" />
+                        <span class="text-danger"><?= $errors['phone'] ?? '' ?></span>
                       </div>
 
                       <div class="mb-3">

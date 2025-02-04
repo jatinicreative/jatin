@@ -35,10 +35,12 @@ if (isset($_POST['add'])) {
         $passwordErr = "Password is required";
     } else {
         $pass = $_POST["pass"];
-        if (strlen($pass) < 5) {
-            $passwordErr = "Password Minimun length should be 5 character";
+        if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/',$pass))
+         {
+            $passwordErr = "Password Minimum length of 8 character one upper case,lowercase & digit with special character...";
         }
     }
+    $hash = password_hash($pass, PASSWORD_DEFAULT); 
 
     if (empty($_POST["cpass"])) {
         $cpasswordErr = "Confirm Password is required";
@@ -98,7 +100,7 @@ if (isset($_POST['add'])) {
 
     if (empty($firstnameErr) && empty($lastnameErr) && empty($emailErr) && empty($passwordErr) && empty($cpasswordErr) && empty($numberErr) && empty($messageErr) && empty($genderErr) && empty($hobbyErr) && empty($countryErr) && empty($imageErr)) {
         
-        $sql = "INSERT INTO user (first_name, last_name, email, pass, file, address, phone, gender, hobby, country) VALUES ('$first_name', '$last_name', '$email', '$pass', '$target_file', '$address', '$phone', '$gender', '$hobby', '$country')";
+        $sql = "INSERT INTO user (first_name, last_name, email, pass, file, address, phone, gender, hobby, country) VALUES ('$first_name', '$last_name', '$email', '$hash', '$target_file', '$address', '$phone', '$gender', '$hobby', '$country')";
 
         if (!mysqli_query($conn, $sql)) {
             die('Error: ' . mysqli_error($conn));

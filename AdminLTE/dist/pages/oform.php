@@ -36,13 +36,14 @@ require_once 'oadd.php';
                     </div>
                     <div class="mb-3">
                         <label>Password</label>
-                        <input type="password" name="pass" class="form-control" />
+                        <input type="password" name="pass" class="form-control" value="<?= htmlspecialchars($pass ?? '') ?>"/>
                         <span class="text-danger"><?= $errors['pass'] ?? '' ?></span>
                     </div>
                     <div class="mb-3">
                         <label>Confirm Password</label>
-                        <input type="password" name="cpass" class="form-control" />
+                        <input type="password" name="cpass" class="form-control" value="<?= htmlspecialchars($cpass ?? '') ?>"/>
                         <span class="text-danger"><?= $errors['cpass'] ?? '' ?></span>
+                        <span class="text-danger"><?= $errors['ppass'] ?? '' ?></span>
                     </div>
                     <div class="mb-3">
                         <label>Profile Image</label>
