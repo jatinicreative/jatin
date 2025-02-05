@@ -111,7 +111,7 @@
                 
                 <li class="user-footer">
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
-                  <a href="logout.php" class="btn btn-default btn-flat float-end">Sign out</a>
+                  <a href="./../logout.php" class="btn btn-default btn-flat float-end">Sign out</a>
                 </li>
               </ul>
             </li>
