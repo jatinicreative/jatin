@@ -99,7 +99,7 @@ if (isset($_POST['add'])) {
 
     if (empty($firstnameErr) && empty($lastnameErr) && empty($emailErr) && empty($passwordErr) && empty($cpasswordErr) && empty($numberErr) && empty($messageErr) && empty($genderErr) && empty($hobbyErr) && empty($countryErr) && empty($imageErr)) {
         
-        $sql = "INSERT INTO user (first_name, last_name, email, pass, file, address, phone, gender, hobby, country) VALUES ('$first_name', '$last_name', '$email', '$pass', '$target_file', '$address', '$phone', '$gender', '$hobby', '$country')";
+        $sql = "INSERT INTO user (first_name, last_name, email, password, file, address, phone, gender, hobby, country) VALUES ('$first_name', '$last_name', '$email', '$pass', '$target_file', '$address', '$phone', '$gender', '$hobby', '$country')";
 
         if (!mysqli_query($conn, $sql)) {
             die('Error: ' . mysqli_error($conn));
