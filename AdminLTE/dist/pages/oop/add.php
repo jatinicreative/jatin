@@ -1,12 +1,12 @@
 <?php
-include 'ofunction.php';
-$insertdata = new CRUD();
+    include 'function.php';
+    $insertdata = new CRUD();
 
-$errors = [];
-$first_name = $last_name = $email = $pass = $cpass = $address = $phone = $gender = $hobby = $country = "";
-$file_name = "";
+    $errors = [];
+    $first_name = $last_name = $email = $pass = $cpass = $address = $phone = $gender = $hobby = $country = "";
+    $file_name = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['oadd'])) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['oadd'])) {
 
     $first_name = trim($_POST['first_name']);
     if (empty($first_name)) {
@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['oadd'])) {
         $sql = $insertdata->insert($first_name, $last_name, $email, $pass, $file_name, $address, $phone, $gender, $hobby, $country);
         if ($sql) {
             echo "<script>alert('Record inserted successfully');</script>";
-            echo "<script>window.location.href='odisplay.php'</script>";
+            echo "<script>window.location.href='display.php'</script>";
         } else {
             echo "<script>alert('Something went wrong. Please try again');</script>";
         }

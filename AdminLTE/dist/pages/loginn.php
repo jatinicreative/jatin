@@ -25,7 +25,7 @@ if(isset($_POST['login'])){
             $_SESSION['userid']=$row['id'];
             $_SESSION['first']=$row['first_name'];
             $_SESSION['last']=$row['last_name'];
-            header('location:index.php');
+            header('location:crud/index.php');
             }
             else{
                 $_SESSION['message']="Login Failed. Incorrect Password!";

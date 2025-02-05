@@ -39,7 +39,6 @@ if (isset($_POST['add'])) {
          {
             $passwordErr = "Password Minimum length of 8 character one upper case,lowercase & digit with special character...";
         }
-        
     }
 
     if (empty($_POST["cpass"])) {

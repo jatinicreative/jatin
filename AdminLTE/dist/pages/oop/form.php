@@ -1,19 +1,17 @@
 <?php
-  session_start();
-  if (isset($_SESSION['login_in']) ) {
-   
-  }
-  else {
-    header('Location: login.php');
-    exit();
-
-  }
-include("header.php");
-include("sidebar.php");
-require_once 'oadd.php';
+    session_start();
+    if (isset($_SESSION['login_in']) ) {
+    }
+    else {
+        header('Location: ./../login.php');
+        exit();
+    }
+    include("../header.php");
+    include("../sidebar.php");
+    require_once 'add.php';
 ?>
 <html>
-<body>
+  <body>
     <div class="container mt-5">
         <div class="card">
             <div class="card-header">Input User Details</div>
@@ -94,6 +92,6 @@ require_once 'oadd.php';
             </form>
         </div>
     </div>
-    <?php include("footer.php"); ?>
+    <?php include("../footer.php"); ?>
 </body>
 </html>

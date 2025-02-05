@@ -21,7 +21,7 @@
       integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
       crossorigin="anonymous"
       ></script>
-      <script src="../../dist/js/adminlte.js"></script>
+      <script src="../../js/adminlte.js"></script>
       <script>
       const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
       const Default = {

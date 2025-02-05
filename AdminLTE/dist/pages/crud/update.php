@@ -1,11 +1,10 @@
 <?php
+    include '../db.php';
 
-include 'db.php';
+    $firstnameErr = $lastnameErr = $emailErr = $numberErr = $genderErr = $hobbyErr = $countryErr = $messageErr = "";
+    $first_name = $last_name = $email = $address = $phone = $gender = $hobby = $country = "";
 
-$firstnameErr = $lastnameErr = $emailErr = $numberErr = $genderErr = $hobbyErr = $countryErr = $messageErr = "";
-$first_name = $last_name = $email = $address = $phone = $gender = $hobby = $country = "";
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'] ?? '';
     function input_data($data) {
         $data = trim($data);

@@ -5,9 +5,9 @@
     </head>
     <body>
         <?php 
-        include 'db.php';
-        include 'nav.html';
-        include("add.php");
+            include 'db.php';
+            include 'nav.html';
+            include 'add.php"';
         ?>
         <h4> User Form..</h4>
 
@@ -25,11 +25,11 @@
             <span class="text-danger"><?= $emailErr ?? '' ?></span><br><br>
 
             <label>Password :-</label>
-            <input type="password" name="pass" >
+            <input type="password" name="pass" value="<?= htmlspecialchars($pass ?? '') ?>">
             <span class="text-danger"><?= $passwordErr ?? '' ?></span><br><br>
 
             <label>Confirm Password :-</label>
-            <input type="password" name="cpass"  >
+            <input type="password" name="cpass" value="<?= htmlspecialchars($cpass ?? '') ?>" >
             <span class="text-danger"><?= $cpasswordErr ?? '' ?></span><br><br>
 
             <label>Profile Image :-</label>
@@ -66,6 +66,5 @@
             <input type="submit" name="add" value="SUBMIT">
 
         </form>
- 
     </body>
 </html>

@@ -1,27 +1,25 @@
 <?php
     session_start();
     if (isset($_SESSION['login_in']) ) {
-     
     }
     else {
       header('Location: login.php');
       exit();
-  
     }
-    include ("header.php"); 
-    include ("sidebar.php"); 
-    require_once ('oupdate.php');
-if(isset($_GET['id']))
-{
-$id=$_GET['id'];
-$fetchdata=new CRUD();
-$sql=$fetchdata->singlefetchdata($id);
-if ($sql) {
-    $user = $sql->fetch_assoc();
-} else {
-    die("User not found.");
-}
-}
+    include ("../header.php"); 
+    include ("../sidebar.php"); 
+    require_once ('update.php');
+    if(isset($_GET['id']))
+    {   
+      $id=$_GET['id'];
+      $fetchdata=new CRUD();
+      $sql=$fetchdata->singlefetchdata($id);
+      if ($sql) {
+          $user = $sql->fetch_assoc();
+      } else {
+          die("User not found.");
+      }
+    }
 ?>
 <html>
     <body>                
@@ -100,6 +98,6 @@ if ($sql) {
                   </form>
                 </div>
 
-  <?php include ("footer.php"); ?>
+  <?php include ("../footer.php"); ?>
 </body>
 </html>

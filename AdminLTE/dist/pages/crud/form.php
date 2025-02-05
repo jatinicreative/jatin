@@ -1,15 +1,14 @@
 <?php 
-  session_start();
-  if (isset($_SESSION['login_in']) ) {
-   
-  }
-  else {
-    header('Location: login.php');
-    exit();
-  }
-  include ("header.php"); 
-  include ("sidebar.php"); 
-  include("add.php");
+    session_start();
+    if (isset($_SESSION['login_in']) ) {
+      }
+    else {
+        header('Location: ./../login.php');
+        exit();
+    }
+    include ("../header.php"); 
+    include ("../sidebar.php"); 
+    include("add.php");
 ?>
 <html> 
   <body>
@@ -92,6 +91,6 @@
           </form>
       </div>
   </div>
-  <?php include ("footer.php"); ?>
+  <?php include ("../footer.php"); ?>
   </body>
 </html>
