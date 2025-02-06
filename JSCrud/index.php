@@ -1,24 +1,14 @@
 <html>
     <head>
-        <title></title>    
+        <title>Products</title>    
         <?php include 'nav.php'; ?><br>
     <style>
         .productform {
          display: none;
         }
-        .variant-container {
-            margin-top: 10px;
-            padding: 10px;
-            border: 2px solid rgb(99, 95, 95);
-        }
-        .remove-variant {
-            background-color: tomato;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-
-        }   
     </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </head>    
     <body>
 
@@ -43,7 +33,7 @@
 
                 <div id="showvariant" class="showvariant"></div><br>
 
-                <button type="submit" class="btn btn-success" name="add">Submit</button>
+                <button type="submit" class="btn btn-success" name="add">Submit </button>
             </form>
         </div>
     <footer>
@@ -62,7 +52,7 @@
             variantButton.onclick = function(){
                 
                 const variantDiv = document.createElement("div");
-                variantDiv.classList.add("variant-container");
+ 
 
                 variantDiv.innerHTML = `
                     <label>Size:</label>
