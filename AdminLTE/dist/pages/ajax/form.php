@@ -1,18 +1,10 @@
 <?php 
-session_start();
-if (!isset($_SESSION['login_in'])) {
-  header('Location: ./../login.php');
-  exit();
-}
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 include("../header.php"); 
 include("../sidebar.php"); 
 ?>
-<html> 
-  <head>
-    <title>User Form</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>   
-  </head>
-  <body>
     <div class="container mt-5">
       <div class="card">
         <div class="card-header">Input User Details</div>
@@ -83,43 +75,4 @@ include("../sidebar.php");
         </form>
       </div>
     </div>
-  <footer>  
-  <script>
-    $(document).ready(function () {
-      $("#userForm").on("submit", function (e) {
-        e.preventDefault();
-        var formData = new FormData(this);
-        $(".error-message").remove();
-
-        $.ajax({
-          url: "add.php",
-          type: "POST",
-          data: formData,
-          contentType: false,
-          processData: false,
-          dataType : "json",
-          success: function (response) {
-            if (response.status === "success") {
-              alert(response.message);
-              window.location.href = "display.php";
-              $("#userForm")[0].reset();
-            } else if (response.errors) {
-
-              $.each(response.errors, function (key, message) {
-                $(`[name="${key}"]`).after(`<span class="error-message text-danger">${message}</span>`);
-              });
-            } else {
-              alert(response.message);
-            }
-          },
-          error: function (xhr) {
-            alert("Error: " + xhr.responseText);
-          }
-        });
-      });
-    });
-  </script>
   <?php include("../footer.php"); ?>
-  </footer>  
-  </body>
-</html>

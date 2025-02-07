@@ -1,13 +1,5 @@
 <?php     
-    session_start();
-    if (isset($_SESSION['login_in']) ) {
-     
-    }
-    else {
-      header('Location: login.php');
-      exit();
-  
-    }
+
     $current_page = ($_SERVER['PHP_SELF']);
    
 

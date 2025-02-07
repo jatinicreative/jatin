@@ -1,11 +1,5 @@
 <?php
-    session_start();
-    if (isset($_SESSION['login_in']) ) {
-    }
-    else {
-      header('Location: login.php');
-      exit();
-    }
+
     include ("../header.php"); 
     include ("../sidebar.php"); 
     require_once ('update.php');
@@ -21,8 +15,7 @@
       }
     }
 ?>
-<html>
-    <body>                
+            
       <div class="card card-primary card-outline mb-4">
         <div class="card-header"><div class="card-title">Input User Details..</div></div>
           <form action="" method="POST" enctype="multipart/form-data">
@@ -72,8 +65,10 @@
 
                       <div class="mb-3">
                       <label>Gender :-</label>
-                      <input type="radio" name="gender" value="male" <?php echo ($user['gender'] == 'male') ? 'checked' : ''; ?> >Male
-                      <input type="radio" name="gender" value="female" <?php echo ($user['gender'] == 'female') ? 'checked' : ''; ?>>Female<br>
+                      <?php $gender = isset($_POST['gender']) ? $_POST['gender']:$user['gender']; ?>
+                      <input type="radio" name="gender" value="male" <?php echo ($gender == 'male') ? 'checked' : ''; ?> >Male
+                      <input type="radio" name="gender" value="female" <?php echo ($gender == 'female') ? 'checked' : ''; ?>>Female<br>
+                      <span class="text-danger"><?= $errors['gender'] ?? '' ?></span>
                       </div>
 
                       <div class="mb-3">
@@ -81,15 +76,22 @@
                       <input type="checkbox" name="hobby[]" value="music" <?php echo strpos($user['hobby'], 'music') !== false ? 'checked' : ''; ?> >Music
                       <input type="checkbox" name="hobby[]" value="dance" <?php echo strpos($user['hobby'], 'dance') !== false ? 'checked' : ''; ?>>Dance
                       <input type="checkbox" name="hobby[]" value="coding" <?php echo strpos($user['hobby'], 'coding') !== false ? 'checked' : ''; ?>>Coding<br>
+                      <span class="text-danger"><?= $errors['hobby'] ?? '' ?></span>
                       </div>
+                      
 
                       <div class="mb-3">  
                       <label>Country :-</label>
+                      <?php $country = isset($_POST['country']) ? $_POST['country']:$user['country']; ?>
                       <select name="country">
-                          <option value="India" <?php echo ($user['country'] == 'India') ? 'selected' : ''; ?>>India</option>
-                          <option value="Pakistan" <?php echo ($user['country'] == 'Pakistan') ? 'selected' : ''; ?>>Pakistan</option>
-                          <option value="Sri Lanka" <?php echo ($user['country'] == 'Sri Lanka') ? 'selected' : ''; ?>>Sri Lanka</option>
+                          <option value="" <?php echo ($country == '') ? 'selected' : ''; ?>>Select Country</option>
+                          <option value="India" <?php echo ($country == 'India') ? 'selected' : ''; ?>>India</option>
+                          <option value="Pakistan" <?php echo ($country == 'Pakistan') ? 'selected' : ''; ?>>Pakistan</option>
+                          <option value="Sri Lanka" <?php echo ($country == 'Sri Lanka') ? 'selected' : ''; ?>>Sri Lanka</option>
                       </select><br>
+                      <span class="text-danger"><?= $errors['country'] ?? '' ?></span>
+                      
+                      
                       </div>
                     </div>
                     <div class="card-footer">
@@ -99,5 +101,4 @@
                 </div>
 
   <?php include ("../footer.php"); ?>
-</body>
-</html>
+

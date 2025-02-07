@@ -4,15 +4,15 @@
          
       }
       else {
-          header('Location: login.php');
+          header('Location: ./../login.php');
           exit();
       
       }
-      require_once 'db.php';  
+      include 'db.php';  
       if (isset($_SESSION['userid'])) {
         $id = $_SESSION['userid'];
 
-        $query = "SELECT file FROM user WHERE id = '$id'";
+        $query = "SELECT * FROM user WHERE id = '$id'";
         $result = mysqli_query($conn, $query);
         if ($result && mysqli_num_rows($result) > 0) {
           $row = mysqli_fetch_assoc($result);
@@ -20,6 +20,7 @@
 
     }
 ?>
+<html>
   <head>
     <title></title>
     <link
@@ -53,7 +54,10 @@
       integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4="
       crossorigin="anonymous"
     />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+
   </head>
   <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <div class="app-wrapper">
@@ -85,9 +89,9 @@
                 />
                 <span class="d-none d-md-inline"></span>
                         <?php                        
-                        echo $_SESSION['first'];
+                        echo $row['first_name'];
                         echo ' ';
-                        echo $_SESSION['last'];
+                        echo $row['last_name'];
                         ?></span> 
               </a>
               <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
@@ -99,12 +103,10 @@
                   />
                   <p>
                   <?php
- 
-                    if (isset($_SESSION['first']) && $_SESSION['last']){
-                        echo $_SESSION['first'];
+                        echo $row['first_name'];
                         echo ' ';
-                        echo $_SESSION['last'];
-                    }?>
+                        echo $row['last_name'];
+                    ?>
                     
                   </p>
                 </li>
@@ -118,3 +120,9 @@
           </ul>
         </div>
       </nav>
+      </body>
+      </html>
+
+
+
+

@@ -1,6 +1,6 @@
 <?php
     header('Content-Type: application/json');
-    include("db.php");
+    include("adb.php");
 
     $response = [];
 
@@ -73,7 +73,7 @@
             $sql .= ", file='$target_file'";
         }
         $sql .= " WHERE id='$id'";
-        if (mysqli_query($conn, $sql)) {
+        if (mysqli_query($co, $sql)) {
             $response = ["status" => "success", "message" => "Successfully Updated"];
             } 
         else {

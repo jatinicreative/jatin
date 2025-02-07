@@ -1,6 +1,6 @@
 <?php
     header('Content-Type: application/json');
-    include "db.php";
+    include "adb.php";
 
     $response = ["status" => "error", "errors" => []];
 
@@ -67,10 +67,10 @@
             $sql = "INSERT INTO user (first_name, last_name, email, pass, file, address, phone, gender, hobby, country)
                 VALUES ('$first_name', '$last_name', '$email', '$password', '$target_file', '$address', '$phone', '$gender', '$hobby', '$country')";
 
-            if (mysqli_query($conn, $sql)) {
+            if (mysqli_query($co, $sql)) {
                 $response = ["status" => "success", "message" => "User data successfully inserted."];
             } else {
-                $response = ["status" => "error", "message" => "Database error: " . mysqli_error($conn)];
+                $response = ["status" => "error", "message" => "Database error: " . mysqli_error($co)];
             }
         } else {
             $response["errors"] = $errors;
