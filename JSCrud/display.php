@@ -1,7 +1,7 @@
 <?php 
     include 'nav.php'; 
     include  'db.php';        
-    $sql = "SELECT * from product join variant on product.p_id = variant.p_id";
+    $sql = "SELECT * from product left join variant on product.p_id = variant.p_id";
     $result = mysqli_query($conn, $sql);
 ?><br>
 <html>
