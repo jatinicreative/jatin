@@ -9,7 +9,7 @@
     
     echo "<h3>User Details...</h3>";
 
-    $result = $conn->query("SELECT * FROM user"); 
+    $result = $conn->query("SELECT * FROM user order by updated_at desc"); 
 ?>
 <table border="1">
     <tr>
