@@ -74,17 +74,10 @@ error_reporting(E_ALL);
 
                       <div class="mb-3">
                       <label>Hobby :-</label>
-                      <?php if($hobbyErr){ ?>
-                      <input type="checkbox" name="hobby[]" value="music" >Music
-                      <input type="checkbox" name="hobby[]" value="dance" >Dance
-                      <input type="checkbox" name="hobby[]" value="coding">Coding<br>
-                      <span class="text-danger"><?= $hobbyErr ?? '' ?></span>
-                      <?php }else { ?>
-                      
                       <input type="checkbox" name="hobby[]" value="music" <?php echo strpos($user['hobby'], 'music') !== false ? 'checked' : ''; ?> >Music
                       <input type="checkbox" name="hobby[]" value="dance" <?php echo strpos($user['hobby'], 'dance') !== false ? 'checked' : ''; ?>>Dance
                       <input type="checkbox" name="hobby[]" value="coding" <?php echo strpos($user['hobby'], 'coding') !== false ? 'checked' : ''; ?>>Coding<br>
-                      <?php } ?>
+                      <span class="text-danger"><?= $hobbyErr ?? '' ?></span>  
                       </div>
 
                       <div class="mb-3">  

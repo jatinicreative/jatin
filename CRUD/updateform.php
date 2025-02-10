@@ -20,26 +20,27 @@ if (isset($_GET['id'])) {
         <label>First Name :-</label>
         <?php $first_name = isset($_POST['first_name']) ? $_POST['first_name'] :$user['first_name']; ?>
         <input type="text" name="first_name" value="<?php echo $first_name; ?>"><br><br>
-        <span class="text-danger"><?= $firstnameErr ?? '' ?></span> <br>
+        <span class="text-danger"><?= $firstnameErr ?></span> <br>
 
         <label>Last Name :-</label>
         <?php $last_name = isset($_POST['last_name']) ? $_POST['last_name'] :$user['last_name']; ?>
         <input type="text" name="last_name" value="<?php echo $last_name; ?>"><br><br>
-        <span class="text-danger"><?= $lastnameErr ?? '' ?></span> <br>
+        <span class="text-danger"><?= $lastnameErr ?></span> <br>
 
         <label>Email :-</label>
         <?php $email = isset($_POST['email']) ? $_POST['email'] : $user['email']; ?>
         <input type="email" name="email" value="<?php echo $email; ?>"><br><br>
-        <span class="text-danger"><?= $emailErr ?? '' ?></span> <br>
+        <span class="text-danger"><?= $emailErr ?></span> <br>
 
-        <img src="./image/<?= htmlspecialchars($user['file']) ?>" width="100" height="100" alt="Profile Image"><br>
+        <img src="./image/<?= $user['file'] ?>" width="100" height="100" alt="Profile Image"><br>
         <label>Update Profile Image :-</label>
         <input type="file" name="file" accept="image/*"/><br><br>
+        <span class="text-danger"><?= $imageErr ?></span> <br>
 
         <label>Address :-</label>
         <?php $address = isset($_POST['address']) ? $_POST['address'] : $user['address']; ?>
         <input type="textarea" name="address" value="<?php echo $address ?>"><br><br>
-        <span class="text-danger"><?= $messageErr ?? '' ?></span> <br>
+        <span class="text-danger"><?= $messageErr ?></span> <br>
 
         <label>Phone No :-</label>
         <?php $phone = isset($_POST['phone']) ? $_POST['phone'] : $user['phone']; ?>

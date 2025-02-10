@@ -1,33 +1,39 @@
 <html>
     <head>
         <title>Products</title>    
-        <?php include 'nav.php'; ?><br>
-    <style>
-        .productform {
-         display: none;
-        }
-    </style>
+        <?php 
+            ini_set('display_errors', 1);
+            ini_set('display_startup_errors', 1);
+            error_reporting(E_ALL);
+            include 'nav.php';
+            include 'add.php';
+        ?><br>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </head>    
     <body>
 
-        <button type="button" class="btn btn-primary" id="addproduct">Add Product</button>
+        
         <div class="productform" id="productform">
-            <form action="add.php" method="POST" enctype="multipart/form-data"><br>
+        <h4>Product form...</h4>
+            <form action="" method="POST" enctype="multipart/form-data"><br>
                 <label>Product Name :-</label>
-                <input type="text" name="name"><br><br>
+                <input type="text" name="name" value="<?= $name ?>"><br>
+                <span class="text-danger"><?= $nameErr ?? '' ?></span><br>
 
                 <label>SKU :-</label>
-                <input type="text" name="sku"><br><br>
+                <input type="text" name="sku" value="<?= $sku ?>"><br>
+                <span class="text-danger"><?= $skuErr ?? '' ?></span><br>
 
                 <label>Category :-</label>
                 <select name="category">
-                    <option value="">Select Category</option>
-                    <option value="Cloths">Cloths</option>
-                    <option value="Electronics">Electronics</option>
-                    <option value="Furniture">Furniture</option>
-                </select><br><br>
+                    <option value="" <?= isset($category) && $category=='' ?'selected':''; ?> >Select Category</option>
+                    <option value="Cloths" <?= isset($category) && $category=='Cloths' ?'selected':''; ?> >Cloths</option>
+                    <option value="Electronics" <?= isset($category) && $category=='Electronics' ?'selected':''; ?>>Electronics</option>
+                    <option value="Furniture" <?= isset($category) && $category=='Furniture' ?'selected':''; ?>>Furniture</option>
+                </select><br>
+                <span class="text-danger"><?= $categoryErr ?? '' ?></span><br>
 
                 <button type="button" class="btn btn-secondary" id="variant">Add Variant</button>
 
@@ -38,13 +44,7 @@
         </div>
     <footer>
         <script>
-            var addproduct = document.getElementById("addproduct");
-            var productform = document.getElementById("productform");
-
-            addproduct.onclick = function()
-            {
-                productform.style.display = productform.style.display === "block" ? "none" : "block" ;
-            }
+            
             
             const variantButton = document.getElementById("variant");
             const showVariantContainer =document.getElementById("showvariant");

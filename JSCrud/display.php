@@ -1,9 +1,12 @@
 <?php 
     include 'nav.php'; 
     include  'db.php';        
-    $sql = "SELECT * from product left join variant on product.p_id = variant.p_id";
+
+   
+    $sql = "SELECT * FROM product";
     $result = mysqli_query($conn, $sql);
-?><br>
+?>
+<br>
 <html>
     <head>
         <title>Products</title>    
@@ -11,7 +14,6 @@
         #table{
             height: 60%;
             width: 60%;
-            
         }
     </style>
     </head>
@@ -22,19 +24,31 @@
                 <th>Product Name</th>
                 <th>SKU</th>
                 <th>Category</th>
-                <th>Size</th>
-                <th>Color</th>
-                <th>Quantity</th>
+                <th>Variants</th>
                 <th>Actions</th>
             </tr>
-            <?php while($row = $result->fetch_assoc()) {?>
+            <?php while($row = $result->fetch_assoc()) { 
+                
+                $p_id = $row['p_id'];
+                $variantSql = "SELECT * FROM variant WHERE p_id = '$p_id'";
+                $variantResult = mysqli_query($conn, $variantSql);
+
+                $variants = [];
+                
+                while($variant = mysqli_fetch_assoc($variantResult)) {
+                    $size = $variant['size'];
+                    $color = $variant['color'];
+                    $quantity = $variant['quantity'];
+                    $variants[] = "Size [$size] Color [$color] Quantity [$quantity]";
+                }
+                
+                $variantsString = implode(', ', $variants);
+            ?>
             <tr>
-                <td><?= $row['name']     ?></td>
-                <td><?= $row['sku']      ?></td>
+                <td><?= $row['name'] ?></td>
+                <td><?= $row['sku'] ?></td>
                 <td><?= $row['category'] ?></td>
-                <td><?= $row['size']     ?></td>
-                <td><?= $row['color']    ?></td>
-                <td><?= $row['quantity'] ?></td>
+                <td><?= $variantsString ?></td> 
                 <td>
                     <a href="updateform.php?p_id= <?= $row['p_id'] ?>" >Edit</a>
                     <a href="delete.php?p_id= <?= $row['p_id'] ?>" onclick=" return confirm('Are You Sure?')" >Delete</a>
