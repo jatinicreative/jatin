@@ -1,15 +1,33 @@
 <?php 
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 include ("db.php");
 
+$name = $sku = $category ='';
+$nameErr = $skuErr = $categoryErr = '';
 if(isset($_POST["add"])){
 
-$name = $_POST["name"];
-$sku = $_POST["sku"];
-$category = $_POST["category"];
+if(empty($_POST['name'])){
+    $nameErr = "Product name Required...";
+}else{
+    $name = $_POST['name'];
+}
 
+if(empty($_POST['sku'])){
+    $skuErr = "Product SKU Required...";
+}else{
+    $sku = $_POST['sku'];
+}
+
+if(empty($_POST['category'])){
+    $categoryErr = "Product Category Required...";
+}else{
+    $category = $_POST['category'];
+}
+
+if(empty($nameErr) && empty($skuErr) && empty($categoryErr)){
 $productsql = "INSERT into product (name,sku,category) VALUES ('$name','$sku','$category')";
-
 if(mysqli_query($conn, $productsql)){
     $p_id = mysqli_insert_id($conn);
 
@@ -18,7 +36,6 @@ if(mysqli_query($conn, $productsql)){
         $colorArray = $_POST['color'];
         $quantityArray = $_POST['quantity'];
 
-        $variantSqlValues = [];
 
         for ($i = 0; $i < count($sizeArray); $i++) {
             $size = $sizeArray[$i];
@@ -26,20 +43,20 @@ if(mysqli_query($conn, $productsql)){
             $quantity = intval($quantityArray[$i]);
             
             if (!empty($size) && !empty($color) && $quantity > 0) {
-                $variantSqlValues[] = "($p_id, '$size', '$color', $quantity)";
+                $variantSql = "INSERT INTO variant (p_id, size, color, quantity) 
+                           VALUES('$p_id','$size','$color','$quantity')";
+            mysqli_query($conn, $variantSql);
             }
         }
-        if (!empty($variantSqlValues)) {
-            $variantSql = "INSERT INTO variant (p_id, size, color, quantity) 
-                           VALUES " . implode(",", $variantSqlValues);
-            mysqli_query($conn, $variantSql);
-        }
     }
+    
     echo '<script language="javascript">';
     echo 'alert("Successfully inserted data"); location.href="display.php"';
     echo '</script>';
-} else {
+}else {
     die('Error'. mysqli_error($conn));
+}
+ 
 }
 
 }

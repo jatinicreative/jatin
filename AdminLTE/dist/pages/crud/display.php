@@ -1,21 +1,10 @@
 <?php 
-  session_start();
-  if (isset($_SESSION['login_in']) ) {
-  }
-  else {
-  header('Location: ./../login.php');
-  exit();
-  }
+
   include ("../header.php");
   include ("../sidebar.php"); 
   include '../db.php'; 
   $result = $conn->query("SELECT * FROM user ORDER BY updated_at DESC");  
 ?>
-<html>
-  <head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  </head>
-  <body>
     <div class="container-fluid">
       <div class="card mb-4">
         <div class="card-header"><h3 class="card-title">User Table</h3></div>
@@ -63,5 +52,3 @@
           </div>      
     </div>
     <?php include ("../footer.php"); ?>  
-  </body>
-</html>

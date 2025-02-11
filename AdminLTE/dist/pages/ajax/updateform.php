@@ -1,27 +1,17 @@
 <?php  
-    session_start();
-    if (!isset($_SESSION['login_in'])) {
-        header('Location: ./../login.php');
-        exit();
-    }
     include("../header.php"); 
     include("../sidebar.php");   
-    include("db.php");
+    include("adb.php");
 
     $id = intval($_GET["id"]);
 
-    $result = $conn->query("SELECT * FROM user WHERE id = $id");
+    $result = $co->query("SELECT * FROM user WHERE id = $id");
         if ($result && $result->num_rows > 0) {
             $user = $result->fetch_assoc();
         } else {
             die("User not found.");
         }
 ?>
-<html>
-    <head>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    </head>
-    <body>                
       <div class="card card-primary card-outline mb-4">
         <div class="card-header"><div class="card-title">Input User Details</div></div>
           <form id="update" method="POST" enctype="multipart/form-data">
@@ -87,43 +77,5 @@
             </div>
           </form>
         </div>
-        <?php include("footer.php"); ?>
-        <footer>
-            <script>
-                $(document).ready(function () {
-                    $('#update').on('submit', function (e) {
-                        e.preventDefault();
-                        var formData = new FormData(this);
-                        $(".error-message").remove();
-                        $.ajax({
-                            url: "update.php",
-                            type: "POST",
-                            contentType: false,
-                            processData: false,
-                            data: formData,
-                            dataType: "json",
-                            success: function (response) {
-                                if (response.status === 'success') {
-                                    alert(response.message);
-                                    window.location.href = "display.php";
-  
-                                } else if (response.errors) {
-                                    $.each(response.errors, function (key, message) {
-                                    $(`[name="${key}"]`).after(`<span class="error-message text-danger">${message}</span>`);
-                                    });
-                                    }
-                                 else {
-                                    alert(response.message);
-                                }
-                            },
-                            error: function (xhr, status, error) {
-                                alert("Error: " + xhr.responseText);
-                            }
-                        });
-                    });
-                });
-            </script>
-        </footer>
         <?php include("../footer.php"); ?>
-    </body>
-</html>
+   

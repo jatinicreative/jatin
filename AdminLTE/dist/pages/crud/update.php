@@ -55,6 +55,7 @@
 
     if (empty($_POST['hobby'])) {
         $hobbyErr = "At least one hobby must be selected";
+        
     } else {
         $hobby = implode(", ", $_POST['hobby']);
     }

@@ -1,17 +1,12 @@
 <?php
-    session_start();
-    if (isset($_SESSION['login_in']) ) {
-    }
-    else {
-        header('Location: ./../login.php');
-        exit();
-    }
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
     include("../header.php");
     include("../sidebar.php");
-    require_once 'add.php';
+    include 'add.php';
 ?>
-<html>
-  <body>
+
     <div class="container mt-5">
         <div class="card">
             <div class="card-header">Input User Details</div>
@@ -36,12 +31,13 @@
                         <label>Password</label>
                         <input type="password" name="pass" class="form-control" value="<?= htmlspecialchars($pass ?? '') ?>"/>
                         <span class="text-danger"><?= $errors['pass'] ?? '' ?></span>
+                        <span class="text-danger"><?= $errors['ppass'] ?? '' ?></span>
                     </div>
                     <div class="mb-3">
                         <label>Confirm Password</label>
                         <input type="password" name="cpass" class="form-control" value="<?= htmlspecialchars($cpass ?? '') ?>"/>
                         <span class="text-danger"><?= $errors['cpass'] ?? '' ?></span>
-                        <span class="text-danger"><?= $errors['ppass'] ?? '' ?></span>
+                        
                     </div>
                     <div class="mb-3">
                         <label>Profile Image</label>
@@ -93,5 +89,4 @@
         </div>
     </div>
     <?php include("../footer.php"); ?>
-</body>
-</html>
+

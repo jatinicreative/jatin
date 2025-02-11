@@ -1,9 +1,9 @@
 <?php
-   include "db.php";
+   include "adb.php";
    header('Content-type: application/json');
 
    $query = "SELECT * FROM user Order by updated_at DESC";
-   $result= mysqli_query($conn, $query);
+   $result= mysqli_query($co, $query);
    $result_array = [];
 
    if(mysqli_num_rows($result) > 0)

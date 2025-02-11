@@ -1,6 +1,9 @@
 <?php 
-    
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
     include 'db.php';
+    include 'update.php';
 
     if (isset($_GET['p_id'])) {
 
@@ -21,22 +24,28 @@
         </head>
         <body><br>
         <h4>Update Product Details</h4>
-        <form action="update.php" method="POST" enctype="multipart/form-data"><br>
+        <form action="" method="POST" enctype="multipart/form-data"><br>
         <input type="hidden" name="p_id" value="<?= $row['p_id'] ?>">
-
+        
         <label>Product Name :-</label>
-        <input type="text" name="name" value="<?= $row['name'] ?>"><br><br>
+        <?php $name = isset($_POST['name']) ? $_POST['name'] : $row['name'] ?>
+        <input type="text" name="name" value="<?= $name ?>"><br>
+        <span class="text-danger"><?= $nameErr ?></span><br>
 
         <label>SKU :-</label>
-        <input type="text" name="sku" value="<?= $row['sku'] ?>"><br><br>
+        <?php $sku = isset($_POST['sku']) ? $_POST['sku'] : $row['sku'] ?>
+        <input type="text" name="sku" value="<?= $sku ?>"><br>
+        <span class="text-danger"><?= $skuErr ?></span><br>
 
         <label>Category :-</label>
+        <?php $category = isset($_POST['category']) ? $_POST['category'] : $row['category'] ?>
         <select name="category">
             <option value="">Select Category</option>
-            <option value="Cloths" <?= $row['category']=='Cloths' ?'selected':''  ?>>Cloths</option>
-            <option value="Electronics" <?= $row['category']== 'Electronics' ?'selected':''  ?>>Electronics</option>
-            <option value="Furniture" <?= $row['category']== 'Furniture' ?'selected':''  ?>>Furniture</option>
-        </select><br><br>
+            <option value="Cloths" <?= $category =='Cloths' ?'selected':''  ?>>Cloths</option>
+            <option value="Electronics" <?= $category == 'Electronics' ?'selected':''  ?>>Electronics</option>
+            <option value="Furniture" <?= $category == 'Furniture' ?'selected':''  ?>>Furniture</option>
+        </select><br>
+        <span class="text-danger"><?= $categoryErr ?></span><br>
 
         <h6>Variants</h6>
         <div id="variant-container">
@@ -50,6 +59,7 @@
                     <option value="Medium" <?= $variant['size'] == 'Medium'?  'selected':'' ?>>Medium</option>
                     <option value="Large" <?= $variant['size'] == 'Large'? 'selected':'' ?>>Large</option>
                 </select>
+                <span class="text-danger"><?= $sizeErr ?></span>
 
                 <label>Color:</label>
                 <select name="color[]">
@@ -58,9 +68,11 @@
                     <option value="White" <?= $variant['color'] == 'White' ? 'selected':'' ?>>White</option>
                     <option value="Blue" <?= $variant['color'] == 'Blue' ? 'selected':'' ?>>Blue</option>
                 </select>
+                <span class="text-danger"><?= $colorErr ?></span>
 
                 <label>Quantity:</label>
                 <input type="text" name="quantity[]" value="<?=  $variant['quantity']; ?>">
+                <span class="text-danger"><?= $quantityErr ?></span>
 
                 </div>
             <?php } ?>

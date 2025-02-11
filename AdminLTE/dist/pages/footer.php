@@ -1,4 +1,4 @@
-<?php    session_start();  ?>
+
 <footer class="app-footer">
     <div class="float-end d-none d-sm-inline">Anything you want</div>
       <strong>
@@ -22,6 +22,7 @@
       crossorigin="anonymous"
       ></script>
       <script src="../../js/adminlte.js"></script>
+      <script src="crud.js"></script>
       <script>
       const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
       const Default = {

@@ -6,29 +6,23 @@ $firstnameErr = $lastnameErr = $emailErr = $passwordErr = $cpasswordErr = $numbe
 $first_name = $last_name = $email = $pass = $cpass = $address = $phone = $gender = $hobby = $country = "";
 
 if (isset($_POST['add'])) {
-    function input_data($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
 
     if (empty($_POST["first_name"])) {
         $firstnameErr = "First Name is required";
     } else {
-        $first_name = input_data($_POST["first_name"]);
+        $first_name = $_POST["first_name"];
     }
 
     if (empty($_POST["last_name"])) {
         $lastnameErr = "Last Name is required";
     } else {
-        $last_name = input_data($_POST["last_name"]);
+        $last_name = $_POST["last_name"];
     }
 
     if (empty($_POST["email"])) {
         $emailErr = "Email is required";
     } else {
-        $email = input_data($_POST["email"]);
+        $email = $_POST["email"];
     }
 
     if (empty($_POST["pass"])) {
@@ -53,7 +47,7 @@ if (isset($_POST['add'])) {
     if (empty($_POST["phone"])) {
         $numberErr = "Phone number is required";
     } else {
-        $phone = input_data($_POST["phone"]);
+        $phone = $_POST["phone"];
         if (!preg_match("/^[0-9]{10}$/", $phone)) {
             $numberErr = "Phone number must be 10 digits";
         }
@@ -62,13 +56,13 @@ if (isset($_POST['add'])) {
     if (empty($_POST["address"])) {
         $messageErr = "Address is required";
     } else {
-        $address = input_data($_POST["address"]);
+        $address = $_POST["address"];
     }
 
     if (empty($_POST["gender"])) {
         $genderErr = "Gender is required";
     } else {
-        $gender = input_data($_POST["gender"]);
+        $gender = $_POST["gender"];
     }
 
     if (empty($_POST['hobby'])) {
@@ -80,7 +74,7 @@ if (isset($_POST['add'])) {
     if (empty($_POST["country"])) {
         $countryErr = "Country is required";
     } else {
-        $country = input_data($_POST["country"]);
+        $country = $_POST["country"];
     }
 
     if (!empty($_FILES["file"]["name"])) {

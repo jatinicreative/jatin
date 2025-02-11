@@ -1,17 +1,11 @@
 <?php 
-    session_start();
-    if (isset($_SESSION['login_in']) ) {
-      }
-    else {
-        header('Location: ./../login.php');
-        exit();
-    }
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
     include ("../header.php"); 
     include ("../sidebar.php"); 
     include("add.php");
 ?>
-<html> 
-  <body>
     <div class="container mt-5">
       <div class="card">
           <div class="card-header">Input User Details</div>
@@ -92,5 +86,3 @@
       </div>
   </div>
   <?php include ("../footer.php"); ?>
-  </body>
-</html>

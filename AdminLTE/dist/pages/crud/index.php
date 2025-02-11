@@ -1,14 +1,7 @@
 <html>
   <body>
   <?php 
-    session_start();  
-    
-    if (isset($_SESSION['login_in']) ) {        
-    }
-    else {
-      header('Location: ./../login.php');
-      exit();
-    }
+
     include ("../header.php"); 
     include ("../sidebar.php");
     echo "Welcome ";

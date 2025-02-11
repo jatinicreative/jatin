@@ -5,7 +5,7 @@
     $password = "admin123";
     $db = "ajax";
 
-    $conn = mysqli_connect($server,$user,$password,$db);
+    $co = mysqli_connect($server,$user,$password,$db);
 
     if(mysqli_connect_error())
     {

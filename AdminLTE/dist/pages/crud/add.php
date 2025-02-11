@@ -1,5 +1,5 @@
 <?php
-    include 'db.php';
+    include '../db.php';
 
     $firstnameErr = $lastnameErr = $emailErr = $passwordErr = $cpasswordErr = $numberErr = $genderErr = $hobbyErr = $countryErr = $messageErr = $imageErr = "";
     $first_name = $last_name = $email = $pass = $cpass = $address = $phone = $gender = $hobby = $country = "";

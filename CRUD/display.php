@@ -8,8 +8,8 @@
     include 'nav.html'; 
     
     echo "<h3>User Details...</h3>";
-
-    $result = $conn->query("SELECT * FROM user order by updated_at desc"); 
+    $sql = "SELECT * FROM user order by updated_at desc";
+    $result = mysqli_query($conn,$sql); 
 ?>
 <table border="1">
     <tr>
@@ -29,7 +29,7 @@
         <td><?= $row['first_name'] ?></td>
         <td><?= $row['last_name'] ?></td>
         <td><?= $row['email'] ?></td>
-        <td><img src="./image/<?= htmlspecialchars($row['file']) ?>" width="100" height="100" alt="Profile Image"></td>
+        <td><img src="./image/<?= $row['file'] ?>" width="100" height="100" alt="Profile Image"></td>
         <td><?= $row['address'] ?></td>
         <td><?= $row['phone'] ?></td>
         <td><?= $row['gender'] ?></td>
