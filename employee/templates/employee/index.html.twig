@@ -3,6 +3,12 @@
 {% block title %}Employee Details{% endblock %}
 
 {% block body %}
+    {% if app.user %}
+        <div>
+        <p>Logged in as {{ app.user.email }} |
+            <a class="btn btn-outline-danger" href="{{ path('app_logout') }}">Logout</a></p>
+        </div>
+    {% endif %}
     <div class="container">
     <h3 class="text-center mt-5 mb-3">Employee Details</h3>
     <div class="card" style="width: 1180px">

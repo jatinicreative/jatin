@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\EmployeeRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use DateTimeImmutable;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EmployeeRepository::class)]
@@ -60,6 +59,7 @@ class Employee
     #[Gedmo\Timestampable(on:"update")]
     #[ORM\Column(type: 'datetime_immutable')]
     private ?\DateTimeImmutable $updated_at = null;
+
 
     public function getId(): ?int
     {
@@ -197,4 +197,5 @@ class Employee
 
         return $this;
     }
+
 }

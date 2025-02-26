@@ -1,10 +1,9 @@
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-    <h1 class="text-center mt-5 md-3">Login</h1>
+    <h2 class="text-center mt-5 md-3">Login</h2>
     <div class="container">
         <div class="card" style="width: fit-content; margin: auto">
             <div class="card-header">Enter Login Details..</div>
@@ -30,18 +29,11 @@
                            value="{{ csrf_token('authenticate') }}"
                     >
 
-                    <div class="checkbox mb-3">
-                        <label>
-                            <input type="checkbox" name="_remember_me"> Remember me
-                        </label>
-                    </div>
-
-                    <button class="btn btn-lg btn-outline-primary" type="submit">
-                        Sign in
-                    </button>
-
+                    <button class="btn btn-outline-success" type="submit">Sign In</button>
+                    <p>Dont have Account? |<a href="{{ path('app_register') }}">Register Here!</a></p>
                 </div>
             </form>
         </div>
     </div>
 {% endblock %}
+

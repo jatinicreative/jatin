@@ -8,9 +8,6 @@
         <div class="card" style="margin: auto; width:fit-content">
             <div class="card-header">Enter your details</div>
             <div class="card-body">
-
-
-
                 {{ form_errors(registrationForm) }}
 
                 {{ form_start(registrationForm) }}
@@ -22,10 +19,10 @@
                         label: 'Password', 'attr':{'class':'form-control'}
                     }) }}
                 </div>
-                {{ form_row(registrationForm.agreeTerms) }}
 
                 <button class="btn btn-outline-success" type="submit">Register</button>
                 {{ form_end(registrationForm) }}
+                <p>Already have account? |<a href="{{ path('app_login') }}">Login here!</a></p>
             </div>
         </div>
     </div>
