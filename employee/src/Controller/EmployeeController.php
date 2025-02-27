@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/employee')]
 final class EmployeeController extends AbstractController
@@ -25,13 +27,25 @@ final class EmployeeController extends AbstractController
     }
 
     #[Route('/new', name: 'app_employee_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager,SluggerInterface $slugger): Response
     {
         $employee = new Employee();
         $form = $this->createForm(EmployeeType::class, $employee);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $documentFile = $form->get('document')->getData();
+            if ($documentFile) {
+                $originalFilename = pathinfo($documentFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$documentFile->guessExtension();
+                try {
+                    $documentFile->move($this->getParameter('documents_directory'), $newFilename);
+                }catch (FileException $e){
+
+                }
+            $employee->setDocument($newFilename);
+            }
             $entityManager->persist($employee);
             $entityManager->flush();
 
@@ -53,12 +67,30 @@ final class EmployeeController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_employee_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Employee $employee, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Employee $employee, EntityManagerInterface $entityManager,SluggerInterface $slugger): Response
     {
+
         $form = $this->createForm(EmployeeType::class, $employee);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $documentFile = $form->get('document')->getData();
+            if ($documentFile) {
+                $originalFilename = pathinfo($documentFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$documentFile->guessExtension();
+                try {
+                    $documentFile->move($this->getParameter('documents_directory'), $newFilename);
+                }catch (FileException $e){
+
+                }
+                if($employee->getDocument())
+                {
+                    @unlink($this->getParameter('documents_directory').'/'.$employee->getDocument());
+                }
+                $employee->setDocument($newFilename);
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_employee_index', [], Response::HTTP_SEE_OTHER);
@@ -101,8 +133,43 @@ final class EmployeeController extends AbstractController
                 'role' => $e->getRole(),
                 'city'  => $e->getCity(),
                 'csrf_token' => $csrfTokenManager->getToken('delete'.$e->getId())->getValue(),
+                'document' => $e->getDocument(),
 
             ], $employees),
         ]);
+    }
+
+    #[Route('/employee/search', name: 'app_employee_search', methods: ['POST'])]
+    public function search(Request $request, EmployeeRepository $employeeRepository): JsonResponse
+    {
+        $search = $request->request->get('search');
+
+        $employees = $employeeRepository->createQueryBuilder('e')
+            ->where('e.first_name LIKE :search')
+            ->orWhere('e.last_name LIKE :search')
+            ->setParameter('search', '%' . $search . '%')
+            ->getQuery()
+            ->getResult();
+
+        $data = [];
+
+        foreach ($employees as $employee) {
+            $data[] = [
+                'id' => $employee->getId(),
+                'first_name' => $employee->getFirstName(),
+                'last_name' => $employee->getLastName(),
+                'age' => $employee->getAge(),
+                'hobby' => $employee->getHobby(),
+                'gender' => $employee->getGender(),
+                'about' => $employee->getAbout(),
+                'salary' => $employee->getSalary(),
+                'role' => $employee->getRole(),
+                'city' => $employee->getCity(),
+                'document' => $employee->getDocument(),
+                'csrf_token' => $this->container->get('security.csrf.token_manager')->getToken('delete' . $employee->getId())->getValue()
+            ];
+        }
+
+        return new JsonResponse(['employees' => $data]);
     }
 }

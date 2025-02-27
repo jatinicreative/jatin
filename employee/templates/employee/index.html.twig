@@ -11,7 +11,7 @@
     {% endif %}
     <div class="container">
     <h3 class="text-center mt-5 mb-3">Employee Details</h3>
-    <div class="card" style="width: 1180px">
+    <div class="card" style="margin-right: unset; margin-left: -70px; width: max-content">
     <div class="card-header" style="display: flex">
         <a class="btn btn-outline-primary" href="{{ path('app_employee_new') }}">
             Add New Employee
@@ -29,9 +29,11 @@
 
         <button type="button" class="btn btn-outline-warning" id="filterBtn">Filter</button>
         </form>
+
+        <input type="text" id="search" placeholder="Search Here...." />
     </div>
     <div class="card-body">
-    <table class="table table-bordered" style="width: max-content">
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>#</th>
@@ -44,6 +46,7 @@
                 <th>Salary</th>
                 <th>Role</th>
                 <th>City</th>
+                <th>Document</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -60,6 +63,13 @@
                 <td>{{ employee.salary }}</td>
                 <td>{{ employee.role }}</td>
                 <td>{{ employee.city }}</td>
+                <td>
+                    {% if employee.document %}
+                         <a href="{{ asset('uploads/documents/' ~ employee.document) }}" target="_blank">View Document</a>
+                    {% else %}
+                        Not Uploaded
+                    {% endif %}
+                </td>
                 <td>
                     <form method="post" action="{{ path('app_employee_delete', {'id': employee.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
                         <a class="btn btn-outline-info" href="{{ path('app_employee_show', {'id': employee.id}) }}">Show</a>
@@ -107,6 +117,9 @@
                             <td>${emp.role}</td>
                             <td>${emp.city}</td>
                             <td>
+                            ${emp.document ? `<a href="/uploads/documents/${emp.document}" target="_blank">View Document</a>` : 'Not Uploaded'}
+                            </td>
+                            <td>
                                 <form method="post" action="/employee/${emp.id}/delete" onsubmit="return confirm('Are you sure?');">
                                     <a class="btn btn-outline-info" href="/employee/${emp.id}/show">Show</a>
                                     <a class="btn btn-outline-success" href="/employee/${emp.id}/edit">Edit</a>
@@ -120,6 +133,49 @@
                     }
                 }, 'json');
             });
+            $('#search').on('keyup', function () {
+                let searchQuery = $(this).val();
+
+                $.post('{{ path("app_employee_search") }}', {
+                    search: searchQuery
+                }, function (response) {
+                    let tableBody = $('#employeeTable');
+                    tableBody.empty();
+
+                    if (response.employees.length === 0) {
+                        tableBody.append('<tr><td colspan="12">No employees found.</td></tr>');
+                    } else {
+                        response.employees.forEach((emp, index) => {
+                            tableBody.append(`
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td>${emp.first_name}</td>
+                            <td>${emp.last_name}</td>
+                            <td>${emp.age}</td>
+                            <td>${emp.hobby.join(', ')}</td>
+                            <td>${emp.gender}</td>
+                            <td>${emp.about}</td>
+                            <td>${emp.salary}</td>
+                            <td>${emp.role}</td>
+                            <td>${emp.city}</td>
+                            <td>
+                                ${emp.document ? `<a href="/uploads/documents/${emp.document}" target="_blank">View Document</a>` : 'Not Uploaded'}
+                            </td>
+                            <td>
+                                <form method="post" action="/employee/${emp.id}/delete" onsubmit="return confirm('Are you sure?');">
+                                    <a class="btn btn-outline-info" href="/employee/${emp.id}/show">Show</a>
+                                    <a class="btn btn-outline-success" href="/employee/${emp.id}/edit">Edit</a>
+                                    <input type="hidden" name="_token" value="${emp.csrf_token}">
+                                    <button class="btn btn-outline-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    `);
+                        });
+                    }
+                }, 'json');
+            });
+
         });
     </script>
 {% endblock %}
