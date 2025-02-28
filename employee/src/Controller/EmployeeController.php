@@ -14,22 +14,30 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
-#[Route('/employee')]
+//#[Route('/employee')]
 final class EmployeeController extends AbstractController
 {
-    #[Route(name: 'app_employee_index', methods: ['GET'])]
-    public function index(EmployeeRepository $employeeRepository): Response
+    //#[Route(name: 'app_employee_index', methods: ['GET'])]
+    public function index(EmployeeRepository $employeeRepository,PaginatorInterface $paginator, Request $request): Response
     {
+        $query = $employeeRepository->createQueryBuilder('e')->getQuery();
+
+        $employees = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),3
+        );
+
         return $this->render('employee/index.html.twig', [
-            'employees' => $employeeRepository->findAll(),
+            'employees' => $employees,
         ]);
     }
 
     #[Route('/new', name: 'app_employee_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager,SluggerInterface $slugger): Response
     {
-        $employee = new Employee();
+            $employee = new Employee();
         $form = $this->createForm(EmployeeType::class, $employee);
         $form->handleRequest($request);
 
@@ -118,25 +126,32 @@ final class EmployeeController extends AbstractController
         $operator = $request->request->get('operator');
         $salary = $request->request->get('salary');
 
-        $employees = $employeeRepository->findBySalaryFilter($operator, $salary);
+        if (!empty($operator) && isset($salary)) {
+            $employees = $employeeRepository->createQueryBuilder('e')
+                ->where("e.salary $operator :salary")
+                ->setParameter('salary',(float)  $salary)
+                ->getQuery()
+                ->getResult();
+        }
+        $data = [];
+        foreach ($employees as $employee) {
+            $data[] = [
+                'id' => $employee->getId(),
+                'salary' => $employee->getSalary(),
+                'first_name' => $employee->getFirstName(),
+                'last_name' => $employee->getLastName(),
+                'age' => $employee->getAge(),
+                'hobby' => $employee->getHobby(),
+                'gender' => $employee->getGender(),
+                'about'  => $employee->getAbout(),
+                'role' => $employee->getRole(),
+                'city'  => $employee->getCity(),
+                'csrf_token' => $csrfTokenManager->getToken('delete'.$employee->getId())->getValue(),
+                'document' => $employee->getDocument(),
 
-        return $this->json([
-            'employees' => array_map(fn($e) => [
-                'id' => $e->getId(),
-                'salary' => $e->getSalary(),
-                'first_name' => $e->getFirstName(),
-                'last_name' => $e->getLastName(),
-                'age' => $e->getAge(),
-                'hobby' => $e->getHobby(),
-                'gender' => $e->getGender(),
-                'about'  => $e->getAbout(),
-                'role' => $e->getRole(),
-                'city'  => $e->getCity(),
-                'csrf_token' => $csrfTokenManager->getToken('delete'.$e->getId())->getValue(),
-                'document' => $e->getDocument(),
-
-            ], $employees),
-        ]);
+            ];
+        }
+        return new JsonResponse(['employees'=>$data]);
     }
 
     #[Route('/employee/search', name: 'app_employee_search', methods: ['POST'])]

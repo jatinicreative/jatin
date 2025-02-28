@@ -84,8 +84,13 @@
                 <td colspan="13">No records found</td>
             </tr>
         {% endfor %}
+        <div class="pagination">
+            {{ knp_pagination_render(employees) }}
+        </div>
         </tbody>
+
     </table>
+
     </div>
     </div>
     </div>
