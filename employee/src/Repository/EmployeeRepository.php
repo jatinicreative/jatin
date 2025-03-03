@@ -16,16 +16,7 @@ class EmployeeRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Employee::class);
     }
-    public function findBySalaryFilter($operator, $salary): array
-    {
-        $qb = $this->createQueryBuilder('e');
 
-        if (!empty($operator) && isset($salary)) {
-            $qb->where("e.salary $operator :salary")
-                ->setParameter('salary',(float)  $salary);
-        }
-        return $qb->getQuery()->getResult();
-    }
     //    /**
     //     * @return Employee[] Returns an array of Employee objects
     //     */

@@ -4,13 +4,13 @@ namespace App\Form;
 
 use App\Entity\Employee;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-
-
+use Symfony\Component\Validator\Constraints\File;
 class EmployeeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -57,7 +57,23 @@ class EmployeeType extends AbstractType
             ->add('city', TextType::class,[
                 'required' => false,
             ])
+            ->add('document',FileType::class,[
+                'label' => "Upload Document",
+                'required' => false,
+                'mapped' => false,
+                'constraints' => [
+                    new File([
+                    'maxSize' => '2048k',
+                    'mimeTypes' => [
+                        'application/pdf',
+                        'image/jpeg',
+                        'image/png',
+                    ],
+                'mimeTypesMessage' => 'Please upload a valid PDF document',
+                    ])
+                ],
 
+            ])
         ;
     }
 

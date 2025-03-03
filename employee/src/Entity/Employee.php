@@ -60,6 +60,9 @@ class Employee
     #[ORM\Column(type: 'datetime_immutable')]
     private ?\DateTimeImmutable $updated_at = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $document = null;
+
 
     public function getId(): ?int
     {
@@ -194,6 +197,18 @@ class Employee
     public function setUpdatedAt(?\DateTimeImmutable $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getDocument(): ?string
+    {
+        return $this->document;
+    }
+
+    public function setDocument(?string $document): static
+    {
+        $this->document = $document;
 
         return $this;
     }

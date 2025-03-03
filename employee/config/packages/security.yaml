@@ -22,5 +22,4 @@ security:
                 target: app_login
 
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/employee, roles: ROLE_USER }
