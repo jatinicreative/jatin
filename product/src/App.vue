@@ -1,13 +1,18 @@
 
 <script>
+import AddProduct from '@/components/AddProduct.vue'
+import ShowProduct from '@/components/ShowProduct.vue'
 export default {
   components: {
-
+    AddProduct,
+    ShowProduct,
   },
   data() {
     return {
       products: [],
-      showModal: false,
+      showAddModal: false,
+      showDetailsModal :false,
+      selectedProduct: null,
     };
   },
   async created() {
@@ -18,6 +23,22 @@ export default {
       console.error('Error fetching products:', error);
     }
   },
+  methods: {
+    addProduct(newProduct){
+      this.products.unshift({id: Date.now(), ...newProduct})
+      this.showAddModal = false;
+    },
+    showProduct(product) {
+      this.selectedProduct = product;
+      this.showDetailsModal = true;
+    },
+    deleteProduct(id){
+      if(confirm("Are you sure? You want to delete this item?"))
+      {
+        this.products = this.products.filter( product => product.id !== id);
+      }
+    },
+  }
 };
 </script>
 <template>
@@ -26,7 +47,7 @@ export default {
 
     <div class="card" style="width: 1200px">
       <div class="card-header">
-        <button @click="showModal = true" class="btn btn-outline-primary">
+        <button @click="showAddModal = true" class="btn btn-outline-primary">
           Add New Product
         </button>
       </div>
@@ -53,15 +74,25 @@ export default {
             </td>
             <td>{{ product.category }}</td>
             <td>
-              <button class="btn btn-outline-info">Show</button>
+              <button @click="showProduct(product)" class="btn btn-outline-info">Show</button>
               <button class="btn btn-outline-warning">Edit</button>
-              <button class="btn btn-outline-danger">Delete</button>
+              <button @click="deleteProduct(product.id)" class="btn btn-outline-danger">Delete</button>
             </td>
           </tr>
           </tbody>
         </table>
       </div>
     </div>
+    <AddProduct
+      :showModal="showAddModal"
+      @add-product="addProduct"
+      @close="showAddModal = false"
+    />
+    <ShowProduct
+      :showDetailsModal="showDetailsModal"
+      :product="selectedProduct"
+      @close="showDetailsModal = false"
+    />
   </div>
 </template>
 
