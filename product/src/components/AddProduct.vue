@@ -22,7 +22,13 @@
             </div>
             <div class="mb-3">
               <label class="form-label">Category</label>
-              <input type="text" v-model="product.category" class="form-control" required />
+              <select v-model="product.category" class="form-control" required>
+                <option value="">Select Category</option>
+                <option value="men's clothing">Men's Clothing</option>
+                <option value="jewelery">Jewelery</option>
+                <option value="electronics">Electronics</option>
+                <option value="women's clothing">Women's Clothing</option>
+              </select>
             </div>
             <div class="modal-footer">
               <button type="submit" class="btn btn-primary">Add</button>
