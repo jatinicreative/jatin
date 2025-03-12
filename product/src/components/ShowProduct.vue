@@ -9,7 +9,7 @@
         <div class="modal-body">
           <div v-if="product">
             <p><strong>Title:</strong> {{ product.title }}</p>
-            <p><strong>Price:</strong> {{ product.price }}</p>
+            <p><strong>Price:</strong> ₹{{ product.price }}</p>
             <p><strong>Category:</strong> {{ product.category }}</p>
             <p><strong>Image:</strong></p>
             <div>
