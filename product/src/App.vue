@@ -30,6 +30,9 @@ export default {
     }
   },
   computed:{
+    totalPrice(){
+      return this.filteredProducts.reduce((sum,product)=> sum + product.price, 0);
+    },
     totalPages(){
       return Math.ceil(this.filteredProducts.length / this.pageSize);
     },
@@ -67,10 +70,6 @@ export default {
         this.currentPage = page;
       }
     },
-    filterByCategory()
-    {
-      this.currentPage = 1;
-    },
     editProduct(product){
       this.selectedProduct = { ...product };
       this.showEditModal = true;
@@ -94,7 +93,7 @@ export default {
         <button @click="showAddModal = true" class="btn btn-outline-primary">
           Add New Product
         </button>
-        <select v-model="selectedCategory" @change="filterByCategory" style="margin-left: 800px">
+        <select v-model="selectedCategory" style="margin-left: 800px">
           <option value="">Select Category</option>
           <option value="men's clothing">men's clothing</option>
           <option value="jewelery">jewelery</option>
@@ -132,7 +131,10 @@ export default {
           </tr>
           </tbody>
         </table>
-
+        <div style="display: flex">
+        <h6>Total Products:- {{ products.length }}</h6>
+        <h6 style="margin-left: auto">Total Price:- {{ totalPrice.toFixed(2) }}</h6>
+        </div>
         <nav>
           <ul class="pagination justify-content-center">
             <li class="page-item" :class="{ disabled: currentPage === 1}">
