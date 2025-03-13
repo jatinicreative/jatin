@@ -19,6 +19,7 @@ export default {
       pageSize: 5,
       selectedCategory: '',
       showEditModal: false,
+      searchQuery: '',
     };
   },
   async created() {
@@ -42,11 +43,15 @@ export default {
       return this.filteredProducts.slice(start, end);
     },
     filteredProducts(){
-      if(!this.selectedCategory)
+      let filtered = this.products;
+      if(this.selectedCategory)
       {
-        return this.products;
+        filtered = filtered.filter( product => product.category === this.selectedCategory )
       }
-      return this.products.filter( product => product.category === this.selectedCategory )
+      if(this.searchQuery){
+        filtered = filtered.filter( product => product.title.toLowerCase().includes(this.searchQuery.toLowerCase()))
+      }
+      return filtered;
     }
   },
   methods: {
@@ -93,13 +98,14 @@ export default {
         <button @click="showAddModal = true" class="btn btn-outline-primary">
           Add New Product
         </button>
-        <select v-model="selectedCategory" style="margin-left: 800px">
+        <select v-model="selectedCategory" style="margin-left: 500px">
           <option value="">Select Category</option>
           <option value="men's clothing">men's clothing</option>
           <option value="jewelery">jewelery</option>
           <option value="electronics">electronics</option>
           <option value="women's clothing">women's clothing</option>
         </select>
+        <input type="text" placeholder="Search Product Name..." v-model="searchQuery" style="margin-left: 100px">
       </div>
 
       <div class="card-body">
