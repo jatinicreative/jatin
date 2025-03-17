@@ -12,6 +12,7 @@ export default {
   data() {
     return {
       products: [],
+      categories: [],
       showAddModal: false,
       showDetailsModal :false,
       selectedProduct: null,
@@ -26,6 +27,8 @@ export default {
     try {
       const response = await fetch('https://fakestoreapi.com/products');
       this.products = await response.json();
+
+      this.categories = [ ...new Set(this.products.map(product => product.category))]
     } catch (error) {
       console.error('Error fetching products:', error);
     }
@@ -33,6 +36,9 @@ export default {
   computed:{
     totalPrice(){
       return this.filteredProducts.reduce((sum,product)=> sum + product.price, 0);
+    },
+    totalPerPage(){
+      return this.paginatedProducts.reduce((sum,product)=> sum + product.price, 0);
     },
     totalPages(){
       return Math.ceil(this.filteredProducts.length / this.pageSize);
@@ -56,7 +62,11 @@ export default {
   },
   methods: {
     addProduct(newProduct){
-      this.products.unshift({id: Date.now(), ...newProduct})
+      this.products.unshift({id: Date.now(), ...newProduct});
+
+      if(!this.categories.includes(newProduct.category)){
+        this.categories.push(newProduct.category);
+      }
       this.showAddModal = false;
       this.currentPage = 1;
     },
@@ -91,7 +101,7 @@ export default {
 </script>
 <template>
   <div class="container mt-5" style="width: max-content">
-    <h2 class="text-center mt-5 mb-3">All Product Details...</h2>
+    <h2 class="text-center mt-5 mb-3">Product Listing</h2>
 
     <div class="card" style="width: 1200px">
       <div class="card-header">
@@ -100,10 +110,7 @@ export default {
         </button>
         <select v-model="selectedCategory" style="margin-left: 500px">
           <option value="">Select Category</option>
-          <option value="men's clothing">men's clothing</option>
-          <option value="jewelery">jewelery</option>
-          <option value="electronics">electronics</option>
-          <option value="women's clothing">women's clothing</option>
+          <option v-for="category in categories" :key="category" :value="category">{{ category }}</option>
         </select>
         <input type="text" placeholder="Search Product Name..." v-model="searchQuery" style="margin-left: 100px">
       </div>
@@ -113,33 +120,34 @@ export default {
           <thead>
           <tr>
             <th>Sr No</th>
-            <th>Title</th>
-            <th>Price[₹]</th>
+            <th style="width: 300px">Title</th>
+            <th>Price</th>
             <th>Image</th>
             <th>Category</th>
-            <th style="width: 220px">Actions</th>
+            <th style="width: 250px">Actions</th>
           </tr>
           </thead>
           <tbody>
           <tr v-for="(product, index) in paginatedProducts" :key="product.id">
             <td>{{ (currentPage - 1) * pageSize + index + 1}}</td>
             <td>{{ product.title }}</td>
-            <td>{{ product.price }}</td>
+            <td>₹{{ product.price }}</td>
             <td>
               <img :src="product.image" alt="Product Image" style="width: 50px; height: 50px;" />
             </td>
             <td>{{ product.category }}</td>
-            <td>
-              <button @click="showProduct(product)" class="btn btn-outline-info">Show</button>
-              <button @click="editProduct(product)" class="btn btn-outline-warning">Edit</button>
-              <button @click="deleteProduct(product.id)" class="btn btn-outline-danger">Delete</button>
+            <td id="button">
+              <button style="margin: 3px" @click="showProduct(product)" class="btn btn-outline-info">Show</button>
+              <button style="margin: 3px" @click="editProduct(product)" class="btn btn-outline-warning">Edit</button>
+              <button style="margin: 3px" @click="deleteProduct(product.id)" class="btn btn-outline-danger">Delete</button>
             </td>
           </tr>
           </tbody>
         </table>
         <div style="display: flex">
-        <h6>Total Products:- {{ products.length }}</h6>
-        <h6 style="margin-left: auto">Total Price:- {{ totalPrice.toFixed(2) }}</h6>
+          <h6>Total Products:- {{ products.length }}</h6>
+          <h6 style="margin-left: 380px">Total Price:- {{ totalPrice.toFixed(2) }}</h6>
+          <h6 style="margin-left: auto">Total Price Per Page:- {{ totalPerPage.toFixed(2) }}</h6>
         </div>
         <nav>
           <ul class="pagination justify-content-center">
@@ -174,6 +182,7 @@ export default {
     <EditProduct
       :showEditModal = "showEditModal"
       :product = "selectedProduct"
+      :categories = "categories"
       @update-product="updateProduct"
       @close = "showEditModal = false"
     />

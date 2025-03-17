@@ -9,20 +9,20 @@
         </div>
         <div class="form-group">
           <label>Price:</label>
-          <input type="number" v-model="productData.price" class="form-control" required />
+          <input type="number" step="0.01" v-model="productData.price" class="form-control" required />
         </div>
         <div class="form-group">
           <label>Category:</label>
           <select v-model="productData.category" class="form-control" required>
-            <option value="men's clothing">Men's Clothing</option>
-            <option value="jewelery">Jewelery</option>
-            <option value="electronics">Electronics</option>
-            <option value="women's clothing">Women's Clothing</option>
+            <option v-for="category in categories" :key="category" :value="category">{{ category }}</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Image URL:</label>
-          <input v-model="productData.image" class="form-control" required />
+          <label>Image:</label>
+          <div>
+            <img :src="productData.image" alt="Product Image" style="width: 100px; height: 100px;" />
+            <input type="file" @change="handleFileUpload" class="form-control" />
+          </div>
         </div>
         <div class="modal-actions">
           <button type="submit" class="btn btn-primary">Update</button>
@@ -38,6 +38,7 @@ export default {
   props: {
     showEditModal: Boolean,
     product: Object,
+    categories: Array,
   },
   data() {
     return {
@@ -50,6 +51,16 @@ export default {
     }
   },
   methods: {
+    handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.productData.image = reader.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    },
     updateProduct() {
       this.$emit('update-product', this.productData);
     }

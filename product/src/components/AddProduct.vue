@@ -10,25 +10,20 @@
           <form @submit.prevent="submitProduct">
             <div class="mb-3">
               <label class="form-label">Title</label>
-              <input type="text" v-model="product.title" class="form-control" required />
+              <input type="text" v-model="product.title" placeholder="Enter Product Title..." class="form-control" required />
             </div>
             <div class="mb-3">
               <label class="form-label">Price</label>
-              <input type="number" v-model="product.price" class="form-control" required />
+              <input type="number" step="0.01" v-model="product.price" placeholder="Enter Product Price..." class="form-control" required />
             </div>
             <div class="mb-3">
               <label class="form-label">Image</label>
-              <input type="text" v-model="product.image" class="form-control" required />
+              <input type="file" @change="handleFileUpload" class="form-control" required />
+              <img v-if="product.image" :src="product.image" alt="Product Image" style="width: 100px; height: 100px;" />
             </div>
             <div class="mb-3">
               <label class="form-label">Category</label>
-              <select v-model="product.category" class="form-control" required>
-                <option value="">Select Category</option>
-                <option value="men's clothing">Men's Clothing</option>
-                <option value="jewelery">Jewelery</option>
-                <option value="electronics">Electronics</option>
-                <option value="women's clothing">Women's Clothing</option>
-              </select>
+              <input type="text" v-model="product.category" placeholder="Enter Category..."  class="form-control" required />
             </div>
             <div class="modal-footer">
               <button type="submit" class="btn btn-primary">Add</button>
@@ -59,6 +54,16 @@ export default {
     };
   },
   methods: {
+    handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.product.image = reader.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    },
     submitProduct() {
       this.$emit('add-product', { ...this.product });
 
