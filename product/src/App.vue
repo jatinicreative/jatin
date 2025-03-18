@@ -85,7 +85,7 @@ export default {
         this.currentPage = page;
       }
     },
-    editProduct(product){
+      editProduct(product){
       this.selectedProduct = { ...product };
       this.showEditModal = true;
     },
