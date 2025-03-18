@@ -1,4 +1,3 @@
-
 <script>
 import AddProduct from '@/components/AddProduct.vue'
 import ShowProduct from '@/components/ShowProduct.vue'
