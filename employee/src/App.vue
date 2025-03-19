@@ -15,6 +15,10 @@ export default {
       showSeeModal: false,
       selectedEmployee: null,
       showEditModal: false,
+      currentPage: 1,
+      pageSize: 5,
+      searchQuery: null,
+      selectedGender:'',
     }
   },
   async created() {
@@ -26,7 +30,32 @@ export default {
       console.error('Error fetching data', error)
     }
   },
+  computed:{
+    filteredProducts(){
+      let filtered = this.employees
+      if(this.searchQuery){
+        filtered = filtered.filter(employee => employee.firstName.toLowerCase().includes(this.searchQuery.toLowerCase()) || employee.lastName.toLowerCase().includes(this.searchQuery.toLowerCase()))
+      }
+      if(this.selectedGender){
+        filtered = filtered.filter(employee => employee.gender === this.selectedGender)
+      }
+      return filtered;
+    },
+    totalPages(){
+      return Math.ceil(this.employees.length / this.pageSize);
+    },
+    paginatedEmployees(){
+      const start = (this.currentPage-1)*this.pageSize;
+      const end = start+ this.pageSize;
+      return this.filteredProducts.slice(start,end);
+    }
+  },
   methods: {
+    changePage(page){
+      if(page>=1 && page<=this.totalPages){
+        this.currentPage = page;
+      }
+    },
     addEmployee(newEmployee) {
       this.employees.unshift({ id: Date.now(), ...newEmployee })
       this.showAddModal = false
@@ -63,6 +92,12 @@ export default {
         <button @click="showAddModal = true" class="btn btn-outline-primary">
           Add New Employee
         </button>
+        <input type="text" placeholder="Search Employee Name..." v-model="searchQuery" style="margin-left: 100px">
+        <select v-model="selectedGender" style="margin-left: 500px">
+          <option value="">Select Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
       </div>
       <div class="card-body">
         <table class="table table-bordered table-striped">
@@ -79,8 +114,8 @@ export default {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(employee, index) in employees" :key="employee.id">
-              <td>{{ index + 1 }}</td>
+            <tr v-for="(employee, index) in paginatedEmployees" :key="employee.id">
+              <td>{{ (currentPage - 1) * pageSize + index + 1}}</td>
               <td>{{ employee.firstName }}</td>
               <td>{{ employee.lastName }}</td>
               <td>
@@ -97,6 +132,27 @@ export default {
             </tr>
           </tbody>
         </table>
+        <div style="display: flex">
+
+        </div>
+        <nav>
+          <ul class="pagination justify-content-center">
+            <li class="page-item" :class="{ disabled:currentPage===1}">
+              <button @click="changePage(currentPage-1)" class="page-link">Previous</button>
+            </li>
+            <li
+              v-for="page in totalPages"
+              :key="page"
+              class="page-item"
+              :class="{ active:currentPage===page}"
+            >
+            <button @click="changePage(page)" class="page-link">{{ page }}</button>
+            </li>
+            <li class="page-item" :class="{ disabled:currentPage===totalPages}">
+              <button @click="changePage(currentPage+1)" class="page-link">Next</button>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   </div>
@@ -106,6 +162,7 @@ export default {
     @close="showAddModal = false"
   />
   <SeeEmployee
+    @update-employee="updateEmployee"
     :showSeeModal="showSeeModal"
     :employee="selectedEmployee"
     @close="showSeeModal=false"
@@ -113,11 +170,21 @@ export default {
   <EditEmployee
     :showEditModal="showEditModal"
     :employee="selectedEmployee"
-    @update-employee="updateEmployee"
     @close="showEditModal=false"
   />
 </template>
 
 <style scoped>
+.pagination {
+  margin-top: 20px;
+}
 
+.page-item.active .page-link {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.page-item.disabled .page-link {
+  color: #6c757d;
+}
 </style>

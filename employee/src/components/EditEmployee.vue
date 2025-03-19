@@ -1,31 +1,30 @@
 <template>
-  <div v-if="showEditModal" class="modal d-block">
-    <div class="modal-dialog">
+  <div v-if="showEditModal" class="modal-overlay">
       <div class="modal-content">
-        <h5 class="modal-title">Edit Employee Details</h5>
+        <h5>Edit Employee Details</h5>
         <form @submit.prevent="updateEmployee">
-          <div class="mb-3">
-            <label class="form-label">First Name</label>
-            <input type="text" v-model="produceData.firstName" class="form-control" required />
+          <div class="form-group">
+            <label>First Name</label>
+            <input v-model="produceData.firstName" class="form-control" required />
           </div>
-          <div class="mb-3">
-            <label class="form-label">Last Name</label>
-            <input type="text" v-model="produceData.lastName" class="form-control" required />
+          <div class="form-group">
+            <label>Last Name</label>
+            <input v-model="produceData.lastName" class="form-control" required />
           </div>
           <div class="form-group">
             <label>Image:</label>
             <div>
               <img :src="produceData.image" alt="Product Image" style="width: 100px; height: 100px;" />
               <input type="file" @change="handleFileUpload" class="form-control" />
-            <label class="form-label">Birth Date</label>
             </div>
           </div>
-          <div class="mb-3">
-            <label class="form-label">Age</label>
-            <input type="text" v-model="produceData.age"  class="form-control" required />
+          <div class="form-group">
+            <label>Age</label>
+            <input v-model="produceData.age"  class="form-control" required />
           </div>
-          <div class="mb-3">
-            <input type="date" v-model="produceData.birthDate"  class="form-control" required />
+          <div class="form-group">
+            <label>Birth Date</label>
+            <input v-model="produceData.birthDate"  class="form-control" required />
           </div>
           <div class="modal-actions">
             <button type="submit" class="btn btn-primary">Update</button>
@@ -34,7 +33,6 @@
         </form>
       </div>
     </div>
-  </div>
 </template>
 <script>
 export default {
@@ -69,3 +67,28 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  width: 400px;
+  border-radius: 8px;
+}
+.modal-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+</style>
