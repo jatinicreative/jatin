@@ -1,0 +1,44 @@
+{
+    "name": "swag-shop-finder2/swag-shop-finder2",
+    "description": "swag-shop-finder2",
+    "type": "shopware-platform-plugin",
+    "version": "1.0.1",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "iCreative Technologies"
+        }
+    ],
+    "require": {
+        "shopware/core": "~6.6.0"
+    },
+    "extra": {
+        "shopware-plugin-class": "SwagShopFinder\\SwagShopFinder2",
+        "label": {
+            "de-DE": "Swag Shop Finder 2",
+            "en-GB": "Swag Shop Finder 2"
+        },
+        "description": {
+            "de-DE": "Dies ist das Profil Plugin",
+            "en-GB": "This is Profile Plugin"
+        },
+        "manufacturerLink": {
+            "de-DE": "https://www.icreativetechnologies.com",
+            "en-GB": "https://www.icreativetechnologies.com"
+        },
+        "supportLink": {
+            "de-DE": "https://support.icreativetechnologies.com",
+            "en-GB": "https://support.icreativetechnologies.com"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "SwagShopFinder\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SwagShopFinder\\Tests\\": "tests/"
+        }
+    }
+}

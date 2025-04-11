@@ -1,0 +1,45 @@
+{
+    "name": "swag-account/swag-account",
+    "description": "This is a Swag Account",
+    "type": "shopware-platform-plugin",
+    "version": "1.0.0",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "iCreative Technologies"
+        }
+    ],
+    "require": {
+        "shopware/core": "~6.6.0"
+    },
+    "extra": {
+        "shopware-plugin-class": "SwagAccount\\SwagAccount",
+        "label": {
+            "de-DE": "Swag Account Plugin",
+            "en-GB": "Swag Account Plugin"
+        },
+        "description": {
+            "de-DE": "This is Account Plugin",
+            "en-GB": "This is Account Plugin"
+        },
+        "manufacturerLink": {
+            "de-DE": "https://www.icreativetechnologies.com",
+            "en-GB": "https://www.icreativetechnologies.com"
+        },
+        "supportLink": {
+            "de-DE": "https://support.icreativetechnologies.com",
+            "en-GB": "https://support.icreativetechnologies.com"
+        }
+
+    },
+    "autoload": {
+        "psr-4": {
+            "SwagAccount\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SwagAccount\\Tests\\": "tests/"
+        }
+    }
+}

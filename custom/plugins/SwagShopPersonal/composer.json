@@ -1,0 +1,45 @@
+{
+    "name": "swag-shop-personal/swag-shop-personal",
+    "description": "This is SwagShopPersonal Plugin",
+    "type": "shopware-platform-plugin",
+    "version": "1.0.0",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "iCreative Technologies"
+        }
+    ],
+    "require": {
+        "shopware/core": "~6.6.0"
+    },
+    "extra": {
+        "shopware-plugin-class": "SwagShopPersonal\\SwagShopPersonal",
+        "label": {
+            "de-DE": "Swag Shop Personal Plugin",
+            "en-GB": "Swag Shop Personal Plugin"
+        },
+        "description": {
+            "de-DE": "This is Personal Details Plugin",
+            "en-GB": "This is Personal Details Plugin"
+        },
+        "manufacturerLink": {
+            "de-DE": "https://www.icreativetechnologies.com",
+            "en-GB": "https://www.icreativetechnologies.com"
+        },
+        "supportLink": {
+            "de-DE": "https://support.icreativetechnologies.com",
+            "en-GB": "https://support.icreativetechnologies.com"
+        }
+
+    },
+    "autoload": {
+        "psr-4": {
+            "SwagShopPersonal\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SwagShopPersonal\\Tests\\": "tests/"
+        }
+    }
+}

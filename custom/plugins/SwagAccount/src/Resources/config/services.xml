@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="SwagAccount\Core\Content\SwagAccount\SwagAccountDefinition">
+            <tag name="shopware.entity.definition" entity="swag_account"/>
+        </service>
+        <service id="SwagAccount\Core\Content\SwagAccount\Aggregate\SwagAccountTranslationDefinition">
+            <tag name="shopware.entity.definition"/>
+        </service>
+        <service id="SwagAccount\Core\Content\SwagAccount\Extension\LanguageExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+        <service id="SwagAccount\Core\Content\SwagAccount\Extension\CountryExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+        <service id="SwagAccount\Core\Content\SwagAccount\Extension\ProductExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+        <service id="SwagAccount\Core\Content\SwagAccount\Extension\CountryStateExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+        <service id="SwagAccount\Core\Content\SwagAccount\Extension\MediaExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+    </services>
+</container>

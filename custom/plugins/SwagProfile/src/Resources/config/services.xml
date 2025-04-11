@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="SwagProfile\Core\Content\SwagProfile\SwagProfileDefinition">
+            <tag name="shopware.entity.definition" entity="swag_profile"/>
+        </service>
+        <service id="SwagProfile\Core\Content\SwagProfile\Aggregate\SwagProfileTranslationDefinition">
+            <tag name="shopware.entity.definition"/>
+        </service>
+        <service id="SwagProfile\Core\Content\SwagProfile\Extension\LanguageExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+    </services>
+</container>

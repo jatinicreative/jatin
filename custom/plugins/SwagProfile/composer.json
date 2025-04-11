@@ -1,0 +1,44 @@
+{
+    "name": "swag-profile/swag-profile",
+    "description": "swag-profile/swag-profile",
+    "type": "shopware-platform-plugin",
+    "version": "1.0.0",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "iCreative Technologies"
+        }
+    ],
+    "require": {
+        "shopware/core": "~6.6.0"
+    },
+    "extra": {
+        "shopware-plugin-class": "SwagProfile\\SwagProfile",
+        "label": {
+            "de-DE": "Swag Profil Plugin",
+            "en-GB": "Swag Profile Plugin"
+        },
+        "description": {
+            "de-DE": "Dies ist das Profil Plugin",
+            "en-GB": "This is Profile Plugin"
+        },
+        "manufacturerLink": {
+            "de-DE": "https://www.icreativetechnologies.com",
+            "en-GB": "https://www.icreativetechnologies.com"
+        },
+        "supportLink": {
+            "de-DE": "https://support.icreativetechnologies.com",
+            "en-GB": "https://support.icreativetechnologies.com"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "SwagProfile\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SwagProfile\\Tests\\": "tests/"
+        }
+    }
+}

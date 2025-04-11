@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <card>
+        <title>Basic configuration</title>
+
+        <input-field type="bool">
+            <name>showInStorefront</name>
+            <label>Show in storefront</label>
+        </input-field>
+    </card>
+</config>

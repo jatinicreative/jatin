@@ -1,0 +1,23 @@
+<div class="col-md4 footer-column js-footer-column">
+    <div class="footer-column-headline footer-headline js-footer-column-headline js-collapse-footer-column-trigger"
+         data-target="#collapseFooterHotline"
+         aria-expanded="true"
+         aria-controls="collapseFooterHotline">
+        {{ 'swag_shop_finder.footerTitle' | trans }}
+    </div>
+
+    <div>
+        <ul>
+            {% for shop in swag_shop_finder.elements %}
+                <li> {{ shop.name }}</li>
+                <li>{{ 'swag_shop_finder.shopCity' | trans }}: {{ shop.city }}</li>
+                {% if shop.openTimes %}
+                    <p>
+                        {{ 'swag_shop_finder.openTimes' | trans }}: <br>
+                        {{ shop.openTimes }}
+                    </p>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>

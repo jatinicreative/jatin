@@ -1,0 +1,27 @@
+{
+    "name": "swag-shop-finder1/swag-shop-finder1",
+    "description": "swag-shop-finder1/swag-shop-finder1",
+    "type": "shopware-platform-plugin",
+    "version": "1.0.0",
+    "license": "MIT",
+    "require": {
+        "shopware/core": "~6.6.0"
+    },
+    "extra": {
+        "shopware-plugin-class": "SwagShopFinder1\\SwagShopFinder1",
+        "label": {
+            "de-DE": "Swag-Shop-Finder1",
+            "en-GB": "Swag-Shop-Finder1"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "SwagShopFinder1\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SwagShopFinder1\\Tests\\": "tests/"
+        }
+    }
+}
