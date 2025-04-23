@@ -8,7 +8,7 @@ use SwagBlog\Core\Content\SwagBlog\SwagBlogCategoryCollection;
 use SwagBlog\Core\Content\SwagBlog\Aggregate\SwagBlogTranslationCollection;
 use Shopware\Core\Content\Product\ProductCollection;
 
-class BlogEntity extends Entity
+class SwagBlogEntity extends Entity
 {
     use EntityIdTrait;
 

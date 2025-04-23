@@ -14,7 +14,7 @@ use Shopware\Core\Framework\DataAbstractionLayer\EntityCollection;
  * @method SwagBlogEntity|null first()
  * @method SwagBlogEntity|null last()
  */
-class BlogCollection extends EntityCollection
+class SwagBlogCollection extends EntityCollection
 {
     protected function getExpectedClass(): string
     {
