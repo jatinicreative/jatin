@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="SwagBlog\Core\Content\SwagBlog\SwagBlogDefinition">
+            <tag name="shopware.entity.definition" entity="blog"/>
+        </service>
+        <service id="SwagBlog\Core\Content\SwagBlog\Aggregate\SwagBlogTranslationDefinition">
+            <tag name="shopware.entity.definition"/>
+        </service>
+        <service id="SwagBlog\Core\Content\SwagBlog\Extension\LanguageExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+        <service id="SwagBlog\Core\Content\SwagBlog\SwagBlogCategoryDefinition">
+            <tag name="shopware.entity.definition"/>
+        </service>
+        <service id="SwagBlog\Core\Content\SwagBlog\SwagBlogProductDefinition">
+            <tag name="shopware.entity.definition"/>
+        </service>
+        <service id="SwagBlog\Core\Content\SwagBlog\SwagBlogCategoryBlogDefinition">
+            <tag name="shopware.entity.definition"/>
+        </service>
+        <service id="SwagBlog\Core\Content\SwagBlog\Extension\ProductExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+    </services>
+</container>

@@ -1,6 +1,6 @@
 {
-    "name": "swag-shop-personal/swag-shop-personal",
-    "description": "This is SwagShopPersonal Plugin",
+    "name": "swag-blog/swag-blog",
+    "description": "This is Blog Plugin",
     "type": "shopware-platform-plugin",
     "version": "1.0.0",
     "license": "proprietary",
@@ -13,14 +13,14 @@
         "shopware/core": "~6.6.0"
     },
     "extra": {
-        "shopware-plugin-class": "SwagShopPersonal\\SwagShopPersonal",
+        "shopware-plugin-class": "SwagBlog\\SwagBlog",
         "label": {
-            "de-DE": "Swag Shop Personal Plugin",
-            "en-GB": "Swag Shop Personal Plugin"
+            "de-DE": "Swag Blog Plugin",
+            "en-GB": "Swag Blog Plugin"
         },
         "description": {
-            "de-DE": "This is Personal Details Plugin",
-            "en-GB": "This is Personal Details Plugin"
+            "de-DE": "This is Blog Plugin",
+            "en-GB": "This is Blog Plugin"
         },
         "manufacturerLink": {
             "de-DE": "https://www.icreativetechnologies.com",
@@ -30,16 +30,15 @@
             "de-DE": "https://support.icreativetechnologies.com",
             "en-GB": "https://support.icreativetechnologies.com"
         }
-
     },
     "autoload": {
         "psr-4": {
-            "SwagShopPersonal\\": "src/"
+            "SwagBlog\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "SwagShopPersonal\\Tests\\": "tests/"
+            "SwagBlog\\Tests\\": "tests/"
         }
     }
 }

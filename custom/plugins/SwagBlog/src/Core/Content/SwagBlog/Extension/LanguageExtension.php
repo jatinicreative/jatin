@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace SwagShopPersonal\Core\Content\SwagShopPersonal\Extension;
+namespace SwagBlog\Core\Content\SwagBlog\Extension;
 
 use Shopware\Core\Framework\DataAbstractionLayer\EntityExtension;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\OneToManyAssociationField;
 use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
 use Shopware\Core\System\Language\LanguageDefinition;
-use SwagShopPersonal\Core\Content\SwagShopPersonal\Aggregate\SwagShopPersonalTranslationDefinition;
+use SwagBlog\Core\Content\SwagBlog\Aggregate\SwagBlogTranslationDefinition;
 
 class LanguageExtension extends EntityExtension
 {
@@ -14,10 +14,9 @@ class LanguageExtension extends EntityExtension
     {
         $collection->add(
             new OneToManyAssociationField(
-                'swagPersonalTranslations',
-                SwagShopPersonalTranslationDefinition::class,
-                'language_id',
-                'id'
+                'swagBlogTranslation',
+                SwagBlogTranslationDefinition::class,
+                'swag_blog_id',
             )
         );
     }
