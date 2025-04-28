@@ -11,6 +11,7 @@ use Shopware\Core\Framework\Plugin\Context\UpdateContext;
 
 class SwagBlog extends Plugin
 {
+
     public function install(InstallContext $installContext): void
     {
         // Do stuff such as creating a new payment method

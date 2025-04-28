@@ -5,25 +5,28 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="SwagBlog\Core\Content\SwagBlog\SwagBlogDefinition">
+        <service id="SwagBlog\Core\Content\Blog\BlogDefinition">
             <tag name="shopware.entity.definition" entity="blog"/>
         </service>
-        <service id="SwagBlog\Core\Content\SwagBlog\Aggregate\SwagBlogTranslationDefinition">
+        <service id="SwagBlog\Core\Content\Blog\Aggregate\BlogTranslationDefinition">
             <tag name="shopware.entity.definition"/>
         </service>
-        <service id="SwagBlog\Core\Content\SwagBlog\Extension\LanguageExtension">
+        <service id="SwagBlog\Core\Content\Extension\LanguageExtension">
             <tag name="shopware.entity.extension"/>
         </service>
-        <service id="SwagBlog\Core\Content\SwagBlog\SwagBlogCategoryDefinition">
+        <service id="SwagBlog\Core\Content\BlogCategory\BlogCategoryDefinition">
             <tag name="shopware.entity.definition"/>
         </service>
-        <service id="SwagBlog\Core\Content\SwagBlog\SwagBlogProductDefinition">
+        <service id="SwagBlog\Core\Content\BlogCategory\Aggregate\BlogCategoryTranslationDefinition">
             <tag name="shopware.entity.definition"/>
         </service>
-        <service id="SwagBlog\Core\Content\SwagBlog\SwagBlogCategoryBlogDefinition">
+        <service id="SwagBlog\Core\Content\BlogProduct\BlogProductMappingDefinition">
             <tag name="shopware.entity.definition"/>
         </service>
-        <service id="SwagBlog\Core\Content\SwagBlog\Extension\ProductExtension">
+        <service id="SwagBlog\Core\Content\BlogCategory\BlogCategoryMappingDefinition">
+            <tag name="shopware.entity.definition"/>
+        </service>
+        <service id="SwagBlog\Core\Content\Extension\ProductExtension">
             <tag name="shopware.entity.extension"/>
         </service>
     </services>
