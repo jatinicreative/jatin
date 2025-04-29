@@ -7,7 +7,7 @@ Shopware.Module.register('blog-category', {
     title: 'Blog Category',
     description: 'Manage blog categories',
     color: '#57D9A3',
-    entity: 'swag_blog_category',
+    entity: 'blog_category',
 
     routes: {
         index: {

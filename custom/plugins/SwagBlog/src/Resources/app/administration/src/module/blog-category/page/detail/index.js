@@ -1,5 +1,9 @@
 import template from './blog-category-detail.html.twig';
 const { Component } = Shopware;
+const {
+    Mixin,
+    Data: { Criteria },
+} = Shopware;
 
 Component.register('blog-category-detail',
     {
@@ -7,16 +11,31 @@ Component.register('blog-category-detail',
 
     inject: ['repositoryFactory'],
 
+    mixins: [
+            Mixin.getByName('placeholder'),
+            Mixin.getByName('notification'),
+            Mixin.getByName('discard-detail-page-changes')('manufacturer'),
+        ],
+
+    props: {
+            manufacturerId: {
+                type: String,
+                required: false,
+                default: null,
+            },
+        },
     data() {
         return {
             blogCategory: null,
             isNew: this.$route.name === 'blog.category.create',
-            isSaveAllowed: false
+            isSaveAllowed: false,
+            isSaveSuccessful: false,
         };
     },
 
+
     created() {
-        this.repository = this.repositoryFactory.create('swag_blog_category');
+        this.repository = this.repositoryFactory.create('blog_category');
         this.loadEntity();
     },
 

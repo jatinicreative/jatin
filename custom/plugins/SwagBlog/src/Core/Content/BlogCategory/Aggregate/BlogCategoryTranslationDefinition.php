@@ -16,13 +16,13 @@ class BlogCategoryTranslationDefinition extends EntityTranslationDefinition
     {
         return self::ENTITY_NAME;
     }
-//    public function getEntityClass(): string{
-//        return BlogCategoryTranslationEntity::class;
-//    }
-//    public function getCollectionClass(): string
-//    {
-//        return BlogCategoryTranslationCollection::class;
-//    }
+    public function getEntityClass(): string{
+        return BlogCategoryTranslationEntity::class;
+    }
+    public function getCollectionClass(): string
+    {
+        return BlogCategoryTranslationCollection::class;
+    }
     protected function getParentDefinitionClass(): string
     {
         return BlogCategoryDefinition::class;
