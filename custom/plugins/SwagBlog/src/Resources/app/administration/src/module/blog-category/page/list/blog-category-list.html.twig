@@ -1,0 +1,25 @@
+<sw-page>
+    <template #smart-bar-header>
+        <h2>Blog Categories</h2>
+    </template>
+
+    <template #smart-bar-actions>
+        <sw-button @click="onCreateNewCategory" variant="primary">Create New Category</sw-button>
+    </template>
+
+    <template #content>
+        <sw-card title="Blog Categories">
+            <sw-data-grid
+                    :dataSource="blogCategories"
+                    :columns="columns"
+                    :isLoading="isLoading"
+                    detailRoute="blog.category.detail"
+            >
+                <template #column-actions="{ item }">
+                    <sw-button variant="link" @click="onEditCategory(item.id)">Edit</sw-button>
+                    <sw-button variant="danger" @click="onDeleteCategory(item.id)">Delete</sw-button>
+                </template>
+            </sw-data-grid>
+        </sw-card>
+    </template>
+</sw-page>

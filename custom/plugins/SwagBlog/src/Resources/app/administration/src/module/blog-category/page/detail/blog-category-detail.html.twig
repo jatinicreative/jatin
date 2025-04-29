@@ -1,0 +1,17 @@
+<sw-page>
+    <template #smart-bar-header>
+        <h2>{{ isNew ? 'Create' : 'Edit' }} Blog Category</h2>
+    </template>
+
+    <template #smart-bar-actions>
+        <sw-button @click="onSave" variant="primary" :disabled="!isSaveAllowed">Save</sw-button>
+    </template>
+
+    <template #content>
+
+        <sw-card title="General" v-if="blogCategory">
+            <label for="category-name">Name</label>
+            <sw-text-field id="category-name" v-model="blogCategory.name" class="sw-field__input" />
+        </sw-card>
+    </template>
+</sw-page>

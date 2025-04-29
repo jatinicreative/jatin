@@ -51,7 +51,7 @@ class BlogDefinition extends EntityDefinition
                 BlogCategoryDefinition::class,
                 BlogCategoryMappingDefinition::class,
                 'blog_id',
-                'category_id'
+                'blog_category_id'
             ),
 
             new ManyToManyAssociationField(

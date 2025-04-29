@@ -40,7 +40,7 @@ class BlogCategoryDefinition extends EntityDefinition
                 'blogs',
                 BlogDefinition::class,
                 BlogCategoryMappingDefinition::class,
-                'category_id',
+                'blog_category_id',
                 'blog_id'
             ),
         ]);

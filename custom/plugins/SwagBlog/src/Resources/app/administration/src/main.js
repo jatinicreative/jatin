@@ -1,0 +1,2 @@
+
+import './module/blog-category';
