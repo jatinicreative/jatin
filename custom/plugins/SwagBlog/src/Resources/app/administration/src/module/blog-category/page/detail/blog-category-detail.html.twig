@@ -4,16 +4,12 @@
     </template>
 
     <template #smart-bar-actions>
-
-        <sw-button @click="onCancel">
-            Cancel
-        </sw-button>
-
+        <sw-button @click="onCancel">Cancel</sw-button>
         <sw-button-process
-                v-model:process-success="isSaveSuccessful"
                 :is-loading="isLoading"
+                v-model:process-success="isSaveSuccessful"
                 variant="primary"
-                @click.prevent="onSave"
+                @click="onSave"
         >
             Save
         </sw-button-process>
@@ -28,10 +24,13 @@
     </template>
 
     <template #content>
-
         <sw-card title="General" v-if="blogCategory">
-            <label for="category-name">Name</label>
-            <sw-text-field id="category-name" v-model="blogCategory.name" class="sw-field__input" />
+            <sw-text-field
+                    v-model:value="blogCategory.name"
+                    label="Name"
+                    required
+            >
+            </sw-text-field>
         </sw-card>
     </template>
 </sw-page>

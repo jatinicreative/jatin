@@ -1,81 +1,91 @@
 import template from './blog-category-detail.html.twig';
-const { Component } = Shopware;
-const {
-    Mixin,
-    Data: { Criteria },
-} = Shopware;
 
-Component.register('blog-category-detail',
-    {
-        template,
+const { Component } = Shopware;
+
+Component.register('blog-category-detail', {
+    template,
 
     inject: ['repositoryFactory'],
 
-    mixins: [
-            Mixin.getByName('placeholder'),
-            Mixin.getByName('notification'),
-            Mixin.getByName('discard-detail-page-changes')('manufacturer'),
-        ],
-
     props: {
-            manufacturerId: {
-                type: String,
-                required: false,
-                default: null,
-            },
-        },
+        blogCategoryId: {
+            type: String,
+            required: false,
+            default: null
+        }
+    },
+
     data() {
         return {
             blogCategory: null,
-            isNew: this.$route.name === 'blog.category.create',
-            isSaveAllowed: false,
-            isSaveSuccessful: false,
+            isLoading: false,
+            isSaveSuccessful: false
         };
     },
 
+    computed: {
+        isNew() {
+            return !this.blogCategoryId;
+        },
+
+        blogCategoryRepository() {
+            return this.repositoryFactory.create('blog_category');
+        }
+    },
 
     created() {
-        this.repository = this.repositoryFactory.create('blog_category');
-        this.loadEntity();
+        this.loadBlogCategory();
     },
 
     methods: {
+        async loadBlogCategory() {
+            this.isLoading = true;
 
-        loadEntity() {
-            if (this.isNew) {
-
-                this.blogCategory = this.repository.create(Shopware.Context.api);
-                this.isSaveAllowed = true;
-            } else {
-
-                this.repository.get(this.$route.params.id, Shopware.Context.api).then(entity => {
-                    this.blogCategory = entity;
-                    this.isSaveAllowed = true;
-                }).catch(() => {
-
-                    this.createNotificationError({
-                        title: 'Error',
-                        message: 'Blog Category not found.'
-                    });
-                });
+            try {
+                if (this.isNew) {
+                    this.blogCategory = this.blogCategoryRepository.create(Shopware.Context.api);
+                } else {
+                    this.blogCategory = await this.blogCategoryRepository.get(this.blogCategoryId, Shopware.Context.api);
+                }
+            } catch (e) {
+                console.error('Failed to load blog category', e);
+            } finally {
+                this.isLoading = false;
             }
         },
 
-        onSave() {
-            this.repository.save(this.blogCategory, Shopware.Context.api).then(() => {
+        async onSave() {
+            this.isLoading = true;
 
-                this.$router.push({ name: 'blog.category.index' }).then(() => {
-                    this.loadItems();
-                });
-            }).catch(() => {
+            try {
+                await this.blogCategoryRepository.save(this.blogCategory, Shopware.Context.api);
+                this.isSaveSuccessful = true;
 
+                if (this.isNew) {
+                    this.$router.push({ name: 'blog.category.detail', params: { id: this.blogCategory.id } });
+                } else {
+                    await this.loadBlogCategory(); // Refresh after save
+                }
+            } catch (e) {
                 this.createNotificationError({
-                    title: 'Error',
-                    message: 'Failed to save the Blog Category.'
+                    message: this.$tc('global.notification.notificationSaveErrorMessageRequiredFieldsInvalid'),
                 });
-            });
+                console.error('Save failed', e);
+            } finally {
+                this.isLoading = false;
+            }
+        },
+
+        async saveOnLanguageChange() {
+            await this.onSave();
+        },
+
+        async onChangeLanguage() {
+            await this.loadBlogCategory();
+        },
+
+        onCancel() {
+            this.$router.push({ name: 'blog.category.index' });
         }
     }
-
 });
-
