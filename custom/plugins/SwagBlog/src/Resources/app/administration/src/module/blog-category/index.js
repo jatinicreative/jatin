@@ -3,8 +3,8 @@ import './page/detail';
 
 Shopware.Module.register('blog-category', {
     type: 'plugin',
-    name: 'Blog Category',
-    title: 'Blog Category',
+    name: 'blog-module.plugin.name',
+    title: 'blog-module.plugin.title',
     description: 'Manage blog categories',
     color: '#57D9A3',
     entity: 'blog_category',
@@ -41,7 +41,7 @@ Shopware.Module.register('blog-category', {
     },
 
     navigation: [{
-        label: 'Blog Categories',
+        label: 'blog-module.plugin.name',
         color: '#57D9A3',
         path: 'blog.category.index',
         icon: 'default-communication-speech-bubbles',

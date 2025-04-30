@@ -33,7 +33,7 @@ Component.register('blog-category-list', {
             return [
                 {
                     property: 'name',
-                    label: 'Blog Category Name',
+                    label: 'blog-module.list.name',
                     routerLink: 'blog.category.detail',
                     inlineEdit: 'string',
                     primary: true,
@@ -41,7 +41,7 @@ Component.register('blog-category-list', {
                 },
                 {
                     property: 'createdAt',
-                    label: 'Created At',
+                    label: 'blog-module.list.createdAt',
                     allowResize: true
                 }
             ];

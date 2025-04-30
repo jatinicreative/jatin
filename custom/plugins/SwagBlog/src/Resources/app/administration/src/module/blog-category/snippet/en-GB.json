@@ -1,0 +1,23 @@
+{
+  "blog-module": {
+    "plugin": {
+      "name": "Blog Category",
+      "title": "Blog Category"
+    },
+    "list": {
+      "pageTitle": "Blog Categories",
+      "name": "Blog Category Name",
+      "createdAt": "Created At",
+      "createButton": "Create New Category",
+      "searchType": "Blog Categories"
+    },
+    "detail": {
+      "pageTitleCreate": "Create Blog Category",
+      "pageTitleEdit": "Edit Blog Category",
+      "generalCardTitle": "General",
+      "nameLabel": "Name",
+      "save": "Save",
+      "cancel": "Cancel"
+    }
+  }
+}

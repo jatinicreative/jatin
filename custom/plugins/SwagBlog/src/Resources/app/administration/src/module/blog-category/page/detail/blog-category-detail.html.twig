@@ -1,17 +1,19 @@
 <sw-page>
     <template #smart-bar-header>
-        <h2>{{ isNew ? 'Create' : 'Edit' }} Blog Category</h2>
+        <h2><h2>{{ isNew ? $tc('blog-module.detail.pageTitleCreate') : $tc('blog-module.detail.pageTitleEdit') }}</h2></h2>
     </template>
 
     <template #smart-bar-actions>
-        <sw-button @click="onCancel">Cancel</sw-button>
+        <sw-button @click="onCancel">
+            {{ $tc('blog-module.detail.cancel') }}
+        </sw-button>
         <sw-button-process
                 :is-loading="isLoading"
                 v-model:process-success="isSaveSuccessful"
                 variant="primary"
                 @click="onSave"
         >
-            Save
+            {{ $tc('blog-module.detail.save') }}
         </sw-button-process>
     </template>
 
@@ -24,10 +26,10 @@
     </template>
 
     <template #content>
-        <sw-card title="General" v-if="blogCategory">
+        <sw-card :title="$tc('blog-module.detail.generalCardTitle')" v-if="blogCategory">
             <sw-text-field
                     v-model:value="blogCategory.name"
-                    label="Name"
+                    :label="$tc('blog-module.detail.nameLabel')"
                     required
             >
             </sw-text-field>
