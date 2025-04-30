@@ -4,7 +4,8 @@
                 initial-search-type="Blog Categories"
                 :initial-search="term"
                 @search="onSearch"
-        />
+        >
+        </sw-search-bar>
     </template>
 
     <template #smart-bar-header>
@@ -18,7 +19,8 @@
     </template>
 
     <template #language-switch>
-        <sw-language-switch @on-change="onChangeLanguage" />
+        <sw-language-switch @on-change="onChangeLanguage" >
+        </sw-language-switch>
     </template>
 
     <template #content>
@@ -29,7 +31,8 @@
                     :columns="blogCategoryColumns"
                     :repository="blogCategoryRepository"
                     :items="blogCategories"
-            />
+            >
+            </sw-entity-listing>
         </div>
     </template>
 </sw-page>

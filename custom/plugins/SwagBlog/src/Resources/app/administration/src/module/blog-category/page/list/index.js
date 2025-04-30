@@ -15,14 +15,12 @@ Component.register('blog-category-list', {
 
     data() {
         return {
-            blogCategories: [],
+            blogCategories: null,
             isLoading: false,
             sortBy: 'name',
             sortDirection: 'ASC',
             total: 0,
-            term: '',
-            page: 1, // ✅ Added
-            limit: 10 // ✅ Added
+            term: ''
         };
     },
 
@@ -35,67 +33,79 @@ Component.register('blog-category-list', {
             return [
                 {
                     property: 'name',
-                    allowResize: true,
-                    routerLink: 'blog.category.detail',
                     label: 'Blog Category Name',
+                    routerLink: 'blog.category.detail',
                     inlineEdit: 'string',
                     primary: true,
+                    allowResize: true
                 },
                 {
                     property: 'createdAt',
                     label: 'Created At',
-                    allowResize: true,
-                },
+                    allowResize: true
+                }
             ];
         },
 
         blogCategoryCriteria() {
-            const blogcategoryCriteria = new Criteria(this.page, this.limit);
-            blogcategoryCriteria.setTerm(this.term);
-            blogcategoryCriteria.addSorting(
+            const criteria = new Criteria(this.page, this.limit);
+            criteria.setTerm(this.term);
+            criteria.addSorting(
                 Criteria.sort(this.sortBy, this.sortDirection, this.naturalSorting)
             );
-            return blogcategoryCriteria;
-        },
+            return criteria;
+        }
     },
 
-    created() {
+    watch: {
+        page() {
+            this.getList();
+        },
+        limit() {
+            this.getList();
+        },
+        term() {
+            this.page = 1;
+            this.getList();
+        }
+    },
+
+    mounted() {
         this.getList();
     },
 
     methods: {
-        onChangeLanguage(languageId) {
-            this.getList(languageId);
-        },
-
         async getList() {
             this.isLoading = true;
 
-            const criteria = await this.addQueryScores(this.term, this.blogCategoryCriteria);
+            try {
+                const criteria = await this.addQueryScores(this.term, this.blogCategoryCriteria);
 
-            if (!this.entitySearchable) {
-                this.isLoading = false;
-                return false;
-            }
+                if (!this.entitySearchable) {
+                    this.isLoading = false;
+                    return;
+                }
 
-            return this.blogCategoryRepository.search(criteria).then((searchResult) => {
-                this.blogCategories = searchResult;
-                this.total = searchResult.total;
-                this.isLoading = false;
-            }).catch((error) => {
-                this.isLoading = false;
+                const result = await this.blogCategoryRepository.search(criteria);
+                this.blogCategories = result;
+                this.total = result.total;
+            } catch (error) {
                 console.error('Failed to fetch blog categories:', error);
-            });
+            } finally {
+                this.isLoading = false;
+            }
         },
 
         onSearch(term) {
             this.term = term;
-            this.page = 1;
-            this.getList();
         },
 
         onCreateNewCategory() {
             this.$router.push({ name: 'blog.category.create' });
+        },
+
+        onChangeLanguage() {
+            this.getList();
         }
     }
 });
