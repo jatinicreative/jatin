@@ -46,6 +46,7 @@ Component.register('blog-category-detail', {
                     this.blogCategory = this.blogCategoryRepository.create(Shopware.Context.api);
                 } else {
                     this.blogCategory = await this.blogCategoryRepository.get(this.blogCategoryId, Shopware.Context.api);
+
                 }
             } catch (e) {
                 console.error('Failed to load blog category', e);
@@ -65,6 +66,7 @@ Component.register('blog-category-detail', {
                     this.$router.push({ name: 'blog.category.index', params: { id: this.blogCategory.id } });
                 } else {
                     await this.loadBlogCategory();
+                    this.$router.push({ name: 'blog.category.index'});
                 }
             } catch (e) {
                 this.createNotificationError({
