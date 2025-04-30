@@ -1,0 +1,36 @@
+<sw-page>
+    <template #search-bar>
+        <sw-search-bar
+                :initial-search="term"
+                @search="onSearch"
+        >
+        </sw-search-bar>
+    </template>
+    <template #smart-bar-header>
+        <h2>Blogs</h2>
+    </template>
+
+    <template #language-switch>
+        <sw-language-switch @on-change="onChangeLanguage" >
+        </sw-language-switch>
+    </template>
+
+    <template #smart-bar-actions>
+        <sw-button @click="onCreateNewBlog" variant="primary">
+            Create New Blog
+        </sw-button>
+    </template>
+
+    <template #content>
+        <div>
+            <sw-entity-listing
+                    detail-route="blog.module.detail"
+                    :is-loading="isLoading"
+                    :columns="blogColumns"
+                    :repository="blogRepository"
+                    :items="blogs"
+            >
+            </sw-entity-listing>
+        </div>
+    </template>
+</sw-page>
