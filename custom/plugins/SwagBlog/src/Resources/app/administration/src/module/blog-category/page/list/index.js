@@ -20,6 +20,9 @@ Component.register('blog-category-list', {
             sortBy: 'name',
             sortDirection: 'ASC',
             total: 0,
+            term: '',
+            page: 1, // ✅ Added
+            limit: 10 // ✅ Added
         };
     },
 
@@ -42,17 +45,16 @@ Component.register('blog-category-list', {
                     property: 'createdAt',
                     label: 'Created At',
                     allowResize: true,
-                    inlineEdit: 'string',
                 },
             ];
         },
 
         blogCategoryCriteria() {
             const blogcategoryCriteria = new Criteria(this.page, this.limit);
-
             blogcategoryCriteria.setTerm(this.term);
-            blogcategoryCriteria.addSorting(Criteria.sort(this.sortBy, this.sortDirection, this.naturalSorting));
-
+            blogcategoryCriteria.addSorting(
+                Criteria.sort(this.sortBy, this.sortDirection, this.naturalSorting)
+            );
             return blogcategoryCriteria;
         },
     },
@@ -80,6 +82,9 @@ Component.register('blog-category-list', {
                 this.blogCategories = searchResult;
                 this.total = searchResult.total;
                 this.isLoading = false;
+            }).catch((error) => {
+                this.isLoading = false;
+                console.error('Failed to fetch blog categories:', error);
             });
         },
 

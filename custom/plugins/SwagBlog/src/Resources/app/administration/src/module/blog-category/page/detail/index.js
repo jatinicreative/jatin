@@ -62,9 +62,9 @@ Component.register('blog-category-detail', {
                 this.isSaveSuccessful = true;
 
                 if (this.isNew) {
-                    this.$router.push({ name: 'blog.category.detail', params: { id: this.blogCategory.id } });
+                    this.$router.push({ name: 'blog.category.index', params: { id: this.blogCategory.id } });
                 } else {
-                    await this.loadBlogCategory(); // Refresh after save
+                    await this.loadBlogCategory();
                 }
             } catch (e) {
                 this.createNotificationError({

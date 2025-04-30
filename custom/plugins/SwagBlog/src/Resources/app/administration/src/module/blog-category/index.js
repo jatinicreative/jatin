@@ -12,17 +12,20 @@ Shopware.Module.register('blog-category', {
     routes: {
         index: {
             component: 'blog-category-list',
-            path: 'index'
+            path: 'index',
+            name: 'blog.category.index'
         },
         create: {
             component: 'blog-category-detail',
             path: 'create',
+            name: 'blog.category.create',
             meta: {
                 parentPath: 'blog.category.index',
             },
         },
         detail: {
             component: 'blog-category-detail',
+            name: 'blog.category.detail',
             path: 'detail/:id?',
             meta: {
                 parentPath: 'blog.category.index'
@@ -30,7 +33,7 @@ Shopware.Module.register('blog-category', {
             props: {
                 default(route) {
                     return {
-                        categoryId: route.params.id,
+                        blogCategoryId: route.params.id,
                     };
                 },
             },
