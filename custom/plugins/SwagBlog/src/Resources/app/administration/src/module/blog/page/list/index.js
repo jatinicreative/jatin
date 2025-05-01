@@ -30,13 +30,13 @@ Shopware.Component.register('blog-list', {
 
         blogColumns() {
             return [
-                { property: 'name', label: 'Name', routerLink: 'blog.module.detail', inlineEdit: 'string', primary: true, allowResize: true },
-                { property: 'description', label: 'Description', allowResize: true },
-                { property: 'author', label: 'Author', allowResize: true },
-                { property: 'releaseDate', label: 'Release Date', allowResize: true },
-                { property: 'active', label: 'Active', allowResize: true },
-                { property: 'categories', label: 'Categories', allowResize: true },
-                { property: 'products', label: 'Products', allowResize: true }
+                { property: 'name', label: 'blog.fields.name', routerLink: 'blog.module.detail', inlineEdit: 'string', primary: true, allowResize: true },
+                { property: 'description', label: 'blog.fields.description', allowResize: true },
+                { property: 'author', label: 'blog.fields.author', allowResize: true },
+                { property: 'releaseDate', label: 'blog.fields.releaseDate', allowResize: true },
+                { property: 'active', label: 'blog.fields.active', allowResize: true },
+                { property: 'categories', label: 'blog.fields.categories', allowResize: true },
+                { property: 'products', label: 'blog.fields.products', allowResize: true }
             ];
         },
 

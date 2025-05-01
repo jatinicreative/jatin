@@ -7,7 +7,7 @@
     </template>
 
     <template #smart-bar-header>
-        <h2>Blogs</h2>
+        <h2>{{ $tc('blog.list.title') }}</h2>
     </template>
 
     <template #language-switch>
@@ -16,7 +16,7 @@
 
     <template #smart-bar-actions>
         <sw-button @click="onCreateNewBlog" variant="primary">
-            Create New Blog
+            {{ $tc('blog.general.createButton') }}
         </sw-button>
     </template>
 

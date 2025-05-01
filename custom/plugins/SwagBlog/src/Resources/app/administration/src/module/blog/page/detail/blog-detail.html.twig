@@ -1,17 +1,19 @@
 <sw-page>
     <template #smart-bar-header>
-        <h2>{{ isNew ? 'Create' : 'Edit' }} Blog</h2>
+        <h2>{{ isNew ? $tc('blog.general.createTitle') : $tc('blog.general.editTitle') }}</h2>
     </template>
 
     <template #smart-bar-actions>
-        <sw-button @click="onCancel">Cancel</sw-button>
+        <sw-button @click="onCancel">
+            {{ $tc('blog.general.cancelButton') }}
+        </sw-button>
         <sw-button-process
                 :is-loading="isLoading"
                 v-model:process-success="isSaveSuccessful"
                 variant="primary"
                 @click="onSave"
         >
-            Save
+            {{ $tc('blog.general.saveButton') }}
         </sw-button-process>
     </template>
 
@@ -24,38 +26,38 @@
     </template>
 
     <template #content>
-        <sw-card title="General" v-if="blog">
+        <sw-card :title="$tc('blog.general.descriptionTextModule')" v-if="blog">
             <sw-text-field
                     v-model:value="blog.name"
-                    label="Name"
+                    :label="$tc('blog.fields.name')"
                     required
             >
             </sw-text-field>
             <sw-textarea-field
                     v-model:value="blog.description"
-                    label="Description"
+                    :label="$tc('blog.fields.description')"
             >
             </sw-textarea-field>
             <sw-switch-field
                     v-model:value="blog.active"
-                    label="Active"
+                    :label="$tc('blog.fields.active')"
             >
             </sw-switch-field>
             <sw-text-field
                     v-model:value="blog.author"
-                    label="Author"
+                    :label="$tc('blog.fields.author')"
             >
             </sw-text-field>
             <sw-datepicker
                     v-model:value="blog.releaseDate"
-                    label="Release Date"
+                    :label="$tc('blog.fields.releaseDate')"
             >
             </sw-datepicker>
             <sw-entity-multi-select
                     v-model:entityCollection="blog.categories"
                     :criteria="categoryCriteria"
                     entity="blog_category"
-                    label="Blog Categories"
+                    :label="$tc('blog.fields.categories')"
             >
             </sw-entity-multi-select>
 
@@ -63,7 +65,7 @@
                     v-model:entityCollection="blog.products"
                     :criteria="productCriteria"
                     entity="product"
-                    label="Products"
+                    :label="$tc('blog.fields.products')"
             >
             </sw-entity-multi-select>
 
