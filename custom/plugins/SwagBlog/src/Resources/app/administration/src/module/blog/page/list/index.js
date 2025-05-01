@@ -35,8 +35,8 @@ Shopware.Component.register('blog-list', {
                 { property: 'author', label: 'Author', allowResize: true },
                 { property: 'releaseDate', label: 'Release Date', allowResize: true },
                 { property: 'active', label: 'Active', allowResize: true },
-                // { property: 'categories', label: 'Categories', allowResize: true },
-                // { property: 'products', label: 'Products', allowResize: true }
+                { property: 'categories', label: 'Categories', allowResize: true },
+                { property: 'products', label: 'Products', allowResize: true }
             ];
         },
 
@@ -44,6 +44,8 @@ Shopware.Component.register('blog-list', {
             const criteria = new Criteria(this.page, this.limit);
             criteria.setTerm(this.term);
             criteria.addSorting(Criteria.sort(this.sortBy, this.sortDirection, this.naturalSorting));
+            criteria.addAssociation('categories');
+            criteria.addAssociation('products');
             return criteria;
         }
     },
@@ -77,7 +79,7 @@ Shopware.Component.register('blog-list', {
                     return;
                 }
 
-                const result = await this.blogRepository.search(criteria);
+                const result = await this.blogRepository.search(criteria, Shopware.Context.api);
                 this.blogs = result;
                 this.total = result.total;
             } catch (error) {

@@ -11,7 +11,7 @@
     </template>
 
     <template #language-switch>
-        <sw-language-switch @on-change="onChangeLanguage" ></sw-language-switch>
+        <sw-language-switch @on-change="onChangeLanguage"></sw-language-switch>
     </template>
 
     <template #smart-bar-actions>
@@ -21,14 +21,24 @@
     </template>
 
     <template #content>
-        <div>
-            <sw-entity-listing
-                    detail-route="blog.module.detail"
-                    :is-loading="isLoading"
-                    :columns="blogColumns"
-                    :repository="blogRepository"
-                    :items="blogs"
-            ></sw-entity-listing>
-        </div>
+        <sw-entity-listing
+                detail-route="blog.module.detail"
+                :is-loading="isLoading"
+                :columns="blogColumns"
+                :repository="blogRepository"
+                :items="blogs"
+        >
+            <template #column-categories="{ item }">
+                <span>
+                    {{ item.categories.map(category => category.name).join(', ') }}
+                </span>
+            </template>
+
+            <template #column-products="{ item }">
+                <span>
+                    {{ item.products.map(product => product.name).join(', ') }}
+                </span>
+            </template>
+        </sw-entity-listing>
     </template>
 </sw-page>

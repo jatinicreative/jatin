@@ -46,14 +46,14 @@
                     label="Release Date"
             />
             <sw-entity-multi-select
-                    v-model:value="blog.categories"
+                    v-model:entityCollection="blog.categories"
                     :criteria="categoryCriteria"
                     entity="blog_category"
                     label="Blog Categories"
             />
 
             <sw-entity-multi-select
-                    v-model:value="blog.products"
+                    v-model:entityCollection="blog.products"
                     :criteria="productCriteria"
                     entity="product"
                     label="Products"
