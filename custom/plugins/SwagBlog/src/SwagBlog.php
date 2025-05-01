@@ -2,6 +2,7 @@
 
 namespace SwagBlog;
 
+use Doctrine\DBAL\Connection;
 use Shopware\Core\Framework\Plugin;
 use Shopware\Core\Framework\Plugin\Context\ActivateContext;
 use Shopware\Core\Framework\Plugin\Context\DeactivateContext;
@@ -24,6 +25,15 @@ class SwagBlog extends Plugin
         if ($uninstallContext->keepUserData()) {
             return;
         }
+
+        $connection = $this->container->get(Connection::class);
+
+        $connection->executeStatement('DROP TABLE IF EXISTS `blog_category_mapping`');
+        $connection->executeStatement('DROP TABLE IF EXISTS `blog_product_mapping`');
+        $connection->executeStatement('DROP TABLE IF EXISTS `blog_category_translation`');
+        $connection->executeStatement('DROP TABLE IF EXISTS `blog_category`');
+        $connection->executeStatement('DROP TABLE IF EXISTS `blog_translation`');
+        $connection->executeStatement('DROP TABLE IF EXISTS `blog`');
 
         // Remove or deactivate the data created by the plugin
     }

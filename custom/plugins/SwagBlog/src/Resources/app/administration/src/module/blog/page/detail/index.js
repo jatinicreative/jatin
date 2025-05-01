@@ -64,10 +64,10 @@ Shopware.Component.register('blog-detail', {
                 this.isSaveSuccessful = true;
 
                 if (this.isNew) {
-                    this.$router.push({ name: 'blog.module.index', params: { id: this.blog.id } });
+                    this.$router.push({ name: 'blog.module.detail', params: { id: this.blog.id } });
                 } else {
                     await this.loadBlog();
-                    this.$router.push({ name: 'blog.module.index' });
+                    this.$router.push({ name: 'blog.module.detail' });
                 }
             } catch (e) {
                 this.createNotificationError({
