@@ -1,5 +1,7 @@
 import template from './blog-detail.html.twig';
 
+const { Criteria } = Shopware.Data;
+
 Shopware.Component.register('blog-detail', {
     template,
 
@@ -28,6 +30,18 @@ Shopware.Component.register('blog-detail', {
 
         blogRepository() {
             return this.repositoryFactory.create('blog');
+        },
+
+        categoryCriteria() {
+            const criteria = new Criteria(1, 500);
+            criteria.addSorting(Criteria.sort('name', 'ASC'));
+            return criteria;
+        },
+
+        productCriteria() {
+            const criteria = new Criteria(1, 500);
+            criteria.addSorting(Criteria.sort('name', 'ASC'));
+            return criteria;
         }
     },
 
@@ -38,12 +52,11 @@ Shopware.Component.register('blog-detail', {
     methods: {
         async loadBlog() {
             this.isLoading = true;
-
             try {
                 if (this.isNew) {
                     this.blog = this.blogRepository.create(Shopware.Context.api);
                 } else {
-                    const criteria = new Shopware.Data.Criteria();
+                    const criteria = new Criteria();
                     criteria.addAssociation('categories');
                     criteria.addAssociation('products');
 
@@ -58,7 +71,6 @@ Shopware.Component.register('blog-detail', {
 
         async onSave() {
             this.isLoading = true;
-
             try {
                 await this.blogRepository.save(this.blog, Shopware.Context.api);
                 this.isSaveSuccessful = true;
@@ -67,7 +79,7 @@ Shopware.Component.register('blog-detail', {
                     this.$router.push({ name: 'blog.module.index', params: { id: this.blog.id } });
                 } else {
                     await this.loadBlog();
-                    this.$router.push({ name: 'blog.module.index'});
+                    this.$router.push({ name: 'blog.module.index' });
                 }
             } catch (e) {
                 this.createNotificationError({
