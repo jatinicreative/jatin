@@ -31,18 +31,6 @@ Shopware.Component.register('blog-detail', {
         blogRepository() {
             return this.repositoryFactory.create('blog');
         },
-
-        categoryCriteria() {
-            const criteria = new Criteria(1, 500);
-            criteria.addSorting(Criteria.sort('name', 'ASC'));
-            return criteria;
-        },
-
-        productCriteria() {
-            const criteria = new Criteria(1, 500);
-            criteria.addSorting(Criteria.sort('name', 'ASC'));
-            return criteria;
-        }
     },
 
     created() {
