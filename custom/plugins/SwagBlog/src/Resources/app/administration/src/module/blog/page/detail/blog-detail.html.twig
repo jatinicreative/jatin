@@ -19,7 +19,8 @@
         <sw-language-switch
                 :save-changes-function="saveOnLanguageChange"
                 @on-change="onChangeLanguage"
-        />
+        >
+        </sw-language-switch>
     </template>
 
     <template #content>
@@ -28,36 +29,43 @@
                     v-model:value="blog.name"
                     label="Name"
                     required
-            />
+            >
+            </sw-text-field>
             <sw-textarea-field
                     v-model:value="blog.description"
                     label="Description"
-            />
+            >
+            </sw-textarea-field>
             <sw-switch-field
                     v-model:value="blog.active"
                     label="Active"
-            />
+            >
+            </sw-switch-field>
             <sw-text-field
                     v-model:value="blog.author"
                     label="Author"
-            />
+            >
+            </sw-text-field>
             <sw-datepicker
                     v-model:value="blog.releaseDate"
                     label="Release Date"
-            />
+            >
+            </sw-datepicker>
             <sw-entity-multi-select
                     v-model:entityCollection="blog.categories"
                     :criteria="categoryCriteria"
                     entity="blog_category"
                     label="Blog Categories"
-            />
+            >
+            </sw-entity-multi-select>
 
             <sw-entity-multi-select
                     v-model:entityCollection="blog.products"
                     :criteria="productCriteria"
                     entity="product"
                     label="Products"
-            />
+            >
+            </sw-entity-multi-select>
 
         </sw-card>
     </template>
