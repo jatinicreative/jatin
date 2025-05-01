@@ -1,5 +1,10 @@
 {
   "blog": {
+    "module": {
+      "name": "Blog",
+      "description": "Manage Blogs",
+      "label": "Blog"
+    },
     "general": {
       "mainMenuItemGeneral": "Blog",
       "descriptionTextModule": "General",
