@@ -1,0 +1,22 @@
+ {% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+    {% block base_content %}
+    <h1>Hello, Shopware 6!</h1>
+        <div class="container">
+            <h2>Blog List</h2>
+            {% for blog in blogs %}
+            <div class="blog-entry mb-4 p-3 border rounded">
+                <div class="blog-entry">
+                    <h4>{{ blog.name }}</h4>
+                    <small>Description: {{ blog.description | raw}}</small><br>
+                    <small>Released: {{ blog.releaseDate|date('Y-m-d') }}</small><br>
+                    <small>Author: {{ blog.author }}</small><br>
+                    <small>Status: {{ blog.active ? 'Active' : 'Inactive' }}</small><br><br>
+                </div>
+            </div>
+            {% else %}
+                <p>No blogs found.</p>
+            {% endfor %}
+
+        </div>
+    {% endblock %}
