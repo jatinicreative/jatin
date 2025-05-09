@@ -18,7 +18,7 @@ Shopware.Service('cmsService').registerCmsBlock({
         sizingMode: 'boxed',
     },
     slots: {
-        'button':{
+        'left-button':{
             type: 'button',
             default: {
                 config: {
@@ -33,6 +33,54 @@ Shopware.Service('cmsService').registerCmsBlock({
                 }
             }
         },
+        'center-left-button':{
+            type: 'button',
+            default: {
+                config: {
+                    title: {
+                        source: 'static',
+                        value: 'Click Me'
+                    },
+                    url: {
+                        source: 'static',
+                        value: 'https://example.com'
+                    }
+                }
+            }
+        },
+
+        'center-right-button':{
+            type: 'button',
+            default: {
+                config: {
+                    title: {
+                        source: 'static',
+                        value: 'Click Me'
+                    },
+                    url: {
+                        source: 'static',
+                        value: 'https://example.com'
+                    }
+                }
+            }
+        },
+
+        'right-button':{
+            type: 'button',
+            default: {
+                config: {
+                    title: {
+                        source: 'static',
+                        value: 'Click Me'
+                    },
+                    url: {
+                        source: 'static',
+                        value: 'https://example.com'
+                    }
+                }
+            }
+        },
+
         'left-image': {
             type: 'image',
             default: {
