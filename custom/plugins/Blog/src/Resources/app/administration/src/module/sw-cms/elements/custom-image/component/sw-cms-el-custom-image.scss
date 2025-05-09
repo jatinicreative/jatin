@@ -1,0 +1,15 @@
+.sw-cms-el-custom-image {
+  &__content {
+    text-align: center;
+  }
+
+  &__image {
+    max-width: 100%;
+    height: auto;
+  }
+
+  &__placeholder {
+    color: #aaa;
+    padding: 20px;
+  }
+}

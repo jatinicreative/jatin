@@ -57,5 +57,11 @@ export default Object.freeze({
         previewMountain: 'bundles/administration/static/img/cms/preview_mountain_large.jpg',
         previewPlant: 'bundles/administration/static/img/cms/preview_plant_large.jpg',
         previewGlasses: 'bundles/administration/static/img/cms/preview_glasses_large.jpg',
+        SMALL:{
+            previewCamera: 'framework/assets/default/cms/preview_camera_small.jpg',
+            previewMountain: 'framework/assets/default/cms/preview_mountain_small.jpg',
+            previewPlant: 'framework/assets/default/cms/preview_plant_small.jpg',
+            previewGlasses: 'framework/assets/default/cms/preview_glasses_small.jpg',
+        }
     },
 });

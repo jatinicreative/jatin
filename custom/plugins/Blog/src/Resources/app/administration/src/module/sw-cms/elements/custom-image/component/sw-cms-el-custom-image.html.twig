@@ -1,0 +1,16 @@
+<div class="sw-cms-el-custom-image">
+    {% block sw_cms_element_custom_image %}
+        <div class="sw-cms-el-custom-image__content">
+            {% if mediaUrl %}
+                <a v-if="linkUrl" :href="linkUrl" target="_blank" rel="noopener noreferrer">
+                    <img :src="mediaUrl" alt="" class="sw-cms-el-custom-image__image" />
+                </a>
+                <img v-else :src="mediaUrl" alt="" class="sw-cms-el-custom-image__image" />
+            {% else %}
+                <div class="sw-cms-el-custom-image__placeholder">
+                    {{ $tc('sw-cms.elements.customImage.placeholder') }}
+                </div>
+            {% endif %}
+        </div>
+    {% endblock %}
+</div>
