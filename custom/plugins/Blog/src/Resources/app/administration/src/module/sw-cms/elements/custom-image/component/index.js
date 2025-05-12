@@ -1,10 +1,10 @@
 import CMS from '../../../constant/sw-cms.constant';
 import template from './sw-cms-el-custom-image.html.twig';
-
+import './sw-cms-el-custom-image.scss';
 
 const { Component, Mixin, Filter } = Shopware;
 
-export default {
+Component.register('sw-cms-el-custom-image', {
     template,
 
     mixins: [
@@ -30,7 +30,7 @@ export default {
             }
 
             if (elemConfig.source === 'default') {
-                // use only the filename
+
                 const fileName = elemConfig.value.slice(elemConfig.value.lastIndexOf('/') + 1);
                 return this.assetFilter(`/administration/static/img/cms/${fileName}`);
             }
@@ -46,8 +46,36 @@ export default {
             return staticFallBackImage;
         },
 
-        linkUrl() {
-            return this.element.config.url.value || null;
+
+        assetFilter() {
+            return Filter.getByName('asset');
+        },
+
+        mediaConfigValue() {
+            return this.element?.config?.sliderItems?.value;
         },
     },
-};
+
+    watch: {
+
+        mediaConfigValue(value) {
+            const mediaId = this.element?.data?.media?.id;
+            const isSourceStatic = this.element?.config?.media?.source === 'static';
+
+            if (isSourceStatic && mediaId && value !== mediaId) {
+                this.element.config.media.value = mediaId;
+            }
+        },
+    },
+
+    created() {
+        this.createdComponent();
+    },
+
+    methods: {
+        createdComponent() {
+            this.initElementConfig('custom-image');
+            this.initElementData('custom-image');
+        },
+    },
+});

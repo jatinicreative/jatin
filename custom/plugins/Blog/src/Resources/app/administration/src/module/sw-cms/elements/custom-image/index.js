@@ -1,9 +1,6 @@
-
-Shopware.Component.register('sw-cms-el-preview-custom-image', () => import('./preview'));
-
-Shopware.Component.register('sw-cms-el-config-custom-image', () => import('./config'));
-
-Shopware.Component.register('sw-cms-el-custom-image', () => import('./component'));
+import './component';
+import './config';
+import './preview';
 
 Shopware.Service('cmsService').registerCmsElement({
     name: 'custom-image',
@@ -22,7 +19,7 @@ Shopware.Service('cmsService').registerCmsElement({
         },
         url: {
             source: 'static',
-            value: null
-        }
-    }
+            value: null,
+        },
+    },
 });

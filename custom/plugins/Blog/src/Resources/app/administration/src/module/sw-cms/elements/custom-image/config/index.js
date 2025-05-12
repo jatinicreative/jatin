@@ -1,59 +1,107 @@
 import template from './sw-cms-el-config-custom-image.html.twig';
 import './sw-cms-el-config-custom-image.scss';
 
-const { Mixin } = Shopware;
-export default {
-    template,
+const { Component, Mixin } = Shopware;
 
-    mixins: [
-        Mixin.getByName('cms-element')
-    ],
+Component.register('sw-cms-el-config-custom-image', {
+    template,
 
     inject: ['repositoryFactory'],
 
+    mixins: [
+        Mixin.getByName('cms-element'),
+    ],
 
     data() {
         return {
             mediaModalIsOpen: false,
+            initialFolderId: null,
         };
     },
+
     computed: {
-        mediaPreview() {
-            return this.element?.data?.media?.url || null;
+        mediaRepository() {
+            return this.repositoryFactory.create('media');
+        },
+
+        uploadTag() {
+            return `cms-element-media-config-${this.element.id}`;
+        },
+
+        previewSource() {
+            if (this.element.data && this.element.data.media && this.element.data.media.id) {
+                return this.element.data.media;
+            }
+
+            return this.element.config.media.value;
         },
     },
+
     created() {
         this.createdComponent();
     },
+
     methods: {
         createdComponent() {
             this.initElementConfig('custom-image');
-            this.initElementData('custom-image');
         },
-        onMediaUpload(newMedia) {
-            const mediaRepository = Shopware.RepositoryFactory.create('media');
-            mediaRepository.get(newMedia.id, Shopware.Context.api).then((mediaEntity) => {
-                this.element.config.media.value = mediaEntity.id;
-                this.element.config.media.source = 'static';
-                this.updateMediaData(mediaEntity);
-                this.$emit('element-update', this.element);
-            });
-        },
-        onMediaRemove() {
-            this.element.config.media.value = null;
-            this.updateMediaData(null);
+
+        async onImageUpload({ targetId }) {
+            const mediaEntity = await this.mediaRepository.get(targetId);
+
+            this.element.config.media.value = mediaEntity.id;
+            this.element.config.media.source = 'static';
+
+            this.updateElementData(mediaEntity);
+
             this.$emit('element-update', this.element);
         },
-        updateMediaData(media) {
+
+        onImageRemove() {
+            this.element.config.media.value = null;
+
+            this.updateElementData();
+
+            this.$emit('element-update', this.element);
+        },
+
+        onCloseModal() {
+            this.mediaModalIsOpen = false;
+        },
+
+        onSelectionChanges(mediaEntity) {
+            const media = mediaEntity[0];
+            this.element.config.media.value = media.id;
+            this.element.config.media.source = 'static';
+
+            this.updateElementData(media);
+
+            this.$emit('element-update', this.element);
+        },
+
+        updateElementData(media = null) {
+            const mediaId = media === null ? null : media.id;
             if (!this.element.data) {
-                this.$set(this.element, 'data', { media });
+                this.$set(this.element, 'data', { mediaId, media });
             } else {
+                this.$set(this.element.data, 'mediaId', mediaId);
                 this.$set(this.element.data, 'media', media);
             }
         },
+
+        onOpenMediaModal() {
+            this.mediaModalIsOpen = true;
+        },
+
         onUrlChange(value) {
             this.element.config.url.value = value;
+            if (!this.element.data) {
+                this.$set(this.element, 'data', { url: value });
+            } else {
+                this.$set(this.element.data, 'url', value);
+            }
             this.$emit('element-update', this.element);
         },
+
     },
-};
+});
