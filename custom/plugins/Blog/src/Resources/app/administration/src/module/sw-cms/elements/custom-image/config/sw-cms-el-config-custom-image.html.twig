@@ -47,15 +47,15 @@
         </sw-upload-listener>
     {% endblock %}
 
+    {% block sw_cms_element_image_config_link %}
+        <div class="sw-cms-el-config-image__link">
+            <sw-dynamic-url-field
+                    v-model:value="element.config.url.value"
+            >
+            </sw-dynamic-url-field>
 
-
-    <sw-text-field
-            v-model:value="element.config.url.value"
-            label="URL"
-            placeholder="https://example.com"
-            @input="onUrlChange($event)"
-    >
-    </sw-text-field>
+        </div>
+    {% endblock %}
 
     {% block sw_cms_element_custom_image_config_media_modal %}
     <sw-media-modal-v2

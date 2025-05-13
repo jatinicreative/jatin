@@ -1,9 +1,9 @@
-import template from './sw-cms-el-config-custom-image.html.twig';
-import './sw-cms-el-config-custom-image.scss';
+import template from './sw-cms-el-config-ict-image.html.twig';
+import './sw-cms-el-config-ict-image.scss';
 
 const { Component, Mixin } = Shopware;
 
-Component.register('sw-cms-el-config-custom-image', {
+Component.register('sw-cms-el-config-ict-image', {
     template,
 
     inject: ['repositoryFactory'],
@@ -43,7 +43,7 @@ Component.register('sw-cms-el-config-custom-image', {
 
     methods: {
         createdComponent() {
-            this.initElementConfig('custom-image');
+            this.initElementConfig('image');
         },
 
         async onImageUpload({ targetId }) {
@@ -110,6 +110,5 @@ Component.register('sw-cms-el-config-custom-image', {
 
             this.$emit('element-update', this.element);
         },
-
     },
 });
