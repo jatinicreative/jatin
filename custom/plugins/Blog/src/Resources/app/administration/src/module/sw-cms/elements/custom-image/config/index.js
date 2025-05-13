@@ -8,6 +8,8 @@ Component.register('sw-cms-el-config-custom-image', {
 
     inject: ['repositoryFactory'],
 
+    emits: ['element-update'],
+
     mixins: [
         Mixin.getByName('cms-element'),
     ],
@@ -43,7 +45,7 @@ Component.register('sw-cms-el-config-custom-image', {
 
     methods: {
         createdComponent() {
-            this.initElementConfig('custom-image');
+            this.initElementConfig('image');
         },
 
         async onImageUpload({ targetId }) {
@@ -91,24 +93,6 @@ Component.register('sw-cms-el-config-custom-image', {
 
         onOpenMediaModal() {
             this.mediaModalIsOpen = true;
-        },
-
-        onChangeMinHeight(value) {
-            this.element.config.minHeight.value = value === null ? '' : value;
-
-            this.$emit('element-update', this.element);
-        },
-        onChangeButtonField(value) {
-            this.element.config.buttonField.value = value === null ? '' : value;
-
-            this.$emit('element-update', this.element);
-        },
-        onChangeDisplayMode(value) {
-            if (value === 'cover') {
-                this.element.config.verticalAlign.value = null;
-            }
-
-            this.$emit('element-update', this.element);
         },
 
     },

@@ -43,7 +43,7 @@ Shopware.Service('cmsService').registerCmsBlock({
                 },
                 data: {
                     media: {
-                        value: CMS.MEDIA.previewPlant,
+                        value: null,
                         source: 'default',
                     },
                 },

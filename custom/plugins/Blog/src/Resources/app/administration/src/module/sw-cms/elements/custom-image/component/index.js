@@ -13,7 +13,7 @@ Component.register('sw-cms-el-custom-image', {
 
     computed: {
         mediaUrl() {
-            const fallBackImageFileName = CMS.MEDIA.previewMountain.slice(CMS.MEDIA.previewMountain.lastIndexOf('/') + 1);
+            const fallBackImageFileName = CMS.MEDIA.previewPlant.slice(CMS.MEDIA.previewPlant.lastIndexOf('/') + 1);
             const staticFallBackImage = this.assetFilter(`administration/static/img/cms/${fallBackImageFileName}`);
             const elemData = this.element?.data?.media || {};
             const elemConfig = this.element?.config?.media || {};
@@ -31,6 +31,10 @@ Component.register('sw-cms-el-custom-image', {
                 return this.assetFilter(`/administration/static/img/cms/${fileName}`);
             }
 
+            if (elemData?.id) {
+                return this.element.data.media.url;
+            }
+
             if (elemData?.url) {
                 return elemData.url;
             }
@@ -43,18 +47,19 @@ Component.register('sw-cms-el-custom-image', {
         },
 
         mediaConfigValue() {
-            return this.element?.config?.sliderItems?.value;
+            return this.element?.config?.media?.value;
         },
     },
 
     watch: {
-        mediaConfigValue(value) {
-            const mediaId = this.element?.data?.media?.id;
-            const isSourceStatic = this.element?.config?.media?.source === 'static';
+        'cmsPageState.currentDemoEntity': {
+            handler() {
+                this.updateDemoValue(this.mediaConfigValue);
+            },
+        },
 
-            if (isSourceStatic && mediaId && value !== mediaId) {
-                this.element.config.media.value = mediaId;
-            }
+        mediaConfigValue(value) {
+            this.updateDemoValue(value);
         },
     },
 
@@ -66,6 +71,14 @@ Component.register('sw-cms-el-custom-image', {
         createdComponent() {
             this.initElementConfig('custom-image');
             this.initElementData('custom-image');
+        },
+        updateDemoValue(value) {
+            const mediaId = this.element?.data?.media?.id;
+            const isSourceStatic = this.element?.config?.media?.source === 'static';
+
+            if (isSourceStatic && mediaId && value !== mediaId) {
+                this.element.config.media.value = mediaId;
+            }
         },
     },
 });
