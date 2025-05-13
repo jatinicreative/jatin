@@ -1,0 +1,44 @@
+{
+    "name": "customer-registration-extension/customer-registration-extension",
+    "description": "This is customer-registration-extension",
+    "type": "shopware-platform-plugin",
+    "version": "1.0.0",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "iCreative Technologies"
+        }
+    ],
+    "require": {
+        "shopware/core": "~6.6.0"
+    },
+    "extra": {
+        "shopware-plugin-class": "CustomerRegistrationExtension\\CustomerRegistrationExtension",
+        "label": {
+            "de-DE": "Customer Registration Extension",
+            "en-GB": "Customer Registration Extension"
+        },
+        "description": {
+            "de-DE": "This is Customer Registration ExtensionPlugin",
+            "en-GB": "This is Customer Registration Extension Plugin"
+        },
+        "manufacturerLink": {
+            "de-DE": "https://www.icreativetechnologies.com",
+            "en-GB": "https://www.icreativetechnologies.com"
+        },
+        "supportLink": {
+            "de-DE": "https://support.icreativetechnologies.com",
+            "en-GB": "https://support.icreativetechnologies.com"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "CustomerRegistrationExtension\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CustomerRegistrationExtension\\Tests\\": "tests/"
+        }
+    }
+}

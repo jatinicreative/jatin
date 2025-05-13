@@ -1,0 +1,54 @@
+{% sw_extends '@Storefront/storefront/component/account/register.html.twig' %}
+
+
+{% block component_account_register_personal_address_fields %}
+{{ parent() }}
+
+    <div class="form-group">
+        <label for="customerGroup">Customer Group</label>
+        <select name="customCustomerGroup" id="customerGroup" class="form-control" required>
+            <option value="">Please select</option>
+            {% for group in page.extensions.customCustomerGroups.groups %}
+                <option value="{{ group.id }}">{{ group.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    {{ dump(page) }}
+
+    <div class="form-group">
+        <label for="customerGroupSearch">Search Customer Group</label>
+        <input type="text" id="customerGroupSearch" class="form-control" placeholder="3 characters Needed">
+        <ul id="groupSuggestions" class="list-group mt-2"></ul>
+        <ul id="groupSuggestions" class="list-group mt-2"></ul>
+        <ul id="groupSuggestions" class="list-group mt-2"></ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('customerGroupSearch');
+            const suggestions = document.getElementById('groupSuggestions');
+            const groups = {{ page.extensions.customCustomerGroups.groups|json_encode|raw }};
+
+            searchInput.addEventListener('input', function () {
+                const query = this.value.toLowerCase();
+                suggestions.innerHTML = '';
+
+                if (query.length < 3) {
+                    return;
+                }
+
+                const matches = groups.filter(group => group.name.toLowerCase().includes(query));
+                matches.forEach(group => {
+                    const li = document.createElement('li');
+                    li.textContent = group.name;
+                    li.classList.add('list-group-item');
+                    li.addEventListener('click', () => {
+                        searchInput.value = group.name;
+                        suggestions.innerHTML = '';
+                    });
+                    suggestions.appendChild(li);
+                });
+            });
+        });
+    </script>
+{% endblock %}
