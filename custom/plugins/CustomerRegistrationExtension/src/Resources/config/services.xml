@@ -14,5 +14,13 @@
             <argument type="service" id="CustomerRegistrationExtension\Service\CustomerGroupService"/>
         </service>
 
+        <service id="CustomerRegistrationExtension\Controller\CustomerGroupSearchController">
+            <argument type="service" id="customer_group.repository"/>
+            <tag name="controller.service_arguments"/>
+            <call method="setContainer">
+                <argument id="service_container" type="service" />
+            </call>
+
+        </service>
     </services>
 </container>

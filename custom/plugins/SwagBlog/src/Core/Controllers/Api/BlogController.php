@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 
 #[Route(defaults: ['_routeScope' => ['api']])]
-class BlogController extends AbstractController
+class   BlogController extends AbstractController
 {
     private EntityRepository $blogRepository;
     private EntityRepository $blogCategoryRepository;
