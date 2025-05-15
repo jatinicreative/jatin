@@ -482,14 +482,14 @@
                             </div>
                         {% endblock %}
                     {% endfor %}
-                        {% set ecocodeTrustpilotConfig = getEcocodeTrustpilotPluginConfig(context) %}
-                        {% if ecocodeTrustpilotConfig.useBascicFooterWidget %}
-                            <div class="col-md-4 footer-column">
-                                <div class="footer-column-headline footer-headline justify-content-center">
-                                    {% include '@EcocodeTrustpilot/storefront/component/widget/micro-review-count.html.twig' %}
-                                </div>
-                            </div>
-                        {% endif %}
+{#                        {% set ecocodeTrustpilotConfig = getEcocodeTrustpilotPluginConfig(context) %}#}
+{#                        {% if ecocodeTrustpilotConfig.useBascicFooterWidget %}#}
+{#                            <div class="col-md-4 footer-column">#}
+{#                                <div class="footer-column-headline footer-headline justify-content-center">#}
+{#                                    {% include '@EcocodeTrustpilot/storefront/component/widget/micro-review-count.html.twig' %}#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        {% endif %}#}
                 {% endblock %}
 
                 {% block zen_layout_footer_navigation_payment_logos %}
