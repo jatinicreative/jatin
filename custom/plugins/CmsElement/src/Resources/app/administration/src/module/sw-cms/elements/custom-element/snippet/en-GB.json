@@ -1,0 +1,11 @@
+{
+  "custom-element": {
+    "module": {
+      "label": "Custom Element"
+    },
+    "general": {
+      "textLabel": "Text",
+      "urlLabel": "Url Link"
+    }
+  }
+}

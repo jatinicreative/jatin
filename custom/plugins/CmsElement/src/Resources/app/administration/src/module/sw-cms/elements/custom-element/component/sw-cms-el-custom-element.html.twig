@@ -1,0 +1,10 @@
+{% block cms_custom_element %}
+<div class="sw-cms-el-custom-element">
+        {% block sw_cms_element_custom_element_content %}
+            <div v-for="(item, index) in element.config.items.value" :key="index">
+                    <p><strong>{{ $tc('custom-element.general.textLabel') }}:</strong> {{ item.text }}</p>
+                    <p><strong>{{ $tc('custom-element.general.urlLabel') }}:</strong> {{ item.url }}</p>
+            </div>
+        {% endblock %}
+</div>
+{% endblock %}

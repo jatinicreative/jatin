@@ -1,0 +1,11 @@
+{
+  "element-text": {
+    "module": {
+      "label": "Element Text"
+    },
+    "general": {
+      "textLabel": "Text",
+      "urlLabel": "Url Link"
+    }
+  }
+}

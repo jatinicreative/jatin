@@ -1,0 +1,21 @@
+{% block cms_element_custom_element %}
+    <div class="cms-element-custom-element">
+        <div class="custom-grid">
+            {% for item in element.config.items.value %}
+                <div class="custom-item">
+                    {% if item.text is not empty %}
+                        <strong>Text:</strong> <a class="custom-text" href="{{ item.url }}">{{ item.text }}</a>
+                    {% endif %}
+                    {% if item.url is not empty %}
+                        <div class="custom-url">
+                            <strong>URL:</strong>
+                            <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">
+                                {{ item.url }}
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

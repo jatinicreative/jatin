@@ -1,0 +1,25 @@
+.sw-cms-preview-element-text {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  padding: 15px;
+
+  .preview-field {
+    height: auto;
+    max-height: 40px;
+    overflow: hidden;
+    width: 120px
+  }
+  .sw-cms-preview-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+
+    p {
+      margin: 0;
+      font-size: 13px;
+    }
+  }
+}

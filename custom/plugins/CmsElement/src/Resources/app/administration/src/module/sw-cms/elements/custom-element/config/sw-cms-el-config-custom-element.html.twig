@@ -1,0 +1,22 @@
+{% block cms_config_custom_element %}
+<div>
+    <div v-for="(item, index) in element.config.items.value" :key="index" class="sw-field">
+        <sw-text-field
+                    label="Text"
+                    v-model:value="item.text"
+                    @input="onConfigUpdate"
+                    style="margin-bottom: 10px;"
+        >
+        </sw-text-field>
+        <sw-text-field
+                    label="URL"
+                    v-model:value="item.url"
+                    @input="onConfigUpdate"
+                    style="margin-bottom: 10px;"
+        >
+        </sw-text-field>
+        <sw-button @click="removeField(index)" variant="danger" size="small">Remove</sw-button>
+    </div>
+        <sw-button @click="addField" variant="primary" size="small">Add More Element</sw-button>
+</div>
+{% endblock %}
