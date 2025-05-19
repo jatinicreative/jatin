@@ -4,20 +4,3 @@
     {% set footer = page.footer %}
 {% endif %}
 
-{% block layout_footer_inner_container %}
-    {% block layout_footer_navigation_columns %}
-        {{ parent() }}
-    {% endblock %}
-
-    {% block layout_footer_navigation_hotline %}
-        {{ parent() }}
-    {% endblock %}
-
-    {% block layout_footer_payment_shipping_logos %}
-        {{ parent() }}
-    {% endblock %}
-
-    {% block layout_footer_bottom %}
-        {{ parent() }}
-    {% endblock %}
-{% endblock %}
