@@ -6,7 +6,7 @@ Shopware.Component.register('sw-cms-block-element-text', () => import('./compone
 Shopware.Service('cmsService').registerCmsBlock({
     name: 'element-text',
     label: 'element-text.module.label',
-    category: 'text-image',
+    category: 'customCategory',
     component: 'sw-cms-block-element-text',
     previewComponent: 'sw-cms-preview-element-text',
     defaultConfig: {
